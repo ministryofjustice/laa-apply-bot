@@ -13,6 +13,7 @@ group :development, :test do
   gem 'foreman'
   gem 'pry-byebug'
   gem 'rake'
+  gem 'rubocop'
 end
 
 group :test do
