@@ -7,9 +7,9 @@ module SlackApplybot
     SERVICE_URL = 'apply-for-legal-aid.service.justice.gov.uk'.freeze
     PREFIX = 'https://'.freeze
 
-  	def self.valid?(application, name)
-  		APPLICATIONS.include?(application) && (NON_LIVE_ENVS.include?(name) || LIVE_ENV_SYNONYMS.include?(name))
-  	end 
+    def self.valid?(application, name)
+      APPLICATIONS.include?(application) && (NON_LIVE_ENVS.include?(name) || LIVE_ENV_SYNONYMS.include?(name))
+    end
 
     def initialize(application, name)
       @name = name
@@ -24,7 +24,6 @@ module SlackApplybot
                end
     end
 
-
     def ping_page
       "#{url}/ping.json"
     end
@@ -37,6 +36,6 @@ module SlackApplybot
       else
         'unknown'
       end
-    end 
+    end
   end
 end

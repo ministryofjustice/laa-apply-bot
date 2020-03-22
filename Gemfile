@@ -9,7 +9,7 @@ gem 'sinatra'
 gem 'slack-ruby-bot'
 
 group :development, :test do
-	gem 'byebug'
+  gem 'byebug'
   gem 'foreman'
   gem 'pry-byebug'
   gem 'rake'
