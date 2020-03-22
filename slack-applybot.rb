@@ -1,0 +1,5 @@
+require 'slack-ruby-bot'
+require 'slack-applybot/commands/details'
+require 'slack-applybot/commands/help'
+require 'slack-applybot/bot'
+require 'slack-applybot/environment'
