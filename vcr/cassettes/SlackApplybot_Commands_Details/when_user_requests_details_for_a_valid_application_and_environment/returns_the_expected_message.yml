@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://staging.apply-for-legal-aid.service.justice.gov.uk/ping.json
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Connection:
+      - close
+      Host:
+      - staging.apply-for-legal-aid.service.justice.gov.uk
+      User-Agent:
+      - http.rb/4.3.0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - openresty/1.15.8.2
+      Date:
+      - Sun, 22 Mar 2020 18:15:24 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Vary:
+      - Accept-Encoding
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Etag:
+      - W/"8224651ab5d07d088a77f27bd265d8e9"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 0eb0451a7999f4ad45fbd22bfaac42b3
+      X-Runtime:
+      - '0.001961'
+    body:
+      encoding: UTF-8
+      string: '{"build_date":"2020-03-20T13:59:40+0000","build_tag":"app-ccf322d51b508fd16316d24593a44e9c887be281","app_branch":"master"}'
+    http_version: null
+  recorded_at: Sun, 22 Mar 2020 18:15:24 GMT
+recorded_with: VCR 5.1.0
