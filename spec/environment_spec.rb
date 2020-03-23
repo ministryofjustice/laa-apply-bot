@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SlackApplybot::Environment do # rubocop:disable Metrics/BlockLength
+describe SlackApplybot::Environment do
   subject(:environment) { described_class.new(application, env_name) }
 
   context 'when passed a valid application name' do
