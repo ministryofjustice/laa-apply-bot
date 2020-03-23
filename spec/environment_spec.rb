@@ -27,10 +27,6 @@ describe SlackApplybot::Environment do
         it { is_expected.to eql('staging') }
       end
     end
-  end
-
-  context 'when passed a valid application name' do
-    let(:application) { 'apply' }
 
     context 'when passed a live synonym' do
       let(:env_name) { 'prod' }
