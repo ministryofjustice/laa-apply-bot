@@ -13,5 +13,5 @@ Pass it a command and environment name(s)
 e.g. `@cccd <command> <environment>`
 
 ## Commands
-`details`
-`help`
+- `details`
+- `help`
