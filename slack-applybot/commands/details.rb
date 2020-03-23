@@ -12,11 +12,9 @@ module SlackApplybot
         return unless SlackApplybot::Environment.valid?(app, env)
 
         environment = Environment.new(app, env)
-        built_uri = environment.ping_page
-        response = HTTP.get(built_uri)
-        json = JSON.parse(response.body)
 
-        client.say(channel: data.channel, text: "`#{environment.name}` details for `#{app}`:```#{json}```")
+        message_text = "`#{environment.name}` details for `#{app}`:```#{environment.ping_data}```"
+        client.say(channel: data.channel, text: message_text)
       end
     end
   end

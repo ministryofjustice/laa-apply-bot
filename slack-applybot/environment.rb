@@ -28,6 +28,11 @@ module SlackApplybot
       "#{url}/ping.json"
     end
 
+    def ping_data
+      response = HTTP.get(ping_page)
+      JSON.parse(response.body)
+    end
+
     def name
       if LIVE_ENV_SYNONYMS.include?(@name)
         'production'
