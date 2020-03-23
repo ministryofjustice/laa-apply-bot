@@ -3,15 +3,34 @@ require 'spec_helper'
 describe SlackApplybot::Environment do
   subject(:environment) { described_class.new(application, env_name) }
 
-  context 'when passed an invalid application name' do
-    let(:application) { 'bob' }
-
+  describe '#valid?' do
     subject(:valid?) { described_class.valid?(application, env_name) }
 
-    %w[invalid staging].each do |name|
-      let(:env_name) { name }
-      context "when passed #{name}" do
-        it { is_expected.to be false }
+    context 'when passed an invalid application name' do
+      let(:application) { 'bob' }
+
+      %w[invalid staging].each do |name|
+        let(:env_name) { name }
+
+        context "when passed #{name}" do
+          it { is_expected.to be false }
+        end
+      end
+
+      context 'when passed a valid application name' do
+        let(:application) { 'apply' }
+
+        context 'and a valid environment' do
+          let(:env_name) { 'staging' }
+
+          it { is_expected.to be true }
+        end
+
+        context 'and an invalid environment' do
+          let(:env_name) { 'invalid' }
+
+          it { is_expected.to be false }
+        end
       end
     end
   end
