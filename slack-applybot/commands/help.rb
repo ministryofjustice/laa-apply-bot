@@ -1,3 +1,4 @@
+# :nocov:
 module SlackRubyBot
   module Commands
     class Help < Base
@@ -28,3 +29,4 @@ module SlackRubyBot
     end
   end
 end
+# :nocov:
