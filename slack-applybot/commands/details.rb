@@ -1,5 +1,4 @@
-require 'http'
-
+# :nocov:
 module SlackApplybot
   module Commands
     class Details < SlackRubyBot::Commands::Base
@@ -19,3 +18,4 @@ module SlackApplybot
     end
   end
 end
+# :nocov:

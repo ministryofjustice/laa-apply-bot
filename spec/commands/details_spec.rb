@@ -7,10 +7,10 @@ describe SlackApplybot::Commands::Details, :vcr do
     let(:app) { 'cfe' }
     let(:env) { 'staging' }
     let(:expected_response) do
-      part1 = '`staging` details for `cfe`'
+      key = '`staging` details for `cfe`'
       build = 'app-ccf322d51b508fd16316d24593a44e9c887be281'
-      part2 = "{\"build_date\"=>\"2020-03-20T13:59:40+0000\", \"build_tag\"=>\"#{build}\", \"app_branch\"=>\"master\"}"
-      "#{part1}:```#{part2}```"
+      value = "{\"build_date\"=>\"2020-03-20T13:59:40+0000\", \"build_tag\"=>\"#{build}\", \"app_branch\"=>\"master\"}"
+      "#{key}:```#{value}```"
     end
 
     it 'returns the expected message' do
