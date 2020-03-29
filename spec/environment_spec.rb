@@ -74,6 +74,16 @@ describe SlackApplybot::Environment do
       end
     end
 
+    context 'when passed an invalid env name' do
+      let(:env_name) { 'invalid' }
+
+      describe '.name' do
+        subject(:name) { environment.name }
+
+        it { is_expected.to eql('unknown') }
+      end
+    end
+
     context 'when passed a live synonym' do
       let(:env_name) { 'prod' }
 
