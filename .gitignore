@@ -1,2 +1,20 @@
+# Ignore bundler config.
+/.bundle
+
+# dotenv
+# Ignore environment variables
+.env.*
 .env
-dump.rdb
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+.idea/
+
+# Ignore Redis binary dump (dump.rdb) files
+*.rdb
+
+# Ignore simplecov coverage stats
+/coverage/
