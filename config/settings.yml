@@ -1,0 +1,5 @@
+slack_api_token: 'fake_slack_token'
+github_api_token: 'fake_github_api_token'
+github_owner: 'moj'
+github_repo: 'project'
+github_wait_seconds: <%= ENV['GITHUB_WAIT_SECONDS'] || 0 %>

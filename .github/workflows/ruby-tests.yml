@@ -29,3 +29,8 @@ jobs:
           RAILS_ENV: test
         run: |
           bundle exec rspec
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: coverage-report
+          path: coverage

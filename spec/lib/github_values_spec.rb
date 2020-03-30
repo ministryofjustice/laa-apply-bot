@@ -1,0 +1,52 @@
+require 'spec_helper'
+
+describe GithubValues do
+  subject(:base) { described_class.new }
+
+  let(:base_url) { 'https://api.github.com/repos/moj/project' }
+
+  it { is_expected.to be_a GithubValues }
+
+  describe '#headers' do
+    subject(:headers) { described_class.headers }
+    let(:json_keys) { %i[content_type accept Authorization] }
+
+    it { is_expected.to be_a Hash }
+    it { expect(subject.keys).to contain_exactly(*json_keys) }
+  end
+
+  describe '#repo_url' do
+    subject(:repo_url) { described_class.repo_url }
+
+    it { is_expected.to eql(base_url) }
+  end
+
+  describe '#build_url' do
+    subject(:build_url) { described_class.build_url(extension) }
+    let(:extension) { '/extend' }
+
+    it { is_expected.to eql('https://api.github.com/repos/moj/project/extend') }
+  end
+
+  describe '#workflow_url' do
+    subject(:workflow_url) { described_class.workflow_url }
+
+    it { is_expected.to eql("#{base_url}/actions/workflows/manual-integration-tests.yml/runs?status=queued") }
+  end
+
+  describe '#wait_time' do
+    subject(:wait_time) { described_class.wait_time }
+
+    context 'when a value is set' do
+      before { allow(Settings).to receive(:github_wait_seconds).and_return 1 }
+
+      it { is_expected.to eq 1 }
+    end
+
+    context 'when an setting is not present' do
+      before { allow(Settings).to receive(:github_wait_seconds).and_return 0 }
+
+      it { is_expected.to eq 0 }
+    end
+  end
+end
