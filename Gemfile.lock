@@ -89,9 +89,6 @@ GEM
     faraday_middleware (1.0.0)
       faraday (~> 1.0)
     ffi (1.12.2)
-    ffi-compiler (1.0.1)
-      ffi (>= 1.0.0)
-      rake
     foreman (0.87.0)
     formatador (0.2.5)
     gli (2.19.0)
@@ -114,17 +111,9 @@ GEM
       rubocop (~> 0.20)
     hashdiff (1.0.1)
     hashie (4.1.0)
-    http (4.3.0)
-      addressable (~> 2.3)
-      http-cookie (~> 1.0)
-      http-form_data (~> 2.2)
-      http-parser (~> 1.2.0)
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    http-form_data (2.3.0)
-    http-parser (1.2.1)
-      ffi-compiler (>= 1.0, < 2.0)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.4)
@@ -257,7 +246,6 @@ DEPENDENCIES
   foreman
   guard-rspec
   guard-rubocop
-  http
   pry-byebug
   puma
   rack-test
