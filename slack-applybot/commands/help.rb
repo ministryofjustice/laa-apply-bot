@@ -1,4 +1,3 @@
-# :nocov:
 module SlackRubyBot
   module Commands
     class Help < Base
@@ -10,7 +9,6 @@ module SlackRubyBot
                else
                  general_text
                end
-
         client.say(channel: data.channel, text: text)
       end
 
@@ -29,4 +27,3 @@ module SlackRubyBot
     end
   end
 end
-# :nocov:
