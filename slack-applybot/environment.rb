@@ -29,7 +29,7 @@ module SlackApplybot
     end
 
     def ping_data
-      response = HTTP.get(ping_page)
+      response = RestClient.get(ping_page)
       JSON.parse(response.body)
     end
 
