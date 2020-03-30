@@ -2,9 +2,12 @@ source 'https://rubygems.org'
 ruby '2.6.5'
 
 gem 'celluloid-io'
+gem 'config'
 gem 'dotenv'
 gem 'http'
 gem 'puma'
+gem 'rest-client'
+gem 'sidekiq'
 gem 'sinatra'
 gem 'slack-ruby-bot'
 
