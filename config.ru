@@ -1,10 +1,5 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-
-require 'dotenv'
-Dotenv.load
-
-require 'slack_applybot'
-require 'web'
+require './slack_applybot.rb'
+require './app.rb'
 
 Thread.abort_on_exception = true
 
@@ -16,4 +11,4 @@ rescue StandardError => e
   raise e
 end
 
-run SlackApplybot::Web
+run Rack::URLMap.new('/' => App, '/sidekiq' => Sidekiq::Web)
