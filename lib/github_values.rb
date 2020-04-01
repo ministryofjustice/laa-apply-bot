@@ -3,7 +3,7 @@ class GithubValues
     {
       'content_type': ':json',
       'accept': 'application/vnd.github.everest-preview+json',
-      'Authorization': "token #{Settings.github_api_tokens}"
+      'Authorization': "token #{Settings.github_api_token}"
     }
   end
 
