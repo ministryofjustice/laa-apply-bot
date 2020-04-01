@@ -1,4 +1,14 @@
-github_api_token: 'store actual value as SETTINGS__GITHUB_API_TOKEN'
-github_owner: 'etc, in your .env file'
+# You should store values in a .env file that will over-write these 
+# at run time they should be in the format:
+# SETTINGS followed by a double underscore and then the name below uppercased
+# e.g. SETTINGS__GITHUB_API_TOKEN
+github_api_token: 'fake_github_api_token'
+github_owner: 'moj'
 github_repo: 'project'
 github_wait_seconds: 0
+# also, please note that, as only sinatra can load these files, you will need to 
+# store two copies of the slack_api_token both with and without the prefix
+# e.g.
+# SLACK_API_TOKEN=your_slack_bot_token
+# SETTINGS__SLACK_API_TOKEN=your_slack_bot_token
+# this is hopefully a temporary measure!
