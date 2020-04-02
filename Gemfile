@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 ruby '2.6.5'
 
 gem 'celluloid-io'
-gem 'config'
 gem 'dotenv'
 gem 'puma'
 gem 'rest-client'
