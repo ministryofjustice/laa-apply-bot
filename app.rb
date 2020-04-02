@@ -11,8 +11,6 @@ require './lib/slack_attachment.rb'
 require './lib/send_slack_message.rb'
 
 class App < Sinatra::Base
-  Dotenv.load
-
   get '/' do
     "
     <h1>LAA-Apply bot, find it in slack</h1>

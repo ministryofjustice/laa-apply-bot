@@ -1,8 +1,9 @@
 require './slack_applybot.rb'
 require './app.rb'
 
-Thread.abort_on_exception = true
+Dotenv.load
 
+Thread.abort_on_exception = true
 Thread.new do
   SlackApplybot::Bot.run
 rescue StandardError => e
