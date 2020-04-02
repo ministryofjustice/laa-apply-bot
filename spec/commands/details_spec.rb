@@ -8,13 +8,21 @@ describe SlackApplybot::Commands::Details, :vcr do
     let(:env) { 'staging' }
     let(:expected_response) do
       key = '`staging` details for `cfe`'
-      build = 'app-ccf322d51b508fd16316d24593a44e9c887be281'
-      value = "{\"build_date\"=>\"2020-03-20T13:59:40+0000\", \"build_tag\"=>\"#{build}\", \"app_branch\"=>\"master\"}"
+      build = 'app-0b68f9cfec011cd7188d027cb3e02a7c13ec2bfa'
+      value = "{\"build_date\"=>\"2020-04-01T18:10:11+0000\", \"build_tag\"=>\"#{build}\", \"app_branch\"=>\"master\"}"
       "#{key}:```#{value}```"
     end
 
     it 'returns the expected message' do
       expect(message: user_input, channel: 'channel').to respond_with_slack_message(expected_response)
+    end
+
+    context 'in non-lower case' do
+      let(:app) { 'Cfe' }
+
+      it 'returns the expected message' do
+        expect(message: user_input, channel: 'channel').to respond_with_slack_message(expected_response)
+      end
     end
   end
 
