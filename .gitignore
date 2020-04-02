@@ -5,6 +5,7 @@
 # Ignore environment variables
 .env.*
 .env
+!.env.test
 
 # Ignore all logfiles and tempfiles.
 /log/*
