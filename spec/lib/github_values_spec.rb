@@ -38,13 +38,13 @@ describe GithubValues do
     subject(:wait_time) { described_class.wait_time }
 
     context 'when a value is set' do
-      before { allow(Settings).to receive(:github_wait_seconds).and_return 1 }
+      before { allow(ENV).to receive(:[]).with('GITHUB_WAIT_SECONDS').and_return(1) }
 
       it { is_expected.to eq 1 }
     end
 
     context 'when an setting is not present' do
-      before { allow(Settings).to receive(:github_wait_seconds).and_return 0 }
+      before { allow(ENV).to receive(:[]).with('GITHUB_WAIT_SECONDS').and_return(0) }
 
       it { is_expected.to eq 0 }
     end

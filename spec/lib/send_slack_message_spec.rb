@@ -6,7 +6,7 @@ RSpec.describe SendSlackMessage do
   it { is_expected.to be_a SendSlackMessage }
 
   context 'when a slack token is not set' do
-    before { allow(Settings).to receive(:slack_api_token).and_return nil }
+    before { allow(ENV).to receive(:[]).with('SLACK_API_TOKEN').and_return(nil) }
 
     it 'raises an error' do
       expect { slack }.to raise_error('Missing ENV[SLACK_API_TOKEN]!')

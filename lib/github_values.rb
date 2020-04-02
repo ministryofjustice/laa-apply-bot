@@ -3,12 +3,12 @@ class GithubValues
     {
       'content_type': ':json',
       'accept': 'application/vnd.github.everest-preview+json',
-      'Authorization': "token #{Settings.github_api_token}"
+      'Authorization': "token #{ENV['GITHUB_API_TOKEN']}"
     }
   end
 
   def self.repo_url
-    "https://api.github.com/repos/#{Settings.github_owner}/#{Settings.github_repo}"
+    "https://api.github.com/repos/#{ENV['GITHUB_OWNER']}/#{ENV['GITHUB_REPO']}"
   end
 
   def self.build_url(suffix)
@@ -20,6 +20,6 @@ class GithubValues
   end
 
   def self.wait_time
-    Settings.github_wait_seconds.to_i || 0
+    ENV['GITHUB_WAIT_SECONDS'].to_i || 0
   end
 end
