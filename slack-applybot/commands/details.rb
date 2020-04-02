@@ -4,8 +4,8 @@ module SlackApplybot
       command 'apply', 'cfe', /details/ do |client, data, match|
         return unless match['expression'].include?('details')
 
-        app = match['command']
-        env = match['expression'].sub('details', '').strip
+        app = match['command'].downcase
+        env = match['expression'].sub('details', '').strip.downcase
         return unless env.split(/,\s|\s/).count.eql?(1)
         return unless SlackApplybot::Environment.valid?(app, env)
 
