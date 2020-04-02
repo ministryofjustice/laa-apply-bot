@@ -34,6 +34,8 @@ require 'lib/slack_attachment'
 require 'lib/start_integration_tests_worker'
 require 'vcr_helper'
 require 'app'
+require 'dotenv'
+Dotenv.load('.env.test')
 
 RSpec.configure do |config|
   config.before do
@@ -41,6 +43,3 @@ RSpec.configure do |config|
     stub_request(:any, %r{\Ahttps://(www|api).github.com/.*\z}).to_return(status: 200, body: '', headers: {})
   end
 end
-
-require 'dotenv'
-Dotenv.load('.env.test')
