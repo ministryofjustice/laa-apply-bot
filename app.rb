@@ -9,6 +9,8 @@ require './lib/start_integration_tests_worker.rb'
 require './lib/monitor_test_run_worker.rb'
 require './lib/slack_attachment.rb'
 require './lib/send_slack_message.rb'
+dot_file = ENV['ENV'].eql?('test') ? '.env.test' : '.env'
+Dotenv.load(dot_file)
 
 class App < Sinatra::Base
   get '/' do

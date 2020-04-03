@@ -12,6 +12,7 @@ unless ENV['NOCOVERAGE']
   #   SimpleCov.result.format!
   # end
 end
+ENV['ENV'] = 'test'
 
 require 'sidekiq'
 require 'sidekiq/testing'
