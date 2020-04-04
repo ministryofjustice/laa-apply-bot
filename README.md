@@ -10,6 +10,7 @@ Should be addressed as `@apply-bot`
 e.g. `@apply-bot <command>`
 
 ## Commands
-- `run tests` - ```@applybot run tests```
+- `ages` - ```@apply-bot ages```
 - `details` - ```@apply-bot cfe details staging``` or ```@apply-bot apply details live```
+- `run tests` - ```@applybot run tests```
 - `help` - ```@apply-bot help``` provides better examples than these

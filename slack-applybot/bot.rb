@@ -4,6 +4,11 @@ module SlackApplybot
       title 'LAA Apply Bot'
       desc 'This bot assists the LAA Apply team to administer their applications'
 
+      command 'ages' do
+        desc '`@apply-bot ages`'
+        long_desc 'Shows the time since both applications were last deployed'
+      end
+
       command 'details' do
         desc '`@apply-bot <application> details <environment>` e.g. `@apply-bot cfe details staging`'
         long_desc 'Shows the ping details page for the selected application and non-uat environments, '\

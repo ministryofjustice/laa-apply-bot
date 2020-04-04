@@ -7,7 +7,9 @@ describe SlackRubyBot::Commands::Help, :vcr do
     "\n*Commands:*\n*clouds* - Tells you how many clouds there're above you."\
     "\n*command_without_description*\n*What's the weather in <city>?* - Tells you the weather in a <city>.\n"\
     "*LAA Apply Bot* - This bot assists the LAA Apply team to administer their applications\n"\
-    "\n*Commands:*\n*details* - `@apply-bot <application> details <environment>` e.g. `@apply-bot cfe details staging`"\
+    "\n*Commands:*"\
+    "\n*ages* - `@apply-bot ages`"\
+    "\n*details* - `@apply-bot <application> details <environment>` e.g. `@apply-bot cfe details staging`"\
     "\n*run tests* - `@apply-bot run tests`\n\nFor full description of the command use: *help <command>*\n"
   end
   # TODO: find out why the ruby-slack-bot is inserting thw weather bot output into the test response!
