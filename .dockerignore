@@ -4,11 +4,15 @@ tmp
 tmp/*
 coverage/*
 coverage
+spec
 spec/*
+vcr
+vcr/*
 .env
 .env.*
 .rubocop.yml
 .dockerignore
+docker-compose.yml
 .git
 .github
 .rspec
