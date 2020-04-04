@@ -1,0 +1,17 @@
+.idea/**/
+.DS_Store
+tmp
+tmp/*
+coverage/*
+coverage
+spec/*
+.env
+.env.*
+.rubocop.yml
+.dockerignore
+.git
+.github
+.rspec
+dump.rdb
+Guardfile
+README.md

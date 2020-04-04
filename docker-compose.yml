@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+  redis:
+    image: 'redis:4.0-alpine'
+    command: 'redis-server'
+    volumes:
+      - 'redis:/data'
+
+  website:
+    depends_on:
+      - redis
+      - sidekiq
+    build: .
+    command: 'bundle exec rackup'
+    ports:
+      - '6000:9292'
+    volumes:
+      - '.:/app'
+    env_file:
+      - '.env'
+
+  sidekiq:
+    depends_on:
+      - redis
+    build: .
+    command: 'sidekiq -r ./app.rb'
+    volumes:
+      - '.:/app'
+    env_file:
+      - '.env'
+
+volumes:
+  redis:

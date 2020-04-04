@@ -12,6 +12,16 @@ require './lib/send_slack_message.rb'
 dot_file = ENV['ENV'].eql?('test') ? '.env.test' : '.env'
 Dotenv.load(dot_file)
 
+sidekiq_config = { url: ENV['JOB_WORKER_URL'] }
+
+Sidekiq.configure_server do |config|
+  config.redis = sidekiq_config
+end
+
+Sidekiq.configure_client do |config|
+  config.redis = sidekiq_config
+end
+
 class App < Sinatra::Base
   get '/' do
     "
