@@ -5,6 +5,7 @@ SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
   SimpleCov.start do
     add_filter 'spec/'
+    add_filter 'config/'
     add_group 'Libraries', 'lib/'
   end
   # SimpleCov.at_exit do
