@@ -15,6 +15,7 @@ unless ENV['NOCOVERAGE']
 end
 ENV['ENV'] = 'test'
 
+require 'timecop'
 require 'sidekiq'
 require 'sidekiq/testing'
 Sidekiq::Testing.fake!
