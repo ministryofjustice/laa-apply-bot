@@ -1,0 +1,8 @@
+FROM redis:4.0-alpine
+MAINTAINER Ministry of Justice, Apply service <apply@digital.justice.gov.uk>
+
+# fail early and print all commands
+RUN set -ex
+
+# 999 is the uid of the pre-existing alpine/redis user
+USER 999

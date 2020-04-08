@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: website
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: website
+    spec:
+      containers:
+      - command:
+        - bundle
+        - exec
+        - rackup
+        - --host
+        - 0.0.0.0
+        - -p
+        - "4567"
+        env:
+        - name: APPLY_GITHUB_REPO
+          value: laa-apply-for-legal-aid
+        - name: CFE_GITHUB_REPO
+          value: check-financial-eligibility
+        - name: GITHUB_OWNER
+          value: ministryofjustice
+        - name: GITHUB_REPO
+          value: check-financial-eligibility
+        - name: GITHUB_WAIT_SECONDS
+          value: "1"
+        - name: GITHUB_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: apply-bot-secrets
+              key: GITHUB_API_TOKEN
+        - name: JOB_WORKER_URL
+          valueFrom:
+            secretKeyRef:
+              name: apply-bot-secrets
+              key: JOB_WORKER_URL
+        - name: SIDEKIQ_WEB_UI_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: apply-bot-secrets
+              key: SIDEKIQ_WEB_UI_PASSWORD
+        - name: SLACK_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: apply-bot-secrets
+              key: SLACK_API_TOKEN
+        image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/laa-apply-bot:app-latest
+        imagePullPolicy: ""
+        name: website
+        ports:
+        - containerPort: 4567
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+status: {}
