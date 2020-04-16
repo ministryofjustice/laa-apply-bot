@@ -38,7 +38,7 @@ describe StartIntegrationTestsWorker do
       let(:response) { { 'total_count': 0 }.to_json }
 
       it 'polls github for data' do
-        expect { perform }.to raise_error(RuntimeError, 'Could not get in_progress jobs from github')
+        expect { perform }.to raise_error(RuntimeError, 'Could not get queued jobs from github')
       end
     end
   end
