@@ -4,7 +4,10 @@ module SlackApplybot
     APPLICATIONS = %w[apply cfe].freeze
     NON_LIVE_ENVS = %w[staging].freeze
     LIVE_ENV_SYNONYMS = %w[production prod live].freeze
-    SERVICE_URL = 'apply-for-legal-aid.service.justice.gov.uk'.freeze
+    SERVICE_URL = {
+      apply: 'apply-for-legal-aid.service.justice.gov.uk',
+      cfe: 'check-financial-eligibility.apps.live-1.cloud-platform.service.justice.gov.uk'
+    }.freeze
     PREFIX = 'https://'.freeze
 
     def self.valid?(application, name)
@@ -16,11 +19,15 @@ module SlackApplybot
       @application = application
     end
 
+    def service_url
+      @service_url ||= SERVICE_URL[@application.downcase.to_sym]
+    end
+
     def url
       @url ||= if NON_LIVE_ENVS.include?(@name)
-                 "#{PREFIX}#{@name}.#{SERVICE_URL}"
+                 "#{PREFIX}#{@name}.#{service_url}"
                elsif LIVE_ENV_SYNONYMS.include?(@name)
-                 "#{PREFIX}#{SERVICE_URL}"
+                 "#{PREFIX}#{service_url}"
                end
     end
 
