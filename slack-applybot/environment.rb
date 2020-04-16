@@ -18,10 +18,26 @@ module SlackApplybot
 
     def url
       @url ||= if NON_LIVE_ENVS.include?(@name)
-                 "#{PREFIX}#{@name}.#{SERVICE_URL}"
+                 service_url
                elsif LIVE_ENV_SYNONYMS.include?(@name)
-                 "#{PREFIX}#{SERVICE_URL}"
+                 service_url
                end
+    end
+
+    def service_url
+      if @application.downcase.eql?('apply')
+        if NON_LIVE_ENVS.include?(@name)
+          "#{PREFIX}#{@name}.#{SERVICE_URL}"
+        elsif LIVE_ENV_SYNONYMS.include?(@name)
+          "#{PREFIX}#{SERVICE_URL}"
+        end
+      elsif @application.downcase.eql?('cfe')
+        if NON_LIVE_ENVS.include?(@name)
+          "#{PREFIX}check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk"
+        elsif LIVE_ENV_SYNONYMS.include?(@name)
+          "#{PREFIX}check-financial-eligibility.apps.live-1.cloud-platform.service.justice.gov.uk"
+        end
+      end
     end
 
     def ping_page

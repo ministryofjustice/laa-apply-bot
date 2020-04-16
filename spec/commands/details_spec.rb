@@ -8,8 +8,8 @@ describe SlackApplybot::Commands::Details, :vcr do
     let(:env) { 'staging' }
     let(:expected_response) do
       key = '`staging` details for `cfe`'
-      build = 'app-0b68f9cfec011cd7188d027cb3e02a7c13ec2bfa'
-      value = "{\"build_date\"=>\"2020-04-01T18:10:11+0000\", \"build_tag\"=>\"#{build}\", \"app_branch\"=>\"master\"}"
+      build = 'app-bf400232676802bfcd7e53ff7ff013087ee6d1d1'
+      value = "{\"build_date\"=>\"2020-04-15T15:31:45+0000\", \"build_tag\"=>\"#{build}\", \"app_branch\"=>\"master\"}"
       "#{key}:```#{value}```"
     end
 
