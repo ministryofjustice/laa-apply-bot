@@ -36,7 +36,7 @@ describe SlackApplybot::Environment do
   end
 
   context 'when passed a valid application name' do
-    let(:application) { 'cfe' }
+    let(:application) { 'apply' }
 
     context 'when passed a non-live env name' do
       let(:env_name) { 'staging' }

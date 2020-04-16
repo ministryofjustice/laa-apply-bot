@@ -21,9 +21,9 @@ http_interactions:
       message: OK
     headers:
       Server:
-      - openresty/1.15.8.2
+      - nginx/1.17.8
       Date:
-      - Sat, 04 Apr 2020 13:40:20 GMT
+      - Thu, 16 Apr 2020 07:08:52 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -32,8 +32,6 @@ http_interactions:
       - keep-alive
       Vary:
       - Accept-Encoding
-      Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
@@ -47,21 +45,23 @@ http_interactions:
       Referrer-Policy:
       - strict-origin-when-cross-origin
       Etag:
-      - W/"f10bb3ad100ca524a53fa7e0f0c502ac"
+      - W/"975435b21299475b24727bca810cd3b7"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 8fb0673d0147188e55dca8a0cd0d0607
+      - d68a90681c390ae4bd7bcc74a7189edf
       X-Runtime:
-      - '0.002112'
+      - '0.002007'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
     body:
       encoding: ASCII-8BIT
-      string: '{"build_date":"2020-04-03T14:53:25+0000","build_tag":"app-964134380453b9ec84c2b9fcfe97b0058b81dead","app_branch":"master"}'
+      string: '{"build_date":"2020-04-15T08:26:05+0000","build_tag":"app-aa1cfe2ed4275cae77c548fe5c39ecc1ac4f7017","app_branch":"master"}'
     http_version: null
-  recorded_at: Sat, 04 Apr 2020 13:40:20 GMT
+  recorded_at: Fri, 03 Apr 2020 23:00:00 GMT
 - request:
     method: get
-    uri: https://apply-for-legal-aid.service.justice.gov.uk/ping.json
+    uri: https://check-financial-eligibility.apps.live-1.cloud-platform.service.justice.gov.uk/ping.json
     body:
       encoding: US-ASCII
       string: ''
@@ -73,16 +73,16 @@ http_interactions:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
-      - apply-for-legal-aid.service.justice.gov.uk
+      - check-financial-eligibility.apps.live-1.cloud-platform.service.justice.gov.uk
   response:
     status:
       code: 200
       message: OK
     headers:
       Server:
-      - openresty/1.15.8.2
+      - nginx/1.17.8
       Date:
-      - Sat, 04 Apr 2020 13:40:20 GMT
+      - Thu, 16 Apr 2020 07:08:52 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -91,8 +91,6 @@ http_interactions:
       - keep-alive
       Vary:
       - Accept-Encoding
-      Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
@@ -106,16 +104,18 @@ http_interactions:
       Referrer-Policy:
       - strict-origin-when-cross-origin
       Etag:
-      - W/"f10bb3ad100ca524a53fa7e0f0c502ac"
+      - W/"341071f37e8cdd7462195a9265267595"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 6db6437a56f660c4ec260c3331bc826f
+      - c958a71e59e670c3b8782b0f5df77ac6
       X-Runtime:
-      - '0.001929'
+      - '0.001487'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
     body:
       encoding: ASCII-8BIT
-      string: '{"build_date":"2020-04-03T14:53:25+0000","build_tag":"app-964134380453b9ec84c2b9fcfe97b0058b81dead","app_branch":"master"}'
+      string: '{"build_date":"2020-04-02T15:10:29+0000","build_tag":"app-fc957d0f07ab5340060d3725c8deb123d0e6e8c4","app_branch":"master"}'
     http_version: null
-  recorded_at: Sat, 04 Apr 2020 13:40:20 GMT
+  recorded_at: Fri, 03 Apr 2020 23:00:00 GMT
 recorded_with: VCR 5.1.0
