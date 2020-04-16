@@ -12,10 +12,11 @@ vcr/*
 .env.*
 .rubocop.yml
 .dockerignore
-docker-compose.yml
 .git
 .github
 .rspec
 dump.rdb
 Guardfile
 README.md
+bin
+kubectl_deploy
