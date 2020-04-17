@@ -13,7 +13,7 @@ class StartIntegrationTestsWorker
       @retry_headers = { 'If-None-Match': result.headers[:etag].to_s }
       sleep GithubValues.wait_time
     end
-    raise 'Could not get in_progress jobs from github'
+    raise 'Could not get queued jobs from github'
   end
 
   def perform(data)

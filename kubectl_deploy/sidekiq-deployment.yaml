@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sidekiq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sidekiq
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: sidekiq
+    spec:
+      containers:
+      - command:
+        - sidekiq
+        - -r
+        - ./app.rb
+        env:
+          - name: APPLY_GITHUB_REPO
+            value: laa-apply-for-legal-aid
+          - name: CFE_GITHUB_REPO
+            value: check-financial-eligibility
+          - name: GITHUB_OWNER
+            value: ministryofjustice
+          - name: GITHUB_REPO
+            value: check-financial-eligibility
+          - name: GITHUB_WAIT_SECONDS
+            value: "1"
+          - name: GITHUB_API_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: apply-bot-secrets
+                key: GITHUB_API_TOKEN
+          - name: JOB_WORKER_URL
+            valueFrom:
+              secretKeyRef:
+                name: apply-bot-secrets
+                key: JOB_WORKER_URL
+          - name: SIDEKIQ_WEB_UI_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: apply-bot-secrets
+                key: SIDEKIQ_WEB_UI_PASSWORD
+          - name: SLACK_API_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: apply-bot-secrets
+                key: SLACK_API_TOKEN
+        image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/laa-apply-bot:app-latest
+        imagePullPolicy: ""
+        name: sidekiq
+        resources: {}
+      restartPolicy: Always
+status: {}

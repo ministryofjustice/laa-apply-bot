@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: laa-apply-slack-bot-ingress
+spec:
+  tls:
+  - hosts:
+    - laa-apply-slack-bot.apps.live-1.cloud-platform.service.justice.gov.uk
+  rules:
+  - host: laa-apply-slack-bot.apps.live-1.cloud-platform.service.justice.gov.uk
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: website
+          servicePort: 4567

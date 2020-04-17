@@ -6,7 +6,7 @@ class MonitorTestRunWorker
     data.stringify_keys!
     result = JSON.parse(RestClient.get(monitor_url, GithubValues.headers))
     if result['status'].eql?('completed')
-      params = { channel: data['channel'], as_user: true }.merge(SlackAttachment.job_completed(true, web_url))
+      params = { channel: data['channel'], as_user: true }.merge(SlackAttachment.job_completed(result['conclusion'].eql?('success'), web_url))
       SendSlackMessage.new.job_completed(params)
     else
       # if delay.eql?(11)
