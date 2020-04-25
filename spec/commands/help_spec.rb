@@ -10,7 +10,10 @@ describe SlackRubyBot::Commands::Help, :vcr do
     "\n*Commands:*"\
     "\n*ages* - `@apply-bot ages`"\
     "\n*details* - `@apply-bot <application> details <environment>` e.g. `@apply-bot cfe details staging`"\
-    "\n*run tests* - `@apply-bot run tests`\n\nFor full description of the command use: *help <command>*\n"
+    "\n*run tests* - `@apply-bot run tests`"\
+    "\n*uat urls* - `@apply-bot uat urls`"\
+    "\n*uat url* - `@apply-bot uat url <branch> e.g. @apply-bot uat url ap-999`\n"\
+    "\nFor full description of the command use: *help <command>*\n"
   end
   # TODO: find out why the ruby-slack-bot is inserting thw weather bot output into the test response!
 

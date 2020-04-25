@@ -1,13 +1,16 @@
 source 'https://rubygems.org'
-ruby '2.6.5'
+ruby '2.6.6'
 
 gem 'async-websocket', '~>0.8.0'
 gem 'dotenv'
+gem 'kubeclient'
+gem 'openid_connect'
 gem 'puma'
 gem 'rest-client'
 gem 'sidekiq'
 gem 'sinatra'
 gem 'slack-ruby-bot'
+gem 'tzinfo-data'
 
 group :development do
   gem 'guard-rspec'

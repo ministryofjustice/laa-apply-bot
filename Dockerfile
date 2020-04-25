@@ -1,4 +1,4 @@
-FROM ruby:2.6.5-alpine3.10
+FROM ruby:2.6.6-alpine3.10
 MAINTAINER Ministry of Justice, Apply service <apply@digital.justice.gov.uk>
 
 # fail early and print all commands
@@ -40,6 +40,7 @@ RUN apk update && apk del build-dependencies
 
 # expect ping environment variables
 ARG SLACK_API_TOKEN
+ENV KUBE_CONFIG_FILE=./config/.kube_config
 ENV SLACK_API_TOKEN=${SLACK_API_TOKEN}
 
 USER 1000
