@@ -1,4 +1,4 @@
-FROM ruby:2.6.5-alpine3.10
+FROM ruby:2.6.6-alpine3.10
 MAINTAINER Ministry of Justice, Apply service <apply@digital.justice.gov.uk>
 
 # fail early and print all commands
