@@ -43,9 +43,20 @@ require 'app'
 require 'dotenv'
 Dotenv.load('.env.test')
 
+require 'shoulda/matchers'
 RSpec.configure do |config|
   config.before do
     stub_request(:post, %r{\Ahttps://slack.com/api/.*\z}).to_return(status: 200, body: '', headers: {})
     stub_request(:any, %r{\Ahttps://(www|api).github.com/.*\z}).to_return(status: 200, body: '', headers: {})
+  end
+  config.include(Shoulda::Matchers::ActiveModel, type: :model)
+  config.include(Shoulda::Matchers::ActiveRecord, type: :model)
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    # Keep as many of these lines as are necessary:
+    with.library :active_record
   end
 end
