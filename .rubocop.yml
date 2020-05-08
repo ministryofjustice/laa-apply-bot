@@ -4,6 +4,17 @@ AllCops:
 
 Layout/LineLength:
   Max: 120
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Style/ExponentialNotation:
+  Enabled: true
 
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -19,6 +30,10 @@ Style/HashTransformKeys:
 
 Style/HashTransformValues:
   Enabled: true
+
+Style/NumericLiterals:
+  Exclude:
+    - './db/schema.rb'
 
 Metrics/BlockLength:
   Exclude:
