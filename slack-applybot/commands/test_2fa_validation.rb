@@ -12,7 +12,8 @@ module SlackApplybot
 
       command '2fa-start' do |client, data, _match|
         token = TokenGenerator.call(data['user'])
-        message_text = File.join(ENV.fetch('ROOT_URL'), '/2fa/', token)
+        url = File.join(ENV.fetch('ROOT_URL'), '/2fa/', token)
+        message_text = "You will need a 2FA authenticator app before clicking on this <#{url}|this link>"
         client.say(channel: data.channel, text: message_text)
       end
     end
