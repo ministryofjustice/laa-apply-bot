@@ -19,30 +19,20 @@ require 'timecop'
 require 'sidekiq'
 require 'sidekiq/testing'
 Sidekiq::Testing.fake!
-
 require 'webmock'
 require 'webmock/rspec'
 WebMock.disable_net_connect!
-
 require 'pry'
 require 'slack-ruby-bot/rspec'
-require 'slack-applybot/commands/ages'
-require 'slack-applybot/commands/details'
-require 'slack-applybot/commands/help'
-require 'slack-applybot/commands/integration_tests'
-require 'slack-applybot/commands/uat_url'
-require 'slack-applybot/bot'
-require 'slack-applybot/environment'
-require 'lib/github_values'
-require 'lib/kubectl'
-require 'lib/monitor_test_run_worker'
-require 'lib/send_slack_message'
-require 'lib/slack_attachment'
-require 'lib/start_integration_tests_worker'
 require 'vcr_helper'
 require 'app'
 require 'dotenv'
 Dotenv.load('.env.test')
+
+Dir[File.join('slack-applybot/**/*.rb'), File.join('lib/**/*.rb')].sort.each do |f|
+  file = File.join(File.dirname(f), File.basename(f, File.extname(f)))
+  require file
+end
 
 RSpec.configure do |config|
   config.before do
