@@ -24,6 +24,7 @@ require 'webmock'
 require 'webmock/rspec'
 WebMock.disable_net_connect!
 
+require 'pry'
 require 'slack-ruby-bot/rspec'
 require 'slack-applybot/commands/ages'
 require 'slack-applybot/commands/details'
