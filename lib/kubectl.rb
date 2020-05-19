@@ -13,7 +13,7 @@ class Kubectl
 
   # :nocov:
   def ingresses(namespace)
-    @client.get_ingresses(namespace: namespace, as: :ros).map do |ingress|
+    client.get_ingresses(namespace: namespace, as: :ros).map do |ingress|
       ingress.spec.rules[0].host
     end
   end
