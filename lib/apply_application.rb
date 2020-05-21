@@ -1,7 +1,5 @@
-require 'apply_service/base'
-
 class ApplyApplication < ApplyService::Base
   def initialize
-    @application = 'Apply'
+    super('Apply')
   end
 end

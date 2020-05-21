@@ -1,7 +1,5 @@
-require 'apply_service/base'
-
 class CfeApplication < ApplyService::Base
   def initialize
-    @application = 'CFE'
+    super('CFE')
   end
 end

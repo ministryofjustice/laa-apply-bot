@@ -1,7 +1,19 @@
 require 'spec_helper'
 
-describe ApplyService::Base do
-  subject(:base) { described_class.new }
+class MockApplication < ApplyService::Base
+  def initialize
+    super('test')
+  end
+end
 
-  it { expect { base }.to raise_error(RuntimeError, 'ApplyService base class cannot be initialized') }
+describe ApplyService::Base do
+  subject(:base) { described_class.new('test') }
+
+  it { expect { base }.to raise_error(ApplyService::AbstractClassError) }
+
+  context 'when it is instantiated with a missing app name' do
+    it 'returns an error message' do
+      expect { MockApplication.new }.to raise_error(ApplyService::InvalidApplicationError)
+    end
+  end
 end
