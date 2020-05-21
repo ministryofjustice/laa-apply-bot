@@ -8,8 +8,8 @@ describe SlackApplybot::Commands::UatUrl, :vcr do
     let(:user_input) { "#{SlackRubyBot.config.user} uat urls" }
     let(:expected_response) do
       "Apply UAT urls:\n"\
-      "<ap-1234-test.fake.service.uk|ap-1234-test>\n"\
-      '<ap-4321-bad.fake.service.uk|ap-4321-bad>'
+      "<https://ap-1234-test.fake.service.uk|ap-1234-test>\n"\
+      '<https://ap-4321-bad.fake.service.uk|ap-4321-bad>'
     end
 
     it 'returns the expected message' do
@@ -23,7 +23,7 @@ describe SlackApplybot::Commands::UatUrl, :vcr do
     context 'that exists' do
       let(:branch) { 'ap-1234' }
       let(:expected_response) do
-        'Branch <ap-1234-test.fake.service.uk|ap-1234> is available'
+        'Branch <https://ap-1234-test.fake.service.uk|ap-1234> is available'
       end
 
       it 'returns the expected message' do
@@ -35,8 +35,8 @@ describe SlackApplybot::Commands::UatUrl, :vcr do
       let(:branch) { 'ap-666' }
       let(:expected_response) do
         "Sorry I can't find a branch for #{branch} I only have:\n"\
-        "<ap-1234-test.fake.service.uk|ap-1234-test>\n"\
-        '<ap-4321-bad.fake.service.uk|ap-4321-bad>'
+        "<https://ap-1234-test.fake.service.uk|ap-1234-test>\n"\
+        '<https://ap-4321-bad.fake.service.uk|ap-4321-bad>'
       end
 
       it 'returns the expected message' do
