@@ -60,14 +60,14 @@ describe ApplicationInstance do
         let(:type) { v[:type] }
         let(:level) { v[:level] }
 
-        it { expect { application_instance }.to raise_error(ApplyInstance::InvalidInstantiationError) }
+        it { expect { application_instance }.to raise_error(ApplyServiceInstance::InvalidInstantiationError) }
       end
     end
 
     context 'when passed an invalid application name' do
       let(:type) { 'cccd' }
 
-      it { expect { application_instance }.to raise_error(ApplyInstance::InvalidApplicationError) }
+      it { expect { application_instance }.to raise_error(ApplyServiceInstance::InvalidApplicationError) }
     end
   end
 end

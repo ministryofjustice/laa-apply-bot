@@ -1,4 +1,4 @@
-module ApplyInstance
+module ApplyServiceInstance
   class AbstractClassError < RuntimeError
     def initialize(message = 'ApplyService::Base is an abstract class and cannot be instantiated')
       super(message)
@@ -29,7 +29,7 @@ module ApplyInstance
     def initialize(type, level)
       raise 'ApplyInstance base class cannot be initialized' if self.class == Base
       raise InvalidInstantiationError if type.nil? || level.nil?
-      raise ApplyInstance::InvalidApplicationError unless APPLICATIONS.include?(type)
+      raise ApplyServiceInstance::InvalidApplicationError unless APPLICATIONS.include?(type)
 
       @type = type
       @level = level

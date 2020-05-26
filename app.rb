@@ -7,7 +7,7 @@ require 'dotenv'
 require 'rotp'
 require 'rqrcode'
 require './lib/apply_service/base.rb'
-require './lib/apply_instance/base.rb'
+require './lib/apply_service_instance/base.rb'
 Dir[File.join('lib/**/*.rb')].sort.each do |f|
   file = File.join('.', File.dirname(f), File.basename(f))
   require file

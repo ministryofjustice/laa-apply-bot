@@ -1,1 +1,1 @@
-class ApplicationInstance < ApplyInstance::Base; end
+class ApplicationInstance < ApplyServiceInstance::Base; end

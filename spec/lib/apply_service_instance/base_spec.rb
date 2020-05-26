@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ApplyInstance::Base do
+describe ApplyServiceInstance::Base do
   subject(:base) { described_class.new(type, level) }
   let(:type) { 'apply' }
   let(:level) { 'live' }
