@@ -1,11 +1,10 @@
 require 'spec_helper'
 
-describe ApplicationInstance do
-  subject(:application_instance) { described_class.new(type, level) }
-  let(:type) { 'apply' }
+describe ApplyInstance do
+  subject(:application_instance) { described_class.new(level) }
   let(:level) { 'live' }
 
-  it { is_expected.to be_a ApplicationInstance }
+  it { is_expected.to be_a ApplyInstance }
 
   describe 'url' do
     subject(:url) { application_instance.url }
@@ -52,22 +51,9 @@ describe ApplicationInstance do
     end
   end
 
-  describe 'instantiation fails' do
-    { type: { type: nil, level: 'live' },
-      level: { type: 'apply', level: nil },
-      both: { type: nil, level: nil } }.each do |k, v|
-      context "when #{k} is missing" do
-        let(:type) { v[:type] }
-        let(:level) { v[:level] }
+  describe 'when level is not provided, instantiation fails' do
+    let(:level) { nil }
 
-        it { expect { application_instance }.to raise_error(ApplyServiceInstance::InvalidInstantiationError) }
-      end
-    end
-
-    context 'when passed an invalid application name' do
-      let(:type) { 'cccd' }
-
-      it { expect { application_instance }.to raise_error(ApplyServiceInstance::InvalidApplicationError) }
-    end
+    it { expect { application_instance }.to raise_error(ApplyServiceInstance::InvalidInstantiationError) }
   end
 end
