@@ -36,8 +36,6 @@ module ApplyServiceInstance
     end
 
     def url
-      # cfe-live 'http://check-financial-eligibility.apps.live-1.cloud-platform.service.justice.gov.uk/'
-      # cfe-staging 'check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk'
       if LIVE_ENV_SYNONYMS.include?(@level)
         PREFIX + SERVICE_URL
       elsif NON_LIVE_ENVS.include?(@level)
