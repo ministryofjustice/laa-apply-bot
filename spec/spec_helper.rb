@@ -1,6 +1,6 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..'))
 require 'simplecov'
-
+require 'highline/import'
 SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
   SimpleCov.start do
@@ -8,10 +8,10 @@ unless ENV['NOCOVERAGE']
     add_filter 'config/'
     add_group 'Libraries', 'lib/'
   end
-  # SimpleCov.at_exit do
-  #   say("<%= color('Code coverage below 100%', RED) %>") if SimpleCov.result.coverage_statistics[:line].percent < 100
-  #   SimpleCov.result.format!
-  # end
+  SimpleCov.at_exit do
+    say("<%= color('Code coverage below 100%', RED) %>") if SimpleCov.result.coverage_statistics[:line].percent < 100
+    SimpleCov.result.format!
+  end
 end
 ENV['ENV'] = 'test'
 

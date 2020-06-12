@@ -22,6 +22,7 @@ end
 group :development, :test do
   gem 'byebug'
   gem 'foreman'
+  gem 'highline'
   gem 'pry-byebug'
   gem 'rake'
   gem 'rubocop'

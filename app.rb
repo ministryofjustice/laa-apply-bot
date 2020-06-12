@@ -6,14 +6,13 @@ require 'sidekiq/web'
 require 'dotenv'
 require 'rotp'
 require 'rqrcode'
-require './lib/github_values.rb'
-require './lib/date_display.rb'
-require './lib/kubectl.rb'
-require './lib/start_integration_tests_worker.rb'
-require './lib/monitor_test_run_worker.rb'
-require './lib/slack_attachment.rb'
-require './lib/send_slack_message.rb'
-require './lib/token_generator.rb'
+require './lib/apply_service/base.rb'
+require './lib/apply_service_instance/base.rb'
+Dir[File.join('lib/**/*.rb')].sort.each do |f|
+  file = File.join('.', File.dirname(f), File.basename(f))
+  require file
+end
+
 require './config/sidekiq_config.rb'
 
 dot_file = ENV['ENV'].eql?('test') ? '.env.test' : '.env'

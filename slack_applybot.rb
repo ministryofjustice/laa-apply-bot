@@ -1,7 +1,6 @@
 require 'slack-ruby-bot'
 require 'sidekiq'
 require './slack-applybot/bot.rb'
-require './slack-applybot/environment.rb'
 require './slack-applybot/commands/ages.rb'
 require './slack-applybot/commands/details.rb'
 require './slack-applybot/commands/help.rb'
