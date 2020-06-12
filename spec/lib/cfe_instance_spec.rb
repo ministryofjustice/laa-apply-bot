@@ -54,6 +54,12 @@ describe CfeInstance do
     end
   end
 
+  describe 'name' do
+    subject(:name) { application_instance.name }
+
+    it { is_expected.to eql('production') }
+  end
+
   describe 'when level is not provided, instantiation fails' do
     let(:level) { nil }
 

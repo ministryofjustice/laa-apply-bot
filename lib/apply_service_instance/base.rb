@@ -51,5 +51,13 @@ module ApplyServiceInstance
       response = RestClient.get(ping_url)
       JSON.parse(response.body)
     end
+
+    def name
+      if LIVE_ENV_SYNONYMS.include?(@level)
+        'production'
+      elsif NON_LIVE_ENVS.include?(@level)
+        @level
+      end
+    end
   end
 end
