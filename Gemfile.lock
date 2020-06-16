@@ -238,7 +238,7 @@ GEM
     validate_url (1.0.8)
       activemodel (>= 3.0.0)
       public_suffix
-    vcr (5.1.0)
+    vcr (6.0.0)
     webfinger (1.1.0)
       activesupport
       httpclient (>= 2.4)
