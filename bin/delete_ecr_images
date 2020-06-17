@@ -4,10 +4,10 @@ require 'date'
 
 repo = 'laa-apply-for-legal-aid/laa-apply-bot'
 delete_if_older_than = 10 # days
-
+aws_prefix = 'aws --profile laa-apply-bot --region eu-west-2 ecr'
 puts 'Identifying images to delete'
 
-json_output = `aws --profile laa-apply-bot --region eu-west-2 ecr describe-images --repository-name #{repo} --output json`
+json_output = `#{aws_prefix} describe-images --repository-name #{repo} --output json`
 puts json_output
 images = JSON.parse(json_output)['imageDetails']
 
@@ -25,7 +25,7 @@ else
 
   images_to_delete.each_slice(100) do |batch|
     image_ids = batch.map { |i| "imageDigest=#{i['imageDigest']}" }.join(' ')
-    puts `aws ecr --profile laa-apply-bot --region eu-west-2 batch-delete-image --repository-name #{repo} --image-ids #{image_ids}`
+    puts `#{aws_prefix} batch-delete-image --repository-name #{repo} --image-ids #{image_ids}`
   end
 
   puts 'Done!'
