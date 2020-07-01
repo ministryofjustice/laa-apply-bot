@@ -25,7 +25,7 @@ class Kubectl
 
   def client
     @client ||= Kubeclient::Client.new(
-      context.api_endpoint + '/apis/extensions',
+      context.api_endpoint + '/apis/networking.k8s.io',
       'v1beta1',
       ssl_options: context.ssl_options, auth_options: context.auth_options
     )
