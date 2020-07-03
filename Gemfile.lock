@@ -86,8 +86,12 @@ GEM
       activesupport (>= 4.2)
       aes_key_wrap
       bindata
-    kubeclient (4.7.0)
+    jsonpath (1.0.5)
+      multi_json
+      to_regexp (~> 0.2.1)
+    kubeclient (4.8.0)
       http (>= 3.0, < 5.0)
+      jsonpath (~> 1.0)
       recursive-open-struct (~> 1.1, >= 1.1.1)
       rest-client (~> 2.0)
     listen (3.2.1)
@@ -102,6 +106,7 @@ GEM
     mime-types-data (3.2020.0512)
     mini_mime (1.0.2)
     minitest (5.14.1)
+    multi_json (1.14.1)
     multipart-post (2.1.1)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
@@ -149,7 +154,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    recursive-open-struct (1.1.1)
+    recursive-open-struct (1.1.2)
     redis (4.2.1)
     regexp_parser (1.7.1)
     rest-client (2.1.0)
@@ -226,6 +231,7 @@ GEM
     tilt (2.0.10)
     timecop (0.9.1)
     timers (4.3.0)
+    to_regexp (0.2.1)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     tzinfo-data (1.2020.1)
