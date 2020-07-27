@@ -47,7 +47,7 @@ GEM
       rake
     foreman (0.87.1)
     formatador (0.2.5)
-    gli (2.19.1)
+    gli (2.19.2)
     guard (2.16.2)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -80,7 +80,7 @@ GEM
     http-parser (1.2.1)
       ffi-compiler (>= 1.0, < 2.0)
     httpclient (2.8.3)
-    i18n (1.8.3)
+    i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     json-jwt (1.13.0)
       activesupport (>= 4.2)
@@ -212,12 +212,11 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.8.1)
       tilt (~> 2.0)
-    slack-ruby-bot (0.15.0)
+    slack-ruby-bot (0.16.0)
       hashie
       slack-ruby-client (>= 0.14.0)
-    slack-ruby-client (0.14.6)
-      activesupport
-      faraday (>= 0.9)
+    slack-ruby-client (0.15.0)
+      faraday (>= 1.0)
       faraday_middleware
       gli
       hashie
@@ -254,10 +253,10 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    websocket-driver (0.7.2)
+    websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.3.0)
+    zeitwerk (2.4.0)
 
 PLATFORMS
   ruby
