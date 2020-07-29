@@ -5,7 +5,7 @@ describe SlackApplybot::Commands::IntegrationTests, :vcr do
 
   context 'when user requests a test run' do
     it 'starts typing and triggers the sidekiq job' do
-      expect(StartIntegrationTestsWorker).to receive(:perform_async)
+      expect(TestRunStartWorker).to receive(:perform_async)
       expect(message: user_input, channel: 'channel').to start_typing(channel: 'channel')
     end
 
