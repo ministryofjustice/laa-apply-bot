@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.6.6'
 
-gem 'async-websocket', '~>0.8.0'
+gem 'async-websocket', '~>0.15.0'
 gem 'dotenv'
 gem 'dotiw'
 gem 'kubeclient'
