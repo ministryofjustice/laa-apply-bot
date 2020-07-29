@@ -3,7 +3,7 @@ module SlackApplybot
     class IntegrationTests < SlackRubyBot::Commands::Base
       command 'run tests' do |client, data, _match|
         client.typing(channel: data.channel)
-        StartIntegrationTestsWorker.perform_async(data)
+        TestRunStartWorker.perform_async(data)
       end
     end
   end

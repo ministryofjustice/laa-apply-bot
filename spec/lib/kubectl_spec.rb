@@ -8,7 +8,7 @@ RSpec.describe Kubectl do
     allow_any_instance_of(Kubectl).to receive(:ingresses).with('laa-apply-for-legalaid-uat').and_return(valid_json)
   end
 
-  let(:valid_json) { [response: 'true'] }
+  let(:valid_json) { [{ response: 'true' }] }
 
   describe '.uat_ingresses' do
     subject(:uat_ingresses) { kubectl.uat_ingresses }

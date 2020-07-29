@@ -1,5 +1,5 @@
-require './slack_applybot.rb'
-require './app.rb'
+require './slack_applybot'
+require './app'
 
 Thread.abort_on_exception = true
 Thread.new do

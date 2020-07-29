@@ -28,10 +28,10 @@ describe GithubValues do
     it { is_expected.to eql('https://api.github.com/repos/moj/project/extend') }
   end
 
-  describe '#workflow_url' do
-    subject(:workflow_url) { described_class.workflow_url }
+  describe '#running_job_url' do
+    subject(:running_job_url) { described_class.running_job_url }
 
-    it { is_expected.to eql("#{base_url}/actions/workflows/manual-integration-tests.yml/runs?status=queued") }
+    it { is_expected.to eql("#{base_url}/actions/workflows/manual-integration-tests.yml/runs?status=in_progress") }
   end
 
   describe '#wait_time' do

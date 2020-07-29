@@ -6,14 +6,14 @@ require 'sidekiq/web'
 require 'dotenv'
 require 'rotp'
 require 'rqrcode'
-require './lib/apply_service/base.rb'
-require './lib/apply_service_instance/base.rb'
+require './lib/apply_service/base'
+require './lib/apply_service_instance/base'
 Dir[File.join('lib/**/*.rb')].sort.each do |f|
   file = File.join('.', File.dirname(f), File.basename(f))
   require file
 end
 
-require './config/sidekiq_config.rb'
+require './config/sidekiq_config'
 
 dot_file = ENV['ENV'].eql?('test') ? '.env.test' : '.env'
 Dotenv.load(dot_file)

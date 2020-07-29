@@ -15,8 +15,8 @@ class GithubValues
     "#{repo_url}#{suffix}"
   end
 
-  def self.workflow_url
-    build_url('/actions/workflows/manual-integration-tests.yml/runs?status=queued')
+  def self.running_job_url
+    build_url('/actions/workflows/manual-integration-tests.yml/runs?status=in_progress')
   end
 
   def self.wait_time

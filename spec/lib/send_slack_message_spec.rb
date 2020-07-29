@@ -13,26 +13,35 @@ RSpec.describe SendSlackMessage do
     end
   end
 
-  context '.job_started' do
-    subject(:job_started) { slack.job_started(data, web_url) }
-
-    let(:data) { { channel: 'test', user: 'test' } }
-    let(:web_url) { 'http://test.com' }
-
-    it 'sends a message to slack' do
-      subject
-      expect(a_request(:post, 'https://slack.com/api/chat.postEphemeral')).to have_been_made.times(1)
-    end
-  end
-
-  context '.job_completed' do
-    subject(:job_completed) { slack.job_completed(params) }
+  describe '.generic' do
+    subject(:generic) { slack.generic(params) }
 
     let(:params) { { channel: 'test', user: 'test', attachments: [] } }
 
     it 'sends a message to slack' do
       subject
       expect(a_request(:post, 'https://slack.com/api/chat.postMessage')).to have_been_made.times(1)
+    end
+  end
+
+  describe '.update' do
+    subject(:update) { slack.update(params) }
+
+    let(:params) { { ts: '0000.000', channel: 'test', user: 'test', attachments: [] } }
+
+    it 'sends an update post to slack' do
+      subject
+      expect(a_request(:post, 'https://slack.com/api/chat.update')).to have_been_made.times(1)
+    end
+  end
+
+  describe '.user' do
+    subject(:update) { slack.user(params) }
+    let(:params) { { user_id: 'test' } }
+
+    it 'sends an user POST request to slack' do
+      subject
+      expect(a_request(:post, 'https://slack.com/api/users.info')).to have_been_made.times(1)
     end
   end
 end
