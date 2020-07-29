@@ -37,6 +37,9 @@ GEM
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.7.6)
+    dotiw (5.0.0)
+      activesupport
+      i18n
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (1.0.0)
@@ -266,6 +269,7 @@ DEPENDENCIES
   async-websocket (~> 0.8.0)
   byebug
   dotenv
+  dotiw
   foreman
   guard-rspec
   guard-rubocop

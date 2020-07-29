@@ -3,6 +3,7 @@ ruby '2.6.6'
 
 gem 'async-websocket', '~>0.8.0'
 gem 'dotenv'
+gem 'dotiw'
 gem 'kubeclient'
 gem 'openid_connect'
 gem 'puma'
