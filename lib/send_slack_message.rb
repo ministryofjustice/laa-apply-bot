@@ -7,14 +7,22 @@ class SendSlackMessage
     check_connection
   end
 
-  def job_started(data, web_url)
-    data.stringify_keys!
-    params = { as_user: true, user: data['user'], channel: data['channel'] }.merge(SlackAttachment.job_started(web_url))
-    client.chat_postEphemeral(params)
+  def update(params)
+    # params = { ts: '0000000000.000000', channel: data['channel'], as_user: true, text: 'message_text' }
+    client.chat_update(params)
   end
 
-  def job_completed(params)
+  def generic(params)
+    # params = { channel: data['channel'], as_user: true, text: 'message_text' }
     client.chat_postMessage(params)
+  end
+
+  def self.find_user(user_id)
+    new.user(user_id)
+  end
+
+  def user(user_id)
+    client.users_info(user: user_id)&.user
   end
 
   private
