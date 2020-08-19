@@ -48,7 +48,7 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
-    foreman (0.87.1)
+    foreman (0.87.2)
     formatador (0.2.5)
     gli (2.19.2)
     guard (2.16.2)
