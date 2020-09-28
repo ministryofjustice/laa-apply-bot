@@ -1,11 +1,11 @@
 require 'spec_helper'
 
+LIVE_URL = 'https://check-financial-eligibility.apps.live-1.cloud-platform.service.justice.gov.uk'.freeze
+STAGING_URL = 'https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk'.freeze
+
 describe CfeInstance do
   subject(:application_instance) { described_class.new(level) }
   let(:level) { 'live' }
-
-  LIVE_URL = 'https://check-financial-eligibility.apps.live-1.cloud-platform.service.justice.gov.uk'.freeze
-  STAGING_URL = 'https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk'.freeze
 
   it { is_expected.to be_a CfeInstance }
 
