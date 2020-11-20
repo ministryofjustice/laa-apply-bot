@@ -13,7 +13,7 @@ module ApplyService
 
   class Base
     def initialize(name)
-      raise AbstractClassError if self.class == Base
+      raise AbstractClassError if instance_of?(Base)
 
       @name = name
       @github_repo = "#{@name.upcase}_GITHUB_REPO"

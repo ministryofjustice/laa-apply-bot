@@ -27,7 +27,7 @@ module ApplyServiceInstance
     attr_accessor :type, :level
 
     def initialize(type, level)
-      raise AbstractClassError if self.class == Base
+      raise AbstractClassError if instance_of?(Base)
       raise InvalidInstantiationError if type.nil? || level.nil?
       raise InvalidApplicationError unless APPLICATIONS.include?(type)
 
