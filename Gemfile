@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.6.6'
+ruby '2.7.2'
 
 gem 'async-websocket', '~>0.8.0'
 gem 'dotenv'

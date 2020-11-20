@@ -8,14 +8,14 @@ RSpec.describe SlackBlockBuilder do
   it { is_expected.to be_a SlackBlockBuilder }
 
   describe '#call' do
-    subject(:class_call) { described_class.call(state, args) }
+    subject(:class_call) { described_class.call(state, **args) }
     let(:state) { :start }
 
     it { is_expected.to be_a Hash }
   end
 
   describe '.call' do
-    subject(:call) { block_builder.call(state, args) }
+    subject(:call) { block_builder.call(state, **args) }
 
     context 'when the state is missing' do
       let(:state) { nil }
