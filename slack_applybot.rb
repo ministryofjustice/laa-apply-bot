@@ -1,6 +1,7 @@
 require 'slack-ruby-bot'
 require 'sidekiq'
 require './slack-applybot/bot'
+require './slack-applybot/commands/_channel_validity'
 require './slack-applybot/commands/add_user'
 require './slack-applybot/commands/ages'
 require './slack-applybot/commands/details'
