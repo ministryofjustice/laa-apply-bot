@@ -22,6 +22,10 @@ class SendSlackMessage
     client.files_upload(params)
   end
 
+  def conversations_info(channel_id)
+    client.conversations_info(channel_id)
+  end
+
   def self.find_user(user_id)
     new.user(user_id)
   end

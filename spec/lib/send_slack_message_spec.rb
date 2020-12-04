@@ -35,6 +35,17 @@ RSpec.describe SendSlackMessage do
     end
   end
 
+  describe '.conversations_info' do
+    subject(:conversations_info) { slack.conversations_info(params) }
+
+    let(:params) { { channel: 'test' } }
+
+    it 'sends a message to slack' do
+      subject
+      expect(a_request(:post, 'https://slack.com/api/conversations.info')).to have_been_made.times(1)
+    end
+  end
+
   describe '.update' do
     subject(:update) { slack.update(params) }
 
