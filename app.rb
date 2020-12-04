@@ -20,7 +20,7 @@ Dotenv.load(dot_file)
 
 class App < Sinatra::Base
   set :show_exceptions, :after_handler
-
+  SlackRubyBot::Client.logger.level = Logger::WARN
   get '/' do
     "
     <h1>LAA-Apply bot, find it in slack</h1>
