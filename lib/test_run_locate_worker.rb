@@ -14,7 +14,7 @@ class TestRunLocateWorker
     running_job = find_in_progress_job
     update_process(channel, iteration, message_ts, running_job)
   rescue GithubTimeoutError
-    send_message(SlackBlockBuilder.timeout_error, channel, message_ts)
+    send_message(Slack::BlockBuilder.timeout_error, channel, message_ts)
   end
 
   private
@@ -31,11 +31,11 @@ class TestRunLocateWorker
     polling_url = running_job['workflow_runs'][0]['url']
     web_url = get_web_url_from(running_job)
     TestRunMonitorWorker.perform_in(45, polling_url, 30, channel, web_url, message_ts)
-    send_message(SlackBlockBuilder.call(:waiting, web_url: web_url), channel, message_ts)
+    send_message(Slack::BlockBuilder.call(:waiting, web_url: web_url), channel, message_ts)
   end
 
   def wait_and_try_again(channel, iteration, message_ts)
-    block = SlackBlockBuilder.call(:searching, duration: distance_of_time_in_words(duration))
+    block = Slack::BlockBuilder.call(:searching, duration: distance_of_time_in_words(duration))
     send_message(block, channel, message_ts)
     TestRunLocateWorker.perform_in(GithubValues.wait_time, channel, message_ts, iteration + 1, @etag)
   end

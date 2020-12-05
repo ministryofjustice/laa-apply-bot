@@ -5,7 +5,7 @@ class TestRunMonitorWorker
   def perform(monitor_url, delay, channel, web_url, message_ts)
     result = call_github(monitor_url)
     if result['status'].eql?('completed')
-      block = SlackBlockBuilder.call(:complete, result: result['conclusion'].eql?('success'), web_url: web_url)
+      block = Slack::BlockBuilder.call(:complete, result: result['conclusion'].eql?('success'), web_url: web_url)
       SendSlackMessage.new.update({ ts: message_ts, channel: channel, as_user: true }.merge(block))
     else
       TestRunMonitorWorker.perform_in(delay, monitor_url, delay / 2, channel, web_url, message_ts)
