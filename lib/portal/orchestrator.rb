@@ -13,38 +13,31 @@ module Portal
       build_name_list
       results = @user_list.map { |name| Portal::NameValidator.call(name) }
       if results.all?(true)
-        script = build_script
-        params = { channels: @channel, content: script, filename: 'output.ldif' }
+        script = build_success_script
+        params = { channels: Portal::OutputChannel.is, content: script, filename: 'output.ldif' }
         SendSlackMessage.new.upload_file(params) if script.present?
+        send_message_to_user unless Portal::OutputChannel.new(@channel).valid?
       else
-        SendSlackMessage.new.generic(channel: @channel, as_user: true, text: build_name_errors.chomp)
+        SendSlackMessage.new.generic(channel: @channel, as_user: true, text: build_error_script)
       end
     end
 
     private
 
-    def build_name_errors
-      result = ''
-      @user_list.each do |name|
-        result += good_name(name) if name.errors.nil?
-        result += bad_name(name) if name.errors.present?
-      end
-      result
-    end
-
-    def good_name(name)
-      "*#{name.display_name}* :yep:\n"
-    end
-
-    def bad_name(name)
-      "*#{name.display_name}* :nope: #{name.errors}\n"
+    def send_message_to_user
+      message = "Done, I have raised a request in the ##{ENV['USER_OUTPUT_CHANNEL']} channel"
+      SendSlackMessage.new.generic(channel: @channel, as_user: true, text: message)
     end
 
     def build_name_list
       @user_list = @user_array.map { |user| Portal::Name.new(user) }
     end
 
-    def build_script
+    def build_error_script
+      Portal::NameErrorMessage.call(@user_list)
+    end
+
+    def build_success_script
       Portal::GenerateScript.call(@user_list)
     end
   end
