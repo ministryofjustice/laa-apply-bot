@@ -1,12 +1,13 @@
 module Portal
   class Orchestrator
-    def initialize(user_array, channel)
+    def initialize(user_array, data)
       @user_array = user_array
-      @channel = channel
+      @channel = data['channel']
+      @user = data['user']
     end
 
-    def self.compose(user_array, channel)
-      new(user_array, channel).compose
+    def self.compose(user_array, data)
+      new(user_array, data).compose
     end
 
     def compose
@@ -14,7 +15,7 @@ module Portal
       results = @user_list.map { |name| Portal::NameValidator.call(name) }
       if results.all?(true)
         script = build_success_script
-        params = { channels: Portal::OutputChannel.is, content: script, filename: 'output.ldif' }
+        params = params(script)
         SendSlackMessage.new.upload_file(params) if script.present?
         send_message_to_user unless Portal::OutputChannel.new(@channel).valid?
       else
@@ -23,6 +24,15 @@ module Portal
     end
 
     private
+
+    def params(script)
+      { channels: Portal::OutputChannel.is, content: script, filename: 'output.ldif', initial_comment: notify_text }
+    end
+
+    def notify_text
+      '<!here> can you add the following users? ' \
+      "<@#{@user}> has raised the request and the apply service is ready for them"
+    end
 
     def send_message_to_user
       message = "Done, I have raised a request in the ##{ENV['USER_OUTPUT_CHANNEL']} channel"

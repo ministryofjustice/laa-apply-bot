@@ -1,10 +1,11 @@
 require 'rspec'
 
 RSpec.describe Portal::Orchestrator do
-  subject(:orchestrator) { described_class.new(user_array, channel) }
+  subject(:orchestrator) { described_class.new(user_array, data) }
   before do
     stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
   end
+  let(:data) { { 'user' => 'user', 'channel' => channel } }
   let(:channel) { 'shared_channel' }
   let(:expected_body) do
     {
@@ -16,10 +17,13 @@ RSpec.describe Portal::Orchestrator do
   end
   let(:user_array) { ['test.one', 'test two'] }
   let(:notify_message) { "Done, I have raised a request in the ##{ENV['USER_OUTPUT_CHANNEL']} channel" }
+  let(:expected_message) do
+    '<!here> can you add the following users? <@user> has raised the request and the apply service is ready for them'
+  end
   it { is_expected.to be_a(Portal::Orchestrator) }
 
   describe '.compose' do
-    subject(:compose) { described_class.compose(user_array, 'shared_channel') }
+    subject(:compose) { described_class.compose(user_array, data) }
     let(:expected_response) do
       <<~RESPONSE.chomp
         dn: cn=CCMS_Apply,cn=Groups,dc=lab,dc=gov
@@ -30,11 +34,18 @@ RSpec.describe Portal::Orchestrator do
       RESPONSE
     end
     let(:notify_hash) { { channel: 'channel', as_user: true, text: notify_message } }
-    let(:expected_hash) { { channels: 'shared_channel', content: expected_response, filename: 'output.ldif' } }
+    let(:output_hash) do
+      {
+        channels: 'shared_channel',
+        content: expected_response,
+        filename: 'output.ldif',
+        initial_comment: expected_message
+      }
+    end
     before { class_double(Portal::NameValidator, call: true).as_stubbed_const }
 
     it 'sends a file_upload message' do
-      expect_any_instance_of(SendSlackMessage).to receive(:upload_file).with(expected_hash)
+      expect_any_instance_of(SendSlackMessage).to receive(:upload_file).with(output_hash)
       compose
     end
 
@@ -44,10 +55,9 @@ RSpec.describe Portal::Orchestrator do
     end
 
     context 'when the user raises the request outside the expected channel' do
-      subject(:compose) { described_class.compose(user_array, channel) }
+      subject(:compose) { described_class.compose(user_array, data) }
       let(:channel) { 'channel' }
       let(:notify_hash) { { channel: channel, as_user: true, text: notify_message } }
-      let(:output_hash) { { channels: 'shared_channel', content: expected_response, filename: 'output.ldif' } }
 
       it 'alerts the user in the requesting channel' do
         expect_any_instance_of(SendSlackMessage).to receive(:generic).with(notify_hash)
