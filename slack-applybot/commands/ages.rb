@@ -2,14 +2,22 @@ module SlackApplybot
   module Commands
     class Ages < SlackRubyBot::Commands::Base
       command 'ages' do |client, data, _match|
-        apply_message = age_message('Apply')
-        cfe_message = age_message('CFE')
-        # get master data from github?
-        message_text = "#{apply_message}\n#{cfe_message}"
-        client.say(channel: data.channel, text: message_text)
+        @client = client
+        @data = data
+        if channel_is_valid?
+          apply_message = age_message('Apply')
+          cfe_message = age_message('CFE')
+          # get master data from github?
+          message_text = "#{apply_message}\n#{cfe_message}"
+          client.say(channel: data.channel, text: message_text)
+        else
+          send_fail
+        end
       end
 
       class << self
+        include ChannelValidity
+
         private
 
         def age_message(app)

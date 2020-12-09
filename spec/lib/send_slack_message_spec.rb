@@ -24,6 +24,28 @@ RSpec.describe SendSlackMessage do
     end
   end
 
+  describe '.upload_file' do
+    subject(:upload_file) { slack.upload_file(params) }
+
+    let(:params) { { channels: 'test', content: 'test', filename: 'output.txt' } }
+
+    it 'sends a message to slack' do
+      subject
+      expect(a_request(:post, 'https://slack.com/api/files.upload')).to have_been_made.times(1)
+    end
+  end
+
+  describe '.conversations_info' do
+    subject(:conversations_info) { slack.conversations_info(params) }
+
+    let(:params) { { channel: 'test' } }
+
+    it 'sends a message to slack' do
+      subject
+      expect(a_request(:post, 'https://slack.com/api/conversations.info')).to have_been_made.times(1)
+    end
+  end
+
   describe '.update' do
     subject(:update) { slack.update(params) }
 

@@ -74,6 +74,16 @@ spec:
             secretKeyRef:
               name: apply-bot-secrets
               key: ROOT_URL
+        - name: PROVIDER_DETAILS_URL
+          valueFrom:
+            secretKeyRef:
+              name: apply-bot-secrets
+              key: PROVIDER_DETAILS_URL
+        - name: USER_OUTPUT_CHANNEL
+          valueFrom:
+            secretKeyRef:
+              name: apply-bot-secrets
+              key: USER_OUTPUT_CHANNEL
         image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/laa-apply-bot:app-latest
         imagePullPolicy: ""
         name: website

@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-RSpec.describe SlackBlockBuilder do
+RSpec.describe Slack::BlockBuilder do
   subject(:block_builder) { described_class.new }
 
   let(:args) { {} }
 
-  it { is_expected.to be_a SlackBlockBuilder }
+  it { is_expected.to be_a Slack::BlockBuilder }
 
   describe '#call' do
     subject(:class_call) { described_class.call(state, **args) }

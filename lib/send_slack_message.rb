@@ -17,6 +17,15 @@ class SendSlackMessage
     client.chat_postMessage(params)
   end
 
+  def upload_file(params)
+    # params = { channels: data['channel'], content: 'line%20one%0Aafter%20new_line', filename: 'output.ldif' }
+    client.files_upload(params)
+  end
+
+  def conversations_info(channel_id)
+    client.conversations_info(channel_id)
+  end
+
   def self.find_user(user_id)
     new.user(user_id)
   end
