@@ -9,16 +9,7 @@ describe SlackApplybot::Commands::Details, :vcr do
       class_double(Portal::Orchestrator).as_stubbed_const
       class_double(Portal::NameValidator, call: true).as_stubbed_const
     end
-
     let(:command) { 'add user' }
-    let(:expected_response) do
-      <<~SCRIPT.chomp
-        dn: cn=CCMS_Apply,cn=Groups,dc=lab,dc=gov
-        changetype: modify
-        add: uniquemember
-        uniquemember: cn=TEST.USER,cn=users,dc=lab,dc=gov
-      SCRIPT
-    end
 
     it 'returns a valid portal script' do
       expect(Portal::Orchestrator).to receive(:compose)
