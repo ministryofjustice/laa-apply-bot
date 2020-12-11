@@ -11,12 +11,12 @@ RSpec.describe Portal::Orchestrator do
     {
       'ok': true,
       'channel': {
-        name: channel
+        name: 'shared_channel'
       }
     }.to_json
   end
   let(:user_array) { ['test.one', 'test two'] }
-  let(:notify_message) { "Done, I have raised a request in the ##{ENV['USER_OUTPUT_CHANNEL']} channel" }
+  let(:notify_message) { 'Done, I have raised a request in the #shared_channel channel' }
   let(:expected_message) do
     '<!here> can you add the following users? <@user> has raised the request and the apply service is ready for them'
   end
@@ -33,7 +33,7 @@ RSpec.describe Portal::Orchestrator do
         uniquemember: cn=TEST TWO,cn=users,dc=lab,dc=gov
       RESPONSE
     end
-    let(:notify_hash) { { channel: 'channel', as_user: true, text: notify_message } }
+    let(:notify_hash) { { channel: channel, as_user: true, text: notify_message } }
     let(:output_hash) do
       {
         channels: 'shared_channel',
@@ -58,6 +58,11 @@ RSpec.describe Portal::Orchestrator do
       subject(:compose) { described_class.compose(user_array, data) }
       let(:channel) { 'channel' }
       let(:notify_hash) { { channel: channel, as_user: true, text: notify_message } }
+      let(:output_channel) { instance_double(Portal::OutputChannel, valid?: false) }
+
+      before do
+        allow(Portal::OutputChannel).to receive(:new).with(channel).and_return(output_channel)
+      end
 
       it 'alerts the user in the requesting channel' do
         expect_any_instance_of(SendSlackMessage).to receive(:generic).with(notify_hash)

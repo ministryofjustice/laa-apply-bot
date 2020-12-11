@@ -12,5 +12,9 @@ module Portal
     def self.is
       ENV['USER_OUTPUT_CHANNEL']
     end
+
+    def self.display_name
+      SendSlackMessage.new.conversations_info(channel: is)['channel']['name']
+    end
   end
 end

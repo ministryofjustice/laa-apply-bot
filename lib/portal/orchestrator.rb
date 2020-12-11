@@ -35,7 +35,7 @@ module Portal
     end
 
     def send_message_to_user
-      message = "Done, I have raised a request in the ##{ENV['USER_OUTPUT_CHANNEL']} channel"
+      message = "Done, I have raised a request in the ##{Portal::OutputChannel.display_name} channel"
       SendSlackMessage.new.generic(channel: @channel, as_user: true, text: message)
     end
 
