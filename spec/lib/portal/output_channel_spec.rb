@@ -33,4 +33,10 @@ RSpec.describe Portal::OutputChannel do
 
     it { is_expected.to eq ENV['USER_OUTPUT_CHANNEL'] }
   end
+
+  describe '.display_name' do
+    subject(:display_name) { described_class.display_name }
+
+    it { is_expected.to eq channel }
+  end
 end
