@@ -84,6 +84,11 @@ spec:
             secretKeyRef:
               name: apply-bot-secrets
               key: USER_OUTPUT_CHANNEL
+        - name: ALLOWED_CHANNEL_LIST
+          valueFrom:
+            secretKeyRef:
+              name: apply-bot-secrets
+              key: ALLOWED_CHANNEL_LIST
         image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/laa-apply-bot:app-latest
         imagePullPolicy: ""
         name: website
