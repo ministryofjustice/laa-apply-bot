@@ -1,35 +1,55 @@
 module SlackApplybot
   class Bot < SlackRubyBot::Bot
+    COMMANDS = [
+      {
+        name: 'add users',
+        desc: '`@apply-bot add users <comma separated names>`',
+        long_desc: <<~ADDUSER.chomp
+          Generates a portal user script in the #{ENV['USER_OUTPUT_CHANNEL']} channel regardless of where you ask
+          e.g. `@applybot add user BENREID` or `@applybot add users benreid, NEETADESOR`
+        ADDUSER
+      },
+      {
+        name: 'ages',
+        desc: '`@apply-bot ages`',
+        long_desc: 'Shows the time since both applications were last deployed'
+      },
+      {
+        name: 'details',
+        desc: '`@apply-bot <application> details <environment>` e.g. `@apply-bot cfe details staging`',
+        long_desc: 'Shows the ping details page for the selected application and non-uat environments, '\
+                   'e.g.  `@apply-bot apply details staging` or `@apply-bot cfe details production`'
+      },
+      {
+        name: 'run tests',
+        desc: '`@apply-bot run tests`',
+        long_desc: <<~RUNTESTS.chomp
+          Starts a remote test run on the linked github repo it will respond to you with a link
+          to the running job on github.  When the job finishes it will message you with the result
+        RUNTESTS
+      },
+      {
+        name: 'uat urls',
+        desc: '`@apply-bot uat urls`',
+        long_desc: 'Returns a list of all Apply UAT urls currently available'
+      },
+      {
+        name: 'uat url',
+        desc: '`@apply-bot uat url <branch> e.g. @apply-bot uat url ap-999`',
+        long_desc: 'This will either show the uat url for the specified branch or, if it cannot be matched,'\
+                   'return an apology and the list of all available uat environments'
+      }
+    ].freeze
+
     help do
       title 'LAA Apply Bot'
       desc 'This bot assists the LAA Apply team to administer their applications'
 
-      command 'ages' do
-        desc '`@apply-bot ages`'
-        long_desc 'Shows the time since both applications were last deployed'
-      end
-
-      command 'details' do
-        desc '`@apply-bot <application> details <environment>` e.g. `@apply-bot cfe details staging`'
-        long_desc 'Shows the ping details page for the selected application and non-uat environments, '\
-                  'e.g.  `@apply-bot apply details staging` or `@apply-bot cfe details production`'
-      end
-
-      command 'run tests' do
-        desc '`@apply-bot run tests`'
-        long_desc 'Starts a remote test run on the linked github repo it will respond to you with a link '\
-                  'to the running job on github.  When the job finishes it will message you with the result'
-      end
-
-      command 'uat urls' do
-        desc '`@apply-bot uat urls`'
-        long_desc 'Returns a list of all Apply UAT urls currently available'
-      end
-
-      command 'uat url' do
-        desc '`@apply-bot uat url <branch> e.g. @apply-bot uat url ap-999`'
-        long_desc 'This will either show the uat url for the specified branch or, if it cannot be matched,'\
-                  'return an apology and the list of all available uat environments'
+      COMMANDS.each do |command|
+        command command[:name] do
+          desc command[:desc]
+          long_desc command[:long_desc]
+        end
       end
     end
   end
