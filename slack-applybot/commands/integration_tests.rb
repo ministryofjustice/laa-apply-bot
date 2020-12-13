@@ -6,7 +6,7 @@ module SlackApplybot
         @data = data
         if channel_is_valid?
           client.typing(channel: data.channel)
-          TestRunStartWorker.perform_async(data)
+          Worker::TestRunStart.perform_async(data)
         else
           send_fail
         end

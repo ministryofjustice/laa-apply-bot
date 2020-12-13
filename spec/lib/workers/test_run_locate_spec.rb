@@ -1,10 +1,10 @@
 require 'rspec'
 
-RSpec.describe TestRunLocateWorker do
+RSpec.describe Worker::TestRunLocate do
   subject(:worker) { described_class.new }
   before { allow(ENV).to receive(:[]).and_call_original }
 
-  it { is_expected.to be_a TestRunLocateWorker }
+  it { is_expected.to be_a Worker::TestRunLocate }
 
   describe '.perform' do
     subject(:perform) { worker.perform('channel', '000.000', iteration, etag) }
@@ -77,7 +77,7 @@ RSpec.describe TestRunLocateWorker do
       end
 
       it 'creates a new MonitorTestRunWorker' do
-        expect { perform }.to change(TestRunMonitorWorker.jobs, :size).by(1)
+        expect { perform }.to change(Worker::TestRunMonitor.jobs, :size).by(1)
       end
     end
 
@@ -112,7 +112,7 @@ RSpec.describe TestRunLocateWorker do
       end
 
       it 'creates a new TestRunLocateWorker' do
-        expect { perform }.to change(TestRunLocateWorker.jobs, :size).by(1)
+        expect { perform }.to change(Worker::TestRunLocate.jobs, :size).by(1)
       end
     end
 
