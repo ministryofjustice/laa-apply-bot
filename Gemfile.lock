@@ -215,7 +215,8 @@ GEM
       rack (~> 2.2)
       rack-protection (= 2.1.0)
       tilt (~> 2.0)
-    slack-ruby-bot (0.16.0)
+    slack-ruby-bot (0.16.1)
+      activesupport
       hashie
       slack-ruby-client (>= 0.14.0)
     slack-ruby-client (0.15.1)
