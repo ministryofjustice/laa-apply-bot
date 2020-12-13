@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe TestRunMonitorWorker do
+describe Worker::TestRunMonitor do
   subject(:worker) { described_class.new }
 
-  it { is_expected.to be_a TestRunMonitorWorker }
+  it { is_expected.to be_a Worker::TestRunMonitor }
 
   describe '.perform' do
     subject(:perform) { worker.perform(monitor_url, delay, data, web_url, timestamp) }
@@ -21,7 +21,7 @@ describe TestRunMonitorWorker do
 
     context 'when the job has not completed' do
       it 'creates a new MonitorTestRunWorker' do
-        expect { perform }.to change(TestRunMonitorWorker.jobs, :size).by(1)
+        expect { perform }.to change(Worker::TestRunMonitor.jobs, :size).by(1)
       end
     end
 

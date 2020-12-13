@@ -1,6 +1,6 @@
 require 'rspec'
 
-RSpec.describe TestRunStartWorker do
+RSpec.describe Worker::TestRunStart do
   subject(:worker) { described_class.new }
 
   before do
@@ -15,7 +15,7 @@ RSpec.describe TestRunStartWorker do
   let(:good_response) { { status: 204, body: '', headers: {} } }
   let(:bad_response) { { status: 422, body: '', headers: {} } }
 
-  it { is_expected.to be_a TestRunStartWorker }
+  it { is_expected.to be_a Worker::TestRunStart }
 
   describe '.perform' do
     subject(:perform) { worker.perform(data) }
@@ -34,7 +34,7 @@ RSpec.describe TestRunStartWorker do
       end
 
       it 'creates a new MonitorTestRunWorker' do
-        expect { perform }.to change(TestRunLocateWorker.jobs, :size).by(1)
+        expect { perform }.to change(Worker::TestRunLocate.jobs, :size).by(1)
       end
     end
 
