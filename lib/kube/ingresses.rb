@@ -1,6 +1,5 @@
 module Kube
   class Ingresses
-    require 'pry-byebug'
     def initialize(namespace)
       @namespace = namespace
     end
