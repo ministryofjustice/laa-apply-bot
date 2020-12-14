@@ -2,10 +2,12 @@ require 'spec_helper'
 
 describe SlackApplybot::Commands::UatUrl, :vcr do
   before { allow(Kubectl).to receive(:uat_ingresses).and_return(expected_environments) }
-  let(:expected_environments) { %w[ap-1234-test.fake.service.uk ap-4321-bad.fake.service.uk] }
   before do
     stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
+    allow(Kube::Ingresses).to receive(:new).and_return(ingresses)
   end
+  let(:ingresses) { instance_double(Kube::Ingresses, call: expected_environments) }
+  let(:expected_environments) { %w[ap-1234-test.fake.service.uk ap-4321-bad.fake.service.uk] }
   let(:expected_body) do
     {
       'ok': true,
