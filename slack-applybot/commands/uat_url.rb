@@ -6,7 +6,7 @@ module SlackApplybot
         @data = data
         if channel_is_valid?
           branch =  match['expression']
-          ingresses = Kubectl.uat_ingresses
+          ingresses = Kube::Ingresses.call('laa-apply-for-legalaid-uat')
           if branch.present?
             single_match = ingresses.find { |e| e.starts_with?(branch) }
             message_text = if single_match

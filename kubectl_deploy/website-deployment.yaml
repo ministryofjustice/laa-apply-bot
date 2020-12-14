@@ -89,6 +89,21 @@ spec:
             secretKeyRef:
               name: apply-bot-secrets
               key: ALLOWED_CHANNEL_LIST
+        - name: KUBE_API_URL
+          valueFrom:
+            secretKeyRef:
+              name: apply-bot-secrets
+              key: KUBE_API_URL
+        - name: KUBE_CRT
+          valueFrom:
+            secretKeyRef:
+              name: apply-bot-secrets
+              key: KUBE_CRT
+        - name: KUBE_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: apply-bot-secrets
+              key: KUBE_TOKEN
         image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/laa-apply-bot:app-latest
         imagePullPolicy: ""
         name: website
