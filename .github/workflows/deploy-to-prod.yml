@@ -1,0 +1,20 @@
+name: Deploy to Production
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy-production:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Build and push production
+        env:
+          ENVIRONMENT: prod
+          K8S_TOKEN: ${{ secrets.K8S_TOKEN }}
+          K8S_CLUSTER_CERT: ${{ secrets.K8S_CLUSTER_CERT }}
+          K8S_CLUSTER_NAME: ${{ secrets.K8S_CLUSTER_NAME }}
+          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+          K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
+        run: ./scripts/build_and_push.sh
