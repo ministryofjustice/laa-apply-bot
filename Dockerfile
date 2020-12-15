@@ -40,7 +40,6 @@ RUN apk update && apk del build-dependencies
 
 # expect ping environment variables
 ARG SLACK_API_TOKEN
-ENV KUBE_CONFIG_FILE=./config/.kube_config
 ENV SLACK_API_TOKEN=${SLACK_API_TOKEN}
 
 USER 1000
