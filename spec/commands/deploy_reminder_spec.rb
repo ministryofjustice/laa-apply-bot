@@ -13,27 +13,6 @@ describe SlackApplybot::Commands::DeployReminder do
       }
     }.to_json
   end
-  let(:expected_error) do
-    {
-      "table":
-        {
-          "channel": 'channel',
-          "channel_name": 'channel',
-          "blocks":
-            [
-              {
-                type: 'section',
-                block_id: 'error',
-                text:
-                  {
-                    type: 'mrkdwn',
-                    text: 'I want to look up github-user, find a slack id and send them a message'
-                  }
-              }
-            ]
-        }
-    }.to_json
-  end
   let(:user_input) do
     [
       {
@@ -53,7 +32,7 @@ describe SlackApplybot::Commands::DeployReminder do
   let(:params) { Hashie::Mash.new(text: 'hello', blocks: user_input, channel: 'channel', user: 'user') }
 
   it 'logs data for analysis' do
-    expect(SlackRubyBot::Client.logger).to receive(:warn).with(expected_error)
+    expect(SlackRubyBot::Client.logger).to receive(:warn).once # .with(expected_error)
     message_command.call(client, params)
   end
 end
