@@ -6,6 +6,8 @@ module SlackApplybot
           {
             channel: data.channel,
             channel_name: SendSlackMessage.new.conversations_info(channel: data.channel)['channel']['name'],
+            text: data.text,
+            data: data,
             blocks: data.blocks
           }
         )
