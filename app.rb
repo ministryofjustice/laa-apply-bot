@@ -28,6 +28,13 @@ class App < Sinatra::Base
 		"
   end
 
+  get '/ping' do
+    {
+      build_date: ENV['BUILD_DATE'] || 'Not Available',
+      build_tag: ENV['BUILD_TAG'] || 'Not Available'
+    }.to_json
+  end
+
   get '/2fa/:token' do |token|
     begin
       values = JSON.parse(Base64.urlsafe_decode64(token), object_class: OpenStruct)
