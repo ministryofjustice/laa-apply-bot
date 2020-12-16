@@ -39,7 +39,10 @@ COPY . .
 RUN apk update && apk del build-dependencies
 
 # expect ping environment variables
-ARG SLACK_API_TOKEN
-ENV SLACK_API_TOKEN=${SLACK_API_TOKEN}
+ARG BUILD_DATE
+ARG BUILD_TAG
+# set ping environment variables
+ENV BUILD_DATE=${BUILD_DATE}
+ENV BUILD_TAG=${BUILD_TAG}
 
 USER 1000
