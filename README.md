@@ -1,3 +1,5 @@
+[![Actions Status](https://github.com/colinbruce/laa-apply-bot/workflows/Deploy%20to%20Production/badge.svg)](https://github.com/colinbruce/laa-apply-bot/actions)
+
 # LAA-Apply Slack bot
 A bot designed to allows slack users to run commands to assist with maintaining the LAA Apply sapplications
 
