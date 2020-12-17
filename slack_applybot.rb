@@ -1,15 +1,11 @@
 require 'slack-ruby-bot'
 require 'sidekiq'
 require './slack-applybot/bot'
-require './slack-applybot/commands/_channel_validity'
-require './slack-applybot/commands/add_user'
-require './slack-applybot/commands/ages'
-require './slack-applybot/commands/deploy_reminder'
-require './slack-applybot/commands/details'
-require './slack-applybot/commands/help'
-require './slack-applybot/commands/integration_tests'
-require './slack-applybot/commands/test_2fa_validation'
-require './slack-applybot/commands/uat_url'
+Dir[File.join('slack-applybot/commands/*.rb')].sort.each do |f|
+  file = File.join('.', File.dirname(f), File.basename(f))
+  pp file
+  require file
+end
 require './lib/github_values'
 require './lib/worker/test_run_start'
 require './lib/worker/test_run_locate'
