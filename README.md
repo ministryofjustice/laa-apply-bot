@@ -22,3 +22,5 @@ e.g. `@apply-bot <command>`
 This is handled via gihub actions
 On a pull request being merged to master, rspec and rubocop run.  
 As long as they are successful, a deploy job runs that will build a new docker container, push it to ECR and then apply that docker tag to the K8s cluster
+
+<img src="https://user-images.githubusercontent.com/6757677/102602821-f4ae8d00-4119-11eb-8f81-0d26f4564f59.png" width=50% height=50%>
