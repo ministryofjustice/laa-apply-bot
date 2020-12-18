@@ -16,3 +16,9 @@ e.g. `@apply-bot <command>`
 - `details` - ```@apply-bot cfe details staging``` or ```@apply-bot apply details live```
 - `run tests` - ```@applybot run tests```
 - `help` - ```@apply-bot help``` provides better examples than these
+
+## Deploying
+
+This is handled via gihub actions
+On a pull request being merged to master, rspec and rubocop run.  
+As long as they are successful, a deploy job runs that will build a new docker container, push it to ECR and then apply that docker tag to the K8s cluster
