@@ -3,7 +3,6 @@ require 'sidekiq'
 require './slack-applybot/bot'
 Dir[File.join('slack-applybot/commands/*.rb')].sort.each do |f|
   file = File.join('.', File.dirname(f), File.basename(f))
-  pp file
   require file
 end
 require './lib/github_values'
