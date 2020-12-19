@@ -20,9 +20,7 @@ module ChannelValidity
     return true if @channel_info['channel']['is_im']
 
     channel_name = @channel_info['channel']['name']
-    return ENV['ALLOWED_CHANNEL_LIST'].include?(channel_name) if channel_name.present?
-  rescue NoMethodError
-    false
+    ENV['ALLOWED_CHANNEL_LIST'].include?(channel_name)
   end
 
   def channel_is_not_dm?

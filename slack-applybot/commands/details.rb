@@ -4,18 +4,16 @@ module SlackApplybot
       command 'apply', 'cfe', /details/ do |client, data, match|
         @client = client
         @data = data
-        if channel_is_valid?
-          app = match['command'].downcase
-          env = match['expression'].sub('details', '').strip.downcase
-          return unless env.split(/,\s|\s/).count.eql?(1)
+        raise ChannelValidity::PublicError.new(message: error_message, channel: @data.channel) unless channel_is_valid?
 
-          environment = "#{app.humanize}Instance".constantize.new(env)
+        app = match['command'].downcase
+        env = match['expression'].sub('details', '').strip.downcase
+        return unless env.split(/,\s|\s/).count.eql?(1)
 
-          message_text = "`#{environment.name}` details for `#{app}`:```#{environment.ping_data}```"
-          client.say(channel: data.channel, text: message_text)
-        else
-          send_fail
-        end
+        environment = "#{app.humanize}Instance".constantize.new(env)
+
+        message_text = "`#{environment.name}` details for `#{app}`:```#{environment.ping_data}```"
+        client.say(channel: data.channel, text: message_text)
       end
 
       class << self

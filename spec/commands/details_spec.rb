@@ -51,16 +51,5 @@ describe SlackApplybot::Commands::Details, :vcr do
     end
   end
 
-  context 'when the user is not in a channel on the allowed list' do
-    let(:channel) { 'dangerous' }
-    let(:app) { 'cfe' }
-    let(:env) { 'staging' }
-    let(:expected_response) { "Sorry <@user>, I don't understand that command!" }
-
-    it 'returns the expected message' do
-      Timecop.travel(Date.new(2020, 4, 16)) do
-        expect(message: user_input, channel: channel).to respond_with_slack_message(expected_response)
-      end
-    end
-  end
+  it_behaves_like 'the channel is invalid'
 end
