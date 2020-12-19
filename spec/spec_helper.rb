@@ -34,6 +34,8 @@ Dir[File.join('slack-applybot/**/*.rb'), File.join('lib/**/*.rb')].sort.each do 
   require file
 end
 
+Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
+
 RSpec.configure do |config|
   config.before do
     stub_request(:post, %r{\Ahttps://slack.com/api/.*\z}).to_return(status: 200, body: '', headers: {})
