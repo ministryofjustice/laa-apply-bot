@@ -1,4 +1,13 @@
 module ChannelValidity
+  ERROR_MESSAGE = "Sorry <@|USERNAME|>, I don't understand that command!".freeze
+
+  class PublicError < RuntimeError
+    def initialize(channel:, message: 'Channel is too public')
+      SendSlackMessage.new.generic(channel: channel, as_user: true, text: message)
+      super(message)
+    end
+  end
+
   private
 
   def send_fail
@@ -14,6 +23,15 @@ module ChannelValidity
     return ENV['ALLOWED_CHANNEL_LIST'].include?(channel_name) if channel_name.present?
   rescue NoMethodError
     false
+  end
+
+  def channel_is_not_dm?
+    @channel_info = SendSlackMessage.new.conversations_info(channel: @data.channel)
+    @channel_info['channel']['is_im']&.eql?(false)
+  end
+
+  def error_message
+    ERROR_MESSAGE.sub('|USERNAME|', @data.user)
   end
 
   def user_is_valid?
