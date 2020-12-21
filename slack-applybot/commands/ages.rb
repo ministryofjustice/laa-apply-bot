@@ -1,7 +1,6 @@
 module SlackApplybot
   module Commands
     class Ages < SlackRubyBot::Commands::Base
-      require 'pry-byebug'
       command 'ages' do |client, data, _match|
         @client = client
         @data = data
