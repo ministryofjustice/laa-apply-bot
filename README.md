@@ -35,8 +35,10 @@ Binding.pry breakpoints tend to freeze and/or get lost in the threaded services 
 
 ## Deploying
 
-This is handled via github actions
-On a pull request being merged to master, rspec and rubocop run.  
+This is handled via github actions - on a pull request being merged to master, rspec and rubocop run.  
+
 As long as they are successful, a deploy job runs that will build a new docker container, push it to ECR and then apply that docker tag to the K8s cluster
 
 <img src="https://user-images.githubusercontent.com/6757677/102602821-f4ae8d00-4119-11eb-8f81-0d26f4564f59.png" width=50% height=50%>
+
+After approx ~3 minutes the pods should have updated and the bot should respond to `hi` or your new command
