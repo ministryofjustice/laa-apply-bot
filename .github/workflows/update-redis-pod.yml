@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@master
+        uses: actions/checkout@main
       - name: Build and push production
         env:
           K8S_TOKEN: ${{ secrets.K8S_TOKEN }}

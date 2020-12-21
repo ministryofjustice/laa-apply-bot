@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@master
+        uses: actions/checkout@main
       - name: cleanup images on ecr
         env:
           K8S_TOKEN: ${{ secrets.K8S_TOKEN }}
