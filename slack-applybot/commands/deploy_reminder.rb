@@ -1,7 +1,7 @@
 module SlackApplybot
   module Commands
     class DeployReminder < SlackRubyBot::Commands::Base
-      attachment(/(\S*)/) do |_client, data, match|
+      attachment(/(\S*) has a pending ?(\S*)? production approval for master/) do |_client, data, match|
         result = OpenStruct.new(
           {
             channel: data.channel,
