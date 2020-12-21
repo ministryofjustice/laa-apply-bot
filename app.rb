@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'sinatra/activerecord'
 require 'slack-ruby-bot'
 require 'sidekiq'
 require 'sidekiq/api'
