@@ -1,8 +1,7 @@
 name: Update redis pod
 on: workflow_dispatch
 jobs:
-  deploy-production:
-    needs: [rubocop, rspec]
+  update-redis-pod:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
