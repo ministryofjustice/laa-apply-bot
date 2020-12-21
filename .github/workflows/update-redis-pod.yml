@@ -1,27 +1,18 @@
 name: Update redis pod
 on: workflow_dispatch
 jobs:
-  rubocop:
+  update-redis-pod:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Ruby 2.7
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: 2.7.x
-      - uses: actions/cache@v1
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-      - name: Bundle install
-        run: |
-          gem install bundler
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
-      - name: Run rubocop
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Build and push production
         env:
-          RAILS_ENV: test
-        run: |
-          bundle exec rubocop
+          K8S_TOKEN: ${{ secrets.K8S_TOKEN }}
+          K8S_CLUSTER_CERT: ${{ secrets.K8S_CLUSTER_CERT }}
+          K8S_CLUSTER_NAME: ${{ secrets.K8S_CLUSTER_NAME }}
+          K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
+          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+          ECR_USERNAME: ${{ secrets.ECR_USERNAME }}
+          ECR_CREDENTIALS_SECRET: ${{ secrets.ECR_CREDENTIALS_SECRET }}
+        run: ./scripts/environment_setup.sh build_and_push_redis.sh
