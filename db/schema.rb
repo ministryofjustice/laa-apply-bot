@@ -11,13 +11,18 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2020_04_26_180459) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'slack_id'
-    t.string 'otp_token'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "users", force: :cascade do |t|
+    t.string "slack_id"
+    t.string "github_id"
+    t.boolean "enabled_2fa", default: false
+    t.string "encrypted_2fa_secret"
+    t.string "last_2fa_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
+
 end
