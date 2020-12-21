@@ -3,6 +3,9 @@ GEM
   specs:
     activemodel (6.0.3.1)
       activesupport (= 6.0.3.1)
+    activerecord (6.0.3.1)
+      activemodel (= 6.0.3.1)
+      activesupport (= 6.0.3.1)
     activesupport (6.0.3.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
@@ -132,6 +135,7 @@ GEM
     parallel (1.20.1)
     parser (2.7.2.0)
       ast (~> 2.4.1)
+    pg (1.2.3)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -198,6 +202,8 @@ GEM
     ruby-progressbar (1.10.1)
     ruby2_keywords (0.0.2)
     shellany (0.0.1)
+    shoulda-matchers (4.4.1)
+      activesupport (>= 4.2.0)
     sidekiq (6.1.2)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -215,6 +221,9 @@ GEM
       rack (~> 2.2)
       rack-protection (= 2.1.0)
       tilt (~> 2.0)
+    sinatra-activerecord (2.0.21)
+      activerecord (>= 4.1)
+      sinatra (>= 1.0)
     slack-ruby-bot (0.16.1)
       activesupport
       hashie
@@ -266,6 +275,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord
   async-websocket (~> 0.8.0)
   byebug
   dotenv
@@ -276,6 +286,7 @@ DEPENDENCIES
   highline
   kubeclient
   openid_connect
+  pg
   pry-byebug
   puma
   rack-test
@@ -285,10 +296,12 @@ DEPENDENCIES
   rqrcode
   rspec
   rubocop
+  shoulda-matchers
   sidekiq
   simplecov
   simplecov-rcov
   sinatra
+  sinatra-activerecord
   slack-ruby-bot
   timecop
   tzinfo-data
