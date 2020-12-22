@@ -58,6 +58,7 @@ jobs:
           PGUSER: postgres
           RAILS_ENV: test
           SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
+          ENCRYPTION_SERVICE_SALT: ${{ secrets.ENCRYPTION_SERVICE_SALT_FOR_RSPEC }}
         run: |
           bundle exec rake db:create db:schema:load
       - name: Run Tests
