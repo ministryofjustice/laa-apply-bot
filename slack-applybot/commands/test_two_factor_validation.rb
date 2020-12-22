@@ -27,7 +27,22 @@ module SlackApplybot
         )
       end
 
-      command '2fa-check' do |client, data, match|
+      command '2fa-check' do |client, data, _match|
+        @client = client
+        @data = data
+        raise ChannelValidity::PublicError.new(message: error_message, channel: @data.channel) unless channel_is_valid?
+
+        channel = data.channel
+        if channel_is_not_dm?
+          message_text = "I've sent you a DM, we probably shouldn't be talking about this in public!"
+          client.say(channel: channel, text: message_text)
+          channel = client.web_client.conversations_open(users: data['user'])['channel']['id']
+        end
+        validation_succeeded = user.enabled_2fa ? '' : 'not '
+        client.say(channel: channel, text: "2FA #{validation_succeeded}enabled")
+      end
+
+      command '2fa-validate' do |client, data, match|
         @client = client
         @data = data
         if channel_is_valid?
@@ -41,6 +56,7 @@ module SlackApplybot
 
       class << self
         include ChannelValidity
+        include UserCommand
 
         def build_qr_code(token)
           values = JSON.parse(Base64.urlsafe_decode64(token), object_class: OpenStruct)
