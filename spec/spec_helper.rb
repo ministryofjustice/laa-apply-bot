@@ -13,6 +13,7 @@ unless ENV['NOCOVERAGE']
     SimpleCov.result.format!
   end
 end
+ENV['RACK_ENV'] = 'test'
 ENV['ENV'] = 'test'
 
 require 'timecop'
@@ -27,6 +28,7 @@ require 'slack-ruby-bot/rspec'
 require 'vcr_helper'
 require 'app'
 require 'shoulda/matchers'
+require 'database_cleaner'
 require 'dotenv'
 Dotenv.load('.env.test')
 
@@ -50,5 +52,16 @@ Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
     with.library :active_record
+  end
+end
+
+DatabaseCleaner.strategy = :truncation
+
+RSpec.configure do |c|
+  c.before(:all) do
+    DatabaseCleaner.clean
+  end
+  c.after(:each) do
+    DatabaseCleaner.clean
   end
 end
