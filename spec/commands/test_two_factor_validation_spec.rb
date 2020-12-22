@@ -56,8 +56,29 @@ describe SlackApplybot::Commands::TestTwoFactorValidation do
   end
 
   describe '#2fa-check' do
+    let(:user_input) { "#{SlackRubyBot.config.user} 2fa-check" }
+    let!(:client) { SlackRubyBot::App.new.send(:client) }
+    let(:message_hook) { SlackRubyBot::Hooks::Message.new }
+    let(:params) { Hashie::Mash.new(text: user_input, channel: channel, user: 'user') }
+
+    context 'the user is in a public, valid channel' do
+      let(:expected_response) { "I've sent you a DM, we probably shouldn't be talking about this in public!" }
+      let(:public_hash) { { channel: channel, text: expected_response } }
+      let(:direct_message_hash) { { channel: 'A0000B1CDEF', text: '2FA not enabled' } }
+
+      it 'responds with a warning message' do
+        expect(client).to receive(:say).with(public_hash)
+        expect(client).to receive(:say).with(direct_message_hash)
+        message_hook.call(client, params)
+      end
+    end
+
+    it_behaves_like 'the channel is invalid'
+  end
+
+  describe '#2fa-validate' do
     context 'when the code is wrong do' do
-      let(:user_input) { "#{SlackRubyBot.config.user} 2fa-check 000000" }
+      let(:user_input) { "#{SlackRubyBot.config.user} 2fa-validate 000000" }
 
       it 'returns the expected message' do
         expect(message: user_input, channel: channel).to respond_with_slack_message('2FA not configured')
@@ -65,7 +86,7 @@ describe SlackApplybot::Commands::TestTwoFactorValidation do
     end
 
     context 'when the code is right do' do
-      let(:user_input) { "#{SlackRubyBot.config.user} 2fa-check 123456" }
+      let(:user_input) { "#{SlackRubyBot.config.user} 2fa-validate 123456" }
       before { allow_any_instance_of(ROTP::TOTP).to receive(:verify).with('123456').and_return(true) }
 
       it 'returns the expected message' do
