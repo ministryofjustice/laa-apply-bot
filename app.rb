@@ -17,7 +17,7 @@ Dir[File.join('lib/**/*.rb')].sort.each do |f|
   file = File.join('.', File.dirname(f), File.basename(f))
   require file
 end
-
+require './models/user'
 require './config/sidekiq_config'
 
 class App < Sinatra::Base
