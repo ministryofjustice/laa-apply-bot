@@ -17,11 +17,11 @@ class Summary
 end
 
 def image_redis?(image)
-  image['imageTags'].join("\t").match?(/redis/)
+  image['imageTags']&.join("\t")&.match?(/redis/)
 end
 
 def image_in_use?(image)
-  image['imageTags'].join("\t").match?(ENV.fetch('GITHUB_SHA', '-'))
+  image['imageTags']&.join("\t")&.match?(ENV.fetch('GITHUB_SHA', '-'))
 end
 
 def image_out_of_date?(image)
@@ -44,9 +44,7 @@ images = JSON.parse(json_output)['imageDetails']
 
 images_to_delete = []
 @summary = Summary.new
-images.each do |i|
-  images_to_delete << i if image_deletable(i)
-end
+images.each { |i| images_to_delete << i if image_deletable(i) }
 
 if images_to_delete.empty?
   puts 'Nothing to delete'
