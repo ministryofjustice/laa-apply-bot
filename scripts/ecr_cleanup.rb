@@ -52,8 +52,7 @@ else
   puts 'Deleting images'
   images_to_delete.each_slice(100) do |batch|
     image_ids = batch.map { |i| "imageDigest=#{i['imageDigest']}" }.join(' ')
-    puts "I want to delete #{image_ids}"
-    puts `#{aws_prefix} batch-delete-image --repository-name #{repo} --image-ids #{image_ids}`
+    `#{aws_prefix} batch-delete-image --repository-name #{repo} --image-ids #{image_ids}`
   end
 
 end
