@@ -104,6 +104,26 @@ spec:
             secretKeyRef:
               name: apply-bot-secrets
               key: KUBE_TOKEN
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: rds
+              key: database_username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rds
+              key: database_password
+        - name: POSTGRES_HOST
+          valueFrom:
+            secretKeyRef:
+              name: rds
+              key: rds_instance_address
+        - name: POSTGRES_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: rds
+              key: database_name
         image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/laa-apply-bot:pass-a-value-in
         imagePullPolicy: ""
         name: website
