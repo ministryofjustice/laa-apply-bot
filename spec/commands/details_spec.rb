@@ -13,12 +13,11 @@ describe SlackApplybot::Commands::Details, :vcr do
       }
     }.to_json
   end
+  let(:app) { 'cfe' }
+  let(:env) { 'staging' }
+  let(:channel) { 'channel' }
 
   context 'when user requests details for a valid application and environment' do
-    let(:app) { 'cfe' }
-    let(:env) { 'staging' }
-    let(:channel) { 'channel' }
-
     let(:expected_response) do
       key = '`staging` details for `cfe`'
       build = 'app-bf400232676802bfcd7e53ff7ff013087ee6d1d1'
