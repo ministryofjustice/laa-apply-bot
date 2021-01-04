@@ -1,5 +1,4 @@
 RSpec.shared_examples 'the channel is invalid' do
-  let(:user_input) { "#{SlackRubyBot.config.user} 2fa-start" }
   let!(:client) { SlackRubyBot::App.new.send(:client) }
   let(:message_hook) { SlackRubyBot::Hooks::Message.new }
   let(:params) { Hashie::Mash.new(text: user_input, channel: channel, user: 'user') }

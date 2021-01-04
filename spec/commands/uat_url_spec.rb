@@ -35,9 +35,9 @@ describe SlackApplybot::Commands::UatUrl, :vcr do
   context 'when user requests a specific branch' do
     let(:user_input) { "#{SlackRubyBot.config.user} uat url #{branch}" }
     let(:channel) { 'channel' }
+    let(:branch) { 'ap-1234' }
 
     context 'that exists' do
-      let(:branch) { 'ap-1234' }
       let(:expected_response) do
         'Branch <https://ap-1234-test.fake.service.uk|ap-1234> is available'
       end
