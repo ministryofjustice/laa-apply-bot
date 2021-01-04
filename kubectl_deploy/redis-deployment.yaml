@@ -18,7 +18,7 @@ spec:
       - command:
         - redis-server
         image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/laa-apply-bot:redis-latest
-        imagePullPolicy: ""
+        imagePullPolicy: Always
         name: redis
         ports:
         - containerPort: 6379
