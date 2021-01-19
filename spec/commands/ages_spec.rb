@@ -1,11 +1,13 @@
 require 'spec_helper'
-
+require 'support/commit'
 describe SlackApplybot::Commands::Ages, :vcr do
   let(:user_input) { "#{SlackRubyBot.config.user} ages" }
   let(:expected_data) { { channel: { name: 'test' } } }
   before do
     stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
+    stub_request(:any, %r{\Ahttps://(www|api).github.com/.*\z}).to_return(status: 200, body: commits, headers: {})
   end
+  load_shared_commit_data
   let(:expected_body) do
     {
       'ok': true,
@@ -16,7 +18,14 @@ describe SlackApplybot::Commands::Ages, :vcr do
   end
 
   context 'when the values are all valid' do
-    let(:expected_response) { "Apply was deployed yesterday\nCFE was deployed 14 days ago" }
+    let(:expected_response) do
+      "Apply was deployed yesterday\nMerge pull request #1999 from moj/AA-1234\n" \
+      "Merge pull request #1998 from moj/AA-421\nMerge pull request #1997 from moj/AA-666\n" \
+      "Merge pull request #1996 from moj/AA-555\nMerge pull request #1995 from moj/AA-444\n" \
+      "CFE was deployed 14 days ago\nMerge pull request #1999 from moj/AA-1234\n" \
+      "Merge pull request #1998 from moj/AA-421\nMerge pull request #1997 from moj/AA-666\n" \
+      "Merge pull request #1996 from moj/AA-555\nMerge pull request #1995 from moj/AA-444"
+    end
     let(:channel) { 'channel' }
 
     it 'returns the expected message' do
