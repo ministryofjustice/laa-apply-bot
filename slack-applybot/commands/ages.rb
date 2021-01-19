@@ -20,9 +20,13 @@ module SlackApplybot
         private
 
         def age_message(app)
-          application = "#{app.humanize}Instance".constantize.new('production')
-          deploy_date = Date.parse(application.ping_data['build_date'])
-          "#{app} was deployed #{DateDisplay.call(deploy_date)}"
+          application = "#{app.humanize}Application".constantize.new
+          instance = "#{app.humanize}Instance".constantize.new('production')
+          deploy_date = Date.parse(instance.ping_data['build_date'])
+          <<~OUTPUT.chomp
+            #{app} was deployed #{DateDisplay.call(deploy_date)}
+            #{Github::Commits.call(application)}
+          OUTPUT
         end
       end
     end
