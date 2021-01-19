@@ -2,7 +2,7 @@
 set -e
 
 echo  'Building redis docker image...'
-out=$(docker build -t "${ECR_REPO_URL}:redis-latest" .)
+out=$(docker build -t "${ECR_REPO_URL}:redis-latest" -f Dockerfile-redis .)
 echo "$out"
 
 echo 'Pushing redis docker image...'
