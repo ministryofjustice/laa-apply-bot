@@ -27,6 +27,8 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rake'
   gem 'rubocop'
+  gem 'rubocop-rake'
+  gem 'rubocop-rspec'
 end
 
 group :test do
