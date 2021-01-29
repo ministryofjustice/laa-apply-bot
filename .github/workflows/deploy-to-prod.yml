@@ -31,6 +31,10 @@ jobs:
   rspec:
     runs-on: ubuntu-latest
     steps:
+      - name: Install libffi6
+        run: |
+          wget http://mirrors.kernel.org/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-8_amd64.deb
+          sudo apt install ./libffi6_3.2.1-8_amd64.deb
       - uses: actions/checkout@v2
       - name: Set up Ruby 2.7
         uses: actions/setup-ruby@v1
