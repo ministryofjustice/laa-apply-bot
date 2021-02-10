@@ -7,11 +7,20 @@ RUN set -ex
 # build dependencies:
 # -virtual: create virtual package for later deletion
 # - build-base for alpine fundamentals
-RUN apk --no-cache add --virtual build-dependencies build-base
+RUN apk --no-cache add --virtual build-dependencies build-base curl openssl bash
 
 # add non-root user and group with alpine first available uid, 1000
 RUN addgroup -g 1000 -S appgroup \
 && adduser -u 1000 -S appuser -G appgroup
+
+#RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" \
+#    && chmod +x ./kubectl \
+#    && mv ./kubectl /usr/local/bin/kubectl \
+#    && curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 \
+#    && chmod +x get_helm.sh && ./get_helm.sh
+RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+RUN chmod +x get_helm.sh && ./get_helm.sh
+RUN ./get_helm.sh
 
 ## create app directory in conventional, existing dir /usr/src
 RUN mkdir -p /usr/src/app
@@ -36,7 +45,7 @@ RUN gem install bundler -v $(cat Gemfile.lock | tail -1 | tr -d " ") \
 COPY . .
 
 # tidy up installation
-RUN apk update && apk del build-dependencies
+RUN apk update && apk del build-dependencies curl openssl bash
 
 # expect ping environment variables
 ARG BUILD_DATE
