@@ -15,14 +15,6 @@ spec:
         app: website
     spec:
       containers:
-      - command:
-        - bundle
-        - exec
-        - rackup
-        - --host
-        - 0.0.0.0
-        - -p
-        - "4567"
         env:
         - name: APPLY_GITHUB_REPO
           value: laa-apply-for-legal-aid
