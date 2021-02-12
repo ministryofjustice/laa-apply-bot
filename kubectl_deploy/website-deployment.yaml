@@ -15,7 +15,7 @@ spec:
         app: website
     spec:
       containers:
-        env:
+      - env:
         - name: APPLY_GITHUB_REPO
           value: laa-apply-for-legal-aid
         - name: CFE_GITHUB_REPO
