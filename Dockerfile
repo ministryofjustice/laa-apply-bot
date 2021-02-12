@@ -53,3 +53,4 @@ ENV BUILD_DATE=${BUILD_DATE}
 ENV BUILD_TAG=${BUILD_TAG}
 
 USER 1000
+CMD "./scripts/docker-startup.sh"
