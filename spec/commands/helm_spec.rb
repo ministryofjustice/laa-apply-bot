@@ -18,9 +18,9 @@ describe SlackApplybot::Commands::Helm, :vcr do
   it_behaves_like 'the channel is invalid'
   context 'when the channel is valid' do
     let(:channel) { 'channel' }
-
+    let(:missing_command_response) { SlackRubyBot::Commands::Support::Help.instance.command_full_desc('helm') }
     it 'returns the expected message' do
-      expect(message: user_input, channel: channel).to respond_with_slack_message('not yet implemented')
+      expect(message: user_input, channel: channel).to respond_with_slack_message(missing_command_response)
     end
   end
 end
