@@ -38,6 +38,12 @@ module SlackApplybot
         desc: '`@apply-bot uat url <branch> e.g. @apply-bot uat url ap-999`',
         long_desc: 'This will either show the uat url for the specified branch or, if it cannot be matched,'\
                    'return an apology and the list of all available uat environments'
+      },
+      {
+        name: 'helm',
+        desc: '`@apply-bot helm <instruction>` e.g. `@apply-bot helm list`',
+        long_desc: 'This will run a helm command against the UAT helm kubernetes cluster ' \
+                   'currently supported instructions are: `list`'
       }
     ].freeze
 
