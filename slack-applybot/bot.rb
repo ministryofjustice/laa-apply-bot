@@ -43,7 +43,7 @@ module SlackApplybot
         name: 'helm',
         desc: '`@apply-bot helm <instruction>` e.g. `@apply-bot helm list`',
         long_desc: 'This will run a helm command against the UAT helm kubernetes cluster ' \
-                   'currently supported instructions are: `list`'
+                   'currently supported instructions are: `list`, `tidy`'
       }
     ].freeze
 
