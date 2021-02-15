@@ -26,6 +26,12 @@ RSpec.describe Helm::List do
         }
       ].to_json
     end
-    it { expect(subject).to eql("apply-ap-1234-first-name\napply-ap-2345-second-name") }
+    let(:expected) do
+      "Name                                    Status         Date\n"\
+      "apply-ap-1234-first-name                deployed       2021-02-10\n"\
+      'apply-ap-2345-second-name               deployed       2021-02-10'
+    end
+
+    it { expect(subject).to eql(expected) }
   end
 end
