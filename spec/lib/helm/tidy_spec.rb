@@ -11,8 +11,8 @@ RSpec.describe Helm::Tidy do
     end
     let(:truncated_pr_data) do
       [
-        { 'head' => { 'ref' => 'ap-1234' } },
-        { 'head' => { 'ref' => 'ap-5432' } }
+        { 'head' => { 'ref' => 'ap-1234-first-name' } },
+        { 'head' => { 'ref' => 'ap-5432-second-name' } }
       ]
     end
 
@@ -39,8 +39,8 @@ RSpec.describe Helm::Tidy do
       ].to_json
     end
     let(:expected) do
-      "PR still open, retaining apply-ap-1234-first-name\n"\
-      "PR deleted - you could run `helm delete apply-ap-2345-second-name --dry-run` locally\n"
+      "apply-ap-1234-first-name PR still open - retaining\n"\
+      "apply-ap-2345-second-name PR deleted - you could run `helm delete apply-ap-2345-second-name --dry-run` locally\n"
     end
 
     it { expect(subject).to eql(expected) }

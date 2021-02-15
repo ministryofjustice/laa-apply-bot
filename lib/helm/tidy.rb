@@ -6,9 +6,9 @@ module Helm
       output = ''
       active_uat_namespaces.each do |environment|
         output += if pr_still_exists(environment)
-                    "PR still open, retaining #{environment}\n"
+                    "#{environment} PR still open - retaining\n"
                   else
-                    "PR deleted - you could run `helm delete #{environment} --dry-run` locally\n"
+                    "#{environment} PR deleted - you could run `helm delete #{environment} --dry-run` locally\n"
                   end
       end
       output
@@ -34,7 +34,7 @@ module Helm
       end
 
       def pr_still_exists(environment)
-        pull_request_data.map { |name| environment.delete_prefix(PREFIX).include?(name) }.any?
+        pull_request_data.map { |pr_title| pr_title.starts_with?(environment.delete_prefix(PREFIX)) }.any?
       end
     end
   end
