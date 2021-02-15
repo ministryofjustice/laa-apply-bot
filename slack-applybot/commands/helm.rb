@@ -8,7 +8,7 @@ module SlackApplybot
 
         message = case match['expression']
                   when 'list'
-                    list
+                    ::Helm::List.call
                   when nil
                     SlackRubyBot::Commands::Support::Help.instance.command_full_desc('helm')
                   else
@@ -20,13 +20,6 @@ module SlackApplybot
 
       class << self
         include ChannelValidity
-
-        private
-
-        def list
-          releases = JSON.parse(`helm list -o json`)
-          releases.map { |release| release['name'] }
-        end
       end
     end
   end
