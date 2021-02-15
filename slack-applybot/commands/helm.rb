@@ -8,7 +8,8 @@ module SlackApplybot
 
         message = case match['expression']
                   when 'list'
-                    "```#{::Helm::List.call}```"
+                    result = "::Helm::#{match['expression'].capitalize}".constantize.call
+                    "```#{result}```"
                   when nil
                     SlackRubyBot::Commands::Support::Help.instance.command_full_desc('helm')
                   else
