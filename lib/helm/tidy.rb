@@ -34,7 +34,7 @@ module Helm
       end
 
       def pr_still_exists(environment)
-        pull_request_data.map { |pr_title| pr_title.starts_with?(environment.delete_prefix(PREFIX)) }.any?
+        pull_request_data.map { |pr_title| pr_title.include?(environment.delete_prefix(PREFIX)) }.any?
       end
     end
   end
