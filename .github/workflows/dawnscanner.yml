@@ -1,0 +1,25 @@
+# This workflow integrates Brakeman with GitHub's Code Scanning feature
+# Brakeman is a static analysis security vulnerability scanner for Ruby on Rails applications
+
+name: Dawnscanner vulnerability check
+
+# This section configures the trigger for the workflow. Feel free to customize depending on your convention
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  dawnscanner-run:
+    name: Dawnscanner run
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+      - name: Setup dawnscanner
+        run: |
+          gem install dawnscanner
+      - name: Scan
+        run: |
+          dawn . -K
