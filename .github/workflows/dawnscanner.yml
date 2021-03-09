@@ -15,28 +15,11 @@ jobs:
     name: Dawnscanner run
     runs-on: ubuntu-latest
     steps:
-      # Checkout the repository to the GitHub Actions runner
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      # Customize the ruby version depending on your needs
-      - name: Setup Ruby
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: '2.7'
-
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
       - name: Setup dawnscanner
         run: |
           gem install dawnscanner
-
-      # Execute Brakeman CLI and generate a SARIF output with the security issues identified during the analysis
       - name: Scan
-        continue-on-error: true
         run: |
-          dawn . --html --file report.html
-
-      # Upload the report file generated in the previous step
-      - uses: actions/upload-artifact@v1
-        with:
-          name: report.html
-          path: ./report.html
+          dawn . -K
