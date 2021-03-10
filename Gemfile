@@ -1,20 +1,17 @@
 source 'https://rubygems.org'
 ruby '2.7.2'
 
-gem 'activerecord'
 gem 'async-websocket', '~>0.8.0'
 gem 'dotenv'
 gem 'dotiw'
 gem 'kubeclient'
 gem 'openid_connect'
-gem 'pg'
 gem 'puma'
 gem 'rest-client'
 gem 'rotp'
 gem 'rqrcode'
 gem 'sidekiq'
 gem 'sinatra'
-gem 'sinatra-activerecord'
 gem 'slack-ruby-bot'
 gem 'tzinfo-data'
 
@@ -35,10 +32,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'database_cleaner'
   gem 'rack-test'
   gem 'rspec'
-  gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
   gem 'timecop'

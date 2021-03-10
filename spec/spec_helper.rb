@@ -13,7 +13,6 @@ unless ENV['NOCOVERAGE']
     SimpleCov.result.format!
   end
 end
-ENV['RACK_ENV'] = 'test'
 ENV['ENV'] = 'test'
 
 require 'timecop'
@@ -27,8 +26,6 @@ require 'pry'
 require 'slack-ruby-bot/rspec'
 require 'vcr_helper'
 require 'app'
-require 'shoulda/matchers'
-require 'database_cleaner'
 require 'dotenv'
 Dotenv.load('.env.test')
 
@@ -43,25 +40,5 @@ RSpec.configure do |config|
   config.before do
     stub_request(:post, %r{\Ahttps://slack.com/api/.*\z}).to_return(status: 200, body: '', headers: {})
     stub_request(:any, %r{\Ahttps://(www|api).github.com/.*\z}).to_return(status: 200, body: '', headers: {})
-  end
-  config.include(Shoulda::Matchers::ActiveModel, type: :model)
-  config.include(Shoulda::Matchers::ActiveRecord, type: :model)
-end
-
-Shoulda::Matchers.configure do |config|
-  config.integrate do |with|
-    with.test_framework :rspec
-    with.library :active_record
-  end
-end
-
-DatabaseCleaner.strategy = :truncation
-
-RSpec.configure do |c|
-  c.before(:all) do
-    DatabaseCleaner.clean
-  end
-  c.after(:each) do
-    DatabaseCleaner.clean
   end
 end
