@@ -3,16 +3,13 @@ module Helm
     PREFIX = 'apply-'.freeze
 
     def self.call
-      output = ''
+      @output = ''
+      @count = 0
       active_uat_namespaces.each do |environment|
-        output += if branch_still_exists(environment)
-                    ":yep: #{environment} - retaining because branch still exists\n"
-                  else
-                    ":nope: #{environment} - branch deleted - you can run the following locally  - " \
-                    "helm delete #{environment} --dry-run\n"
-                  end
+        update_output_for(environment)
       end
-      output
+      @output += "#{@count} #{'branch'.pluralize(@count)} retained"
+      @output
     end
 
     class << self
@@ -36,6 +33,15 @@ module Helm
 
       def branch_still_exists(environment)
         branch_data.map { |pr_title| pr_title.include?(environment.delete_prefix(PREFIX)) }.any?
+      end
+
+      def update_output_for(environment)
+        if branch_still_exists(environment)
+          @count += 1
+        else
+          @output += ":nope: #{environment} - branch deleted - you can run the following locally  - " \
+                    "`helm delete #{environment} --dry-run`\n"
+        end
       end
     end
   end

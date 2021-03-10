@@ -39,9 +39,9 @@ RSpec.describe Helm::Tidy do
       ].to_json
     end
     let(:expected) do
-      ":yep: apply-ap-1234-first-name - retaining because branch still exists\n" \
       ':nope: apply-ap-2345-second-name - branch deleted - you can run the following locally  - ' \
-        "helm delete apply-ap-2345-second-name --dry-run\n"
+        "`helm delete apply-ap-2345-second-name --dry-run`\n" \
+      '1 branch retained'
     end
 
     it { expect(subject).to eql(expected) }
