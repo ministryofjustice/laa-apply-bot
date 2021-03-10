@@ -1,7 +1,7 @@
 module Helm
   class Tidy
     PREFIX = 'apply-'.freeze
-    require 'pry-byebug'
+
     def self.call
       output = ''
       active_uat_namespaces.each do |environment|
