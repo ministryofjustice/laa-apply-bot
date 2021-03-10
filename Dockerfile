@@ -7,7 +7,7 @@ RUN set -ex
 # build dependencies:
 # -virtual: create virtual package for later deletion
 # - build-base for alpine fundamentals
-RUN apk --no-cache add --virtual build-dependencies build-base curl openssl bash
+RUN apk --no-cache add --virtual build-dependencies build-base curl openssl bash postgresql-dev
 
 # add non-root user and group with alpine first available uid, 1000
 RUN addgroup -g 1000 -S appgroup \
