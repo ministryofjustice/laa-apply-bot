@@ -4,6 +4,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
   before do
     stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
     allow(Helm::List).to receive(:call).and_return("ap1234\nap2345")
+    allow(Helm::Tidy).to receive(:call).and_return(tidy_return)
   end
   let(:expected_body) do
     {
@@ -12,6 +13,11 @@ describe SlackApplybot::Commands::Helm, :vcr do
         name: channel
       }
     }.to_json
+  end
+  let(:tidy_return) do
+    ':nope: apply-ap-2345-second-name - branch deleted - you can run the following locally  - ' \
+      "`helm delete apply-ap-2345-second-name --dry-run`\n" \
+    '1 branch retained'
   end
   let(:user_input) { "#{SlackRubyBot.config.user} helm #{command}" }
   let(:command) { '' }
@@ -40,6 +46,14 @@ describe SlackApplybot::Commands::Helm, :vcr do
       let(:command_response) { "```ap1234\nap2345```" }
       it 'returns the expected message' do
         expect(message: user_input, channel: channel).to respond_with_slack_message(command_response)
+      end
+    end
+
+    context 'when the command is tidy' do
+      let(:command) { 'tidy' }
+      let(:command_response) { "```ap1234\nap2345```" }
+      it 'returns the expected message' do
+        expect(message: user_input, channel: channel).to respond_with_slack_message(tidy_return)
       end
     end
   end

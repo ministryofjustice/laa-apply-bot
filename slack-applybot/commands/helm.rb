@@ -7,9 +7,11 @@ module SlackApplybot
         raise ChannelValidity::PublicError.new(message: error_message, channel: @data.channel) unless channel_is_valid?
 
         message = case match['expression']
-                  when 'list', 'tidy'
+                  when 'list'
                     result = "::Helm::#{match['expression'].capitalize}".constantize.call
                     "```#{result}```"
+                  when 'tidy'
+                    "::Helm::#{match['expression'].capitalize}".constantize.call
                   when nil
                     SlackRubyBot::Commands::Support::Help.instance.command_full_desc('helm')
                   else
