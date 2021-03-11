@@ -25,6 +25,7 @@ class App < Sinatra::Base
 
   set :show_exceptions, :after_handler
   set :database_file, 'config/database.yml'
+  ActiveRecord::Base.logger.level = Logger::WARN if ActiveRecord::Base.logger
   SlackRubyBot::Client.logger.level = Logger::WARN
   SlackRubyBot.configure do |config|
     config.allow_bot_messages = true
