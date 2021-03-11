@@ -5,4 +5,7 @@ kubectl config set-credentials uat-user --token=$KUBE_TOKEN
 kubectl config set-context uat-context --cluster=uat-cluster --user=uat-user --namespace=laa-apply-for-legalaid-uat
 kubectl config use-context uat-context
 
+echo "Migrate Database"
+bundle exec rake db:migrate
+
 bundle exec rackup --host 0.0.0.0 -p "4567"

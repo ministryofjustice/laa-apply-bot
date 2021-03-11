@@ -1,9 +1,14 @@
 require 'sinatra/base'
+require 'sinatra/activerecord'
 require 'slack-ruby-bot'
 require 'sidekiq'
 require 'sidekiq/api'
 require 'sidekiq/web'
 require 'dotenv'
+
+dot_file = ENV['ENV'].eql?('test') ? '.env.test' : '.env'
+Dotenv.load(dot_file)
+
 require 'rotp'
 require 'rqrcode'
 require './lib/apply_service/base'
@@ -12,11 +17,8 @@ Dir[File.join('lib/**/*.rb')].sort.each do |f|
   file = File.join('.', File.dirname(f), File.basename(f))
   require file
 end
-
+require './models/user'
 require './config/sidekiq_config'
-
-dot_file = ENV['ENV'].eql?('test') ? '.env.test' : '.env'
-Dotenv.load(dot_file)
 
 class App < Sinatra::Base
   set :show_exceptions, :after_handler

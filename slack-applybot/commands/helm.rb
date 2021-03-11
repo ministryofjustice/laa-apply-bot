@@ -4,6 +4,7 @@ module SlackApplybot
       command 'helm' do |client, data, match|
         @client = client
         @data = data
+        @user = user
         raise ChannelValidity::PublicError.new(message: error_message, channel: @data.channel) unless channel_is_valid?
 
         message = case match['expression']
@@ -23,6 +24,7 @@ module SlackApplybot
 
       class << self
         include ChannelValidity
+        include UserCommand
       end
     end
   end
