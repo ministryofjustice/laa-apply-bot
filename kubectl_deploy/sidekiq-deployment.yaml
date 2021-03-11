@@ -50,6 +50,11 @@ spec:
               secretKeyRef:
                 name: apply-bot-secrets
                 key: SLACK_API_TOKEN
+          - name: ENCRYPTION_SERVICE_SALT
+            valueFrom:
+              secretKeyRef:
+                name: apply-bot-secrets
+                key: ENCRYPTION_SERVICE_SALT
           - name: SECRET_KEY_BASE
             valueFrom:
               secretKeyRef:
