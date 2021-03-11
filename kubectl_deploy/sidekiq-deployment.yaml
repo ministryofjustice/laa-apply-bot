@@ -50,6 +50,11 @@ spec:
               secretKeyRef:
                 name: apply-bot-secrets
                 key: SLACK_API_TOKEN
+          - name: SECRET_KEY_BASE
+            valueFrom:
+              secretKeyRef:
+                name: apply-bot-secrets
+                key: SECRET_KEY_BASE
         image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/laa-apply-bot:pass-a-value-in
         imagePullPolicy: ""
         name: sidekiq
