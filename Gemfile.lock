@@ -41,7 +41,7 @@ GEM
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.7.6)
-    dotiw (5.2.0)
+    dotiw (5.3.0)
       activesupport
       i18n
     faraday (1.1.0)
