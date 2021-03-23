@@ -44,6 +44,12 @@ module SlackApplybot
         desc: '`@apply-bot helm <instruction>` e.g. `@apply-bot helm list`',
         long_desc: 'This will run a helm command against the UAT helm kubernetes cluster ' \
                    'currently supported instructions are: `list`, `tidy`'
+      },
+      {
+        name: 'github',
+        desc: '`@apply-bot github <instruction>` e.g. `@apply-bot github link <your github name>`',
+        long_desc: 'This will run a command that links your current slack account ' \
+                   'with a github account, currently supported instruction is: `link`'
       }
     ].freeze
 
