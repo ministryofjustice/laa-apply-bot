@@ -25,7 +25,7 @@ module SlackApplybot
           deploy_date = Date.parse(instance.ping_data['build_date'])
           <<~OUTPUT.chomp
             #{app} was deployed #{DateDisplay.call(deploy_date)}
-            #{Github::Commits.call(application)}
+            #{::Github::Commits.call(application)}
           OUTPUT
         end
       end
