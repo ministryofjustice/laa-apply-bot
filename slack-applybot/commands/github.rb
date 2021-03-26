@@ -1,7 +1,6 @@
 module SlackApplybot
   module Commands
     class Github < SlackRubyBot::Commands::Base
-      require 'pry-byebug'
       command 'github' do |client, data, match|
         @client = client
         @data = data
