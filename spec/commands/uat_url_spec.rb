@@ -16,6 +16,16 @@ describe SlackApplybot::Commands::UatUrl, :vcr do
     }.to_json
   end
 
+  context 'when the command is unsupported' do
+    let(:user_input) { "#{SlackRubyBot.config.user} uat delete" }
+    let(:channel) { 'channel' }
+    let(:expected_response) { 'You called `uat` with `delete`. This is not supported.' }
+
+    it 'returns the expected message' do
+      expect(message: user_input, channel: channel).to respond_with_slack_message(expected_response)
+    end
+  end
+
   context 'when user requests all uat urls' do
     let(:user_input) { "#{SlackRubyBot.config.user} uat urls" }
     let(:expected_response) do
