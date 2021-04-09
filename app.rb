@@ -28,7 +28,7 @@ class App < Sinatra::Base
   ActiveRecord::Base.logger.level = Logger::WARN if ActiveRecord::Base.logger
   SlackRubyBot::Client.logger.level = Logger::WARN
   SlackRubyBot.configure do |config|
-    config.allow_bot_messages = true
+    config.allow_bot_messages = false
   end
   get '/' do
     "
