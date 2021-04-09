@@ -1,28 +1,34 @@
 module SlackApplybot
   module Commands
     class UatUrl < SlackRubyBot::Commands::Base
-      command(/uat (url|urls)/) do |client, data, match|
+      command 'uat' do |client, data, match|
         @client = client
         @data = data
+        @user = user
         raise ChannelValidity::PublicError.new(message: error_message, channel: @data.channel) unless channel_is_valid?
 
-        branch =  match['expression']
         ingresses = Kube::Ingresses.call('laa-apply-for-legalaid-uat')
-        if branch.present?
-          single_match = ingresses.find { |e| e.starts_with?(branch) }
-          message_text = if single_match
-                           "Branch <https://#{single_match}|#{branch}> is available"
-                         else
-                           "Sorry I can't find a branch for #{branch} I only have:\n#{display(ingresses)}"
-                         end
-        else
-          message_text = "Apply UAT urls:\n#{display(ingresses)}"
-        end
-        client.say(channel: data.channel, text: message_text)
+        message = case match['expression']&.downcase
+                  when /^urls$/
+                    "Apply UAT urls:\n#{display(ingresses)}"
+                  when /^url/
+                    branch = match['expression'].gsub(/url /, '')
+                    single_match = ingresses.find { |e| e.starts_with?(branch) }
+                    if single_match
+                      "Branch <https://#{single_match}|#{branch}> is available"
+                    else
+                      "Sorry I can't find a branch for #{branch} I only have:\n#{display(ingresses)}"
+                    end
+                  else
+                    "You called `uat` with `#{match['expression']}`. This is not supported."
+                  end
+
+        client.say(channel: data.channel, text: message)
       end
 
       class << self
         include ChannelValidity
+        include UserCommand
 
         private
 
