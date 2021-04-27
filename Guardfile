@@ -6,6 +6,6 @@ guard :rspec, cmd: 'bundle exec rspec', all_on_start: false do
 end
 
 guard :rubocop, all_on_start: false do
-  watch(%r{//.+\.rb$//})
+  watch(%r{/.+\.rb$})
   watch(%r{(?:.+/)?\.(rubocop|rubocop_todo)\.yml$}) { |m| File.dirname(m[0]) }
 end
