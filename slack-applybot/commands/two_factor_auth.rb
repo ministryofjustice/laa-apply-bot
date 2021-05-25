@@ -56,7 +56,7 @@ module SlackApplybot
           SendSlackMessage.new.upload_file(
             channels: channel,
             as_user: true,
-            file: Faraday::FilePart.new(StringIO.new(build_qr_code(token)), 'image/png'),
+            file: Faraday::FilePart.new(StringIO.new(build_qr_code(token)), 'image/png', 'apply_bot_qr.png'),
             title: 'Your apply-bot QR',
             initial_comment: 'Scan with an authenticator app'
           )
@@ -66,13 +66,11 @@ module SlackApplybot
           totp = ROTP::TOTP.new(token, issuer: ENV.fetch('SERVICE_NAME'))
           qrcode = RQRCode::QRCode.new(totp.provisioning_uri(ENV.fetch('SERVICE_EMAIL')))
 
-          qrcode.as_svg(
-            size: 1,
-            offset: 10,
-            shape_rendering: 'crispEdges',
-            module_size: 6,
-            standalone: true
-          )
+          qrcode.as_png(
+            border_modules: 1,
+            resize_exactly_to: true,
+            size: 180
+          ).to_s
         end
       end
     end
