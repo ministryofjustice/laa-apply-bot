@@ -4,7 +4,7 @@ module UserCommand
   end
 
   def user_dm_channel(client)
-    client.web_client.conversations_open(users: user)['channel']['id']
+    client.web_client.conversations_open(users: user.slack_id)['channel']['id']
   end
 
   def user_has_github_linked?
