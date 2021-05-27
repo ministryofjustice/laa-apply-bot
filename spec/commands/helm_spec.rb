@@ -43,7 +43,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
 
     context 'when the command is list' do
       let(:command) { 'list' }
-      let(:command_response) { "```ap1234\nap2345```" }
+      let(:command_response) { "ap1234\nap2345" }
       it 'returns the expected message' do
         expect(message: user_input, channel: channel).to respond_with_slack_message(command_response)
       end

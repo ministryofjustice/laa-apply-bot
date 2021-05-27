@@ -3,7 +3,8 @@ module Helm
     def self.call
       releases = JSON.parse(`helm list -o json`, symbolize_names: true)
       values = releases.pluck(:name, :status, :updated)
-      "#{header}\n#{values.map { |row| parse_row(row) }.join("\n")}"
+      result = "#{header}\n#{values.map { |row| parse_row(row) }.join("\n")}"
+      "```#{result}```"
     end
 
     class <<self

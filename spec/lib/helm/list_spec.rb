@@ -27,9 +27,11 @@ RSpec.describe Helm::List do
       ].to_json
     end
     let(:expected) do
-      "Name                                    Status         Date\n"\
+      '```'\
+      "Name                                    Status         Date       Branch PR     \n"\
       "apply-ap-1234-first-name                deployed       2021-02-10\n"\
-      'apply-ap-2345-second-name               deployed       2021-02-10'
+      'apply-ap-2345-second-name               deployed       2021-02-10'\
+      '```'
     end
 
     it { expect(subject).to eql(expected) }
