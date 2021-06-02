@@ -48,11 +48,11 @@ module Slack
 
     def block
       {
-        "type": 'section',
-        "block_id": @block_id.to_s,
-        "text": {
-          "type": 'mrkdwn',
-          "text": @message.to_s
+        'type': 'section',
+        'block_id': @block_id.to_s,
+        'text': {
+          'type': 'mrkdwn',
+          'text': @message.to_s
         }
       }
     end
