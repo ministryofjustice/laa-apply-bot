@@ -1,7 +1,6 @@
 module SlackApplybot
   module Commands
     class Helm < SlackRubyBot::Commands::Base
-      require 'pry-byebug'
       command 'helm' do |client, data, match|
         @client = client
         @data = data
