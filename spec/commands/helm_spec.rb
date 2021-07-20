@@ -17,7 +17,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
   let(:tidy_return) do
     ':nope: apply-ap-2345-second-name - branch deleted - you can run the following locally  - ' \
       "`helm delete apply-ap-2345-second-name --dry-run`\n" \
-    '1 branch retained'
+      '1 branch retained'
   end
   let(:user_input) { "#{SlackRubyBot.config.user} helm #{command}" }
   let(:command) { '' }

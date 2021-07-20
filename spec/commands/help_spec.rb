@@ -16,20 +16,20 @@ describe SlackRubyBot::Commands::Help, :vcr do
   let(:user_input) { "#{SlackRubyBot.config.user} help" }
   let(:expected_response) do
     "*Weather Bot* - This bot tells you the weather.\n"\
-    "\n*Commands:*\n*clouds* - Tells you how many clouds there're above you."\
-    "\n*command_without_description*\n*What's the weather in <city>?* - Tells you the weather in a <city>.\n"\
-    "*LAA Apply Bot* - This bot assists the LAA Apply team to administer their applications\n"\
-    "\n*Commands:*"\
-    "\n*add users* - `@apply-bot add users <comma separated names>`"\
-    "\n*ages* - `@apply-bot ages`"\
-    "\n*details* - `@apply-bot <application> details <environment>` e.g. `@apply-bot cfe details staging`"\
-    "\n*run tests* - `@apply-bot run tests`"\
-    "\n*uat urls* - `@apply-bot uat urls`"\
-    "\n*uat url* - `@apply-bot uat url <branch> e.g. @apply-bot uat url ap-999`"\
-    "\n*helm* - `@apply-bot helm <instruction>` e.g. `@apply-bot helm list`"\
-    "\n*github* - `@apply-bot github <instruction>` e.g. `@apply-bot github link <your github name>`"\
-    "\n*2fa* - `@apply-bot 2fa <instruction>` e.g. `@apply-bot 2fa setup`\n"\
-    "\nFor full description of the command use: *help <command>*\n"
+      "\n*Commands:*\n*clouds* - Tells you how many clouds there're above you."\
+      "\n*command_without_description*\n*What's the weather in <city>?* - Tells you the weather in a <city>.\n"\
+      "*LAA Apply Bot* - This bot assists the LAA Apply team to administer their applications\n"\
+      "\n*Commands:*"\
+      "\n*add users* - `@apply-bot add users <comma separated names>`"\
+      "\n*ages* - `@apply-bot ages`"\
+      "\n*details* - `@apply-bot <application> details <environment>` e.g. `@apply-bot cfe details staging`"\
+      "\n*run tests* - `@apply-bot run tests`"\
+      "\n*uat urls* - `@apply-bot uat urls`"\
+      "\n*uat url* - `@apply-bot uat url <branch> e.g. @apply-bot uat url ap-999`"\
+      "\n*helm* - `@apply-bot helm <instruction>` e.g. `@apply-bot helm list`"\
+      "\n*github* - `@apply-bot github <instruction>` e.g. `@apply-bot github link <your github name>`"\
+      "\n*2fa* - `@apply-bot 2fa <instruction>` e.g. `@apply-bot 2fa setup`\n"\
+      "\nFor full description of the command use: *help <command>*\n"
   end
   # TODO: find out why the ruby-slack-bot is inserting thw weather bot output into the test response!
 
@@ -41,8 +41,8 @@ describe SlackRubyBot::Commands::Help, :vcr do
     let(:user_input) { "#{SlackRubyBot.config.user} help details" }
     let(:expected_response) do
       "*details* - `@apply-bot <application> details <environment>` e.g. `@apply-bot cfe details staging`\n"\
-      "\nShows the ping details page for the selected application and non-uat environments, "\
-      'e.g.  `@apply-bot apply details staging` or `@apply-bot cfe details production`'
+        "\nShows the ping details page for the selected application and non-uat environments, "\
+        'e.g.  `@apply-bot apply details staging` or `@apply-bot cfe details production`'
     end
 
     it 'returns the expected message' do

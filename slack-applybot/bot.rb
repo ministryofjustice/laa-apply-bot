@@ -50,7 +50,7 @@ module SlackApplybot
         name: 'github',
         desc: '`@apply-bot github <instruction>` e.g. `@apply-bot github link <your github name>`',
         long_desc: 'This will run a command that links your current slack account ' \
-                     'with a github account, currently supported instruction is: `link`'
+                   'with a github account, currently supported instruction is: `link`'
       },
       {
         name: '2fa',

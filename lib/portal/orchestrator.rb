@@ -31,7 +31,7 @@ module Portal
 
     def notify_text
       '<!here> can you add the following users? ' \
-      "<@#{@user}> has raised the request and the apply service is ready for them"
+        "<@#{@user}> has raised the request and the apply service is ready for them"
     end
 
     def send_message_to_user

@@ -25,7 +25,7 @@ module Helm
           @count += 1
         else
           @output += ":nope: #{environment} - branch deleted - you can run the following locally  - " \
-                    "`helm delete #{environment} --dry-run`\n"
+                     "`helm delete #{environment} --dry-run`\n"
         end
       end
     end
