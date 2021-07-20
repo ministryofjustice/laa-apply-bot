@@ -37,7 +37,7 @@ module Slack
 
     def waiting
       ":spinner2: The tests are running.\n"\
-      " I'll update you on completion, or you can click on <#{@args[:web_url]}|this link> for details"
+        " I'll update you on completion, or you can click on <#{@args[:web_url]}|this link> for details"
     end
 
     def complete

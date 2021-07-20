@@ -22,11 +22,11 @@ describe SlackApplybot::Commands::Ages, :vcr do
   context 'when the values are all valid' do
     let(:expected_response) do
       "Apply was deployed yesterday\n:nope: Merge pull request #1999 from moj/AA-1234\n" \
-      ":nope: Merge pull request #1998 from moj/AA-421\n:yep: Merge pull request #1997 from moj/AA-666\n" \
-      ":yep: Merge pull request #1996 from moj/AA-555\n:yep: Merge pull request #1995 from moj/AA-444\n" \
-      "CFE was deployed 14 days ago\n:nope: Merge pull request #1999 from moj/AA-1234\n" \
-      ":nope: Merge pull request #1998 from moj/AA-421\n:yep: Merge pull request #1997 from moj/AA-666\n" \
-      ":yep: Merge pull request #1996 from moj/AA-555\n:yep: Merge pull request #1995 from moj/AA-444"
+        ":nope: Merge pull request #1998 from moj/AA-421\n:yep: Merge pull request #1997 from moj/AA-666\n" \
+        ":yep: Merge pull request #1996 from moj/AA-555\n:yep: Merge pull request #1995 from moj/AA-444\n" \
+        "CFE was deployed 14 days ago\n:nope: Merge pull request #1999 from moj/AA-1234\n" \
+        ":nope: Merge pull request #1998 from moj/AA-421\n:yep: Merge pull request #1997 from moj/AA-666\n" \
+        ":yep: Merge pull request #1996 from moj/AA-555\n:yep: Merge pull request #1995 from moj/AA-444"
     end
     let(:channel) { 'channel' }
 

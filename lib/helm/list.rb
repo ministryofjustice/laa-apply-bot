@@ -7,7 +7,7 @@ module Helm
       "```#{result}```"
     end
 
-    class <<self
+    class << self
       include GithubBits
 
       private

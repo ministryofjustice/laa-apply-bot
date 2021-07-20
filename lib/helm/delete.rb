@@ -5,7 +5,7 @@ module Helm
       remove_release if dry_run?
     end
 
-    class <<self
+    class << self
       private
 
       def remove_release

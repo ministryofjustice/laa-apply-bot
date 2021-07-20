@@ -49,10 +49,10 @@ RSpec.describe Helm::List do
     end
     let(:expected) do
       '```'\
-      "Name                                    Status         Date       PR Branch \n"\
-      "apply-ap-1234-first-name                deployed       2021-02-10 ✔  ✔      \n"\
-      'apply-ap-2345-second-name               deployed       2021-02-10           '\
-      '```'
+        "Name                                    Status         Date       PR Branch \n"\
+        "apply-ap-1234-first-name                deployed       2021-02-10 ✔  ✔      \n"\
+        'apply-ap-2345-second-name               deployed       2021-02-10           '\
+        '```'
     end
 
     it { expect(subject).to eql(expected) }
