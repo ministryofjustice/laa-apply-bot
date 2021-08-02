@@ -71,3 +71,12 @@ jobs:
         with:
           name: coverage-report
           path: coverage
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: D39SRD6MA
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+          SLACK_MESSAGE: 'Job success or failure'
+          SLACK_TITLE: Post Title
+          SLACK_USERNAME: apply-bot
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
