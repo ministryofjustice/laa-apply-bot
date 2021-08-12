@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.7.2'
+ruby '3.0.2'
 
 gem 'activerecord'
-gem 'async-websocket', '~>0.8.0'
+gem 'async-websocket'
 gem 'dotenv'
 gem 'dotiw'
 gem 'kubeclient'
