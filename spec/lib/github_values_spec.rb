@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe GithubValues do
   subject(:base) { described_class.new }
+  before { allow(ENV).to receive(:[]).and_call_original }
 
   let(:base_url) { 'https://api.github.com/repos/moj/project' }
 
