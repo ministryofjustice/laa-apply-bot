@@ -43,4 +43,10 @@ class App < Sinatra::Base
       build_tag: ENV['BUILD_TAG'] || 'Not Available'
     }.to_json
   end
+
+  post '/interactive' do
+    # return empty success response to prevent
+    # warnings in slack when buttons are clicked
+    [200, {}, ['']]
+  end
 end
