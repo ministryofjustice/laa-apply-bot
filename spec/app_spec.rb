@@ -49,4 +49,10 @@ describe 'Sinatra App' do
       expect(last_response.status).to eq 200
     end
   end
+
+  it 'swallows any data posted to interactive' do
+    post '/interactive', { data: 'something' }
+    expect(last_response.body).to eql ''
+    expect(last_response.status).to eq 200
+  end
 end
