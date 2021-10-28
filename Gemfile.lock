@@ -62,7 +62,7 @@ GEM
     fiber-local (1.0.0)
     foreman (0.87.2)
     formatador (0.3.0)
-    gli (2.19.2)
+    gli (2.20.1)
     guard (2.18.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
