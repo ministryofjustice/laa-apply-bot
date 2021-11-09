@@ -16,11 +16,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@master
-      - name: Build and push production -live-1
+      - name: Build and push production - live-1
         env:
           K8S_TOKEN: ${{ secrets.K8S_TOKEN }}
           K8S_CLUSTER_CERT: ${{ secrets.K8S_CLUSTER_CERT }}
           K8S_CLUSTER_NAME: ${{ secrets.K8S_CLUSTER_NAME }}
+          K8S_CLUSTER_PREFIX: 'api.'
           K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
           SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
           ECR_USERNAME: ${{ secrets.ECR_USERNAME }}
@@ -38,6 +39,7 @@ jobs:
           K8S_TOKEN: ${{ secrets.K8S_LIVE_TOKEN }}
           K8S_CLUSTER_CERT: ${{ secrets.K8S_LIVE_CLUSTER_CERT }}
           K8S_CLUSTER_NAME: ${{ secrets.K8S_LIVE_CLUSTER_NAME }}
+          K8S_CLUSTER_PREFIX: ''
           K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
           SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
           ECR_USERNAME: ${{ secrets.ECR_USERNAME }}
