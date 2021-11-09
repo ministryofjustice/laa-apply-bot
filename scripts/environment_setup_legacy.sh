@@ -15,11 +15,11 @@ sudo apt-get update && sudo apt-get install -y awscli docker-ce docker-ce-cli co
 sudo curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v1.17.8/bin/linux/amd64/kubectl
 sudo chmod +x /usr/bin/kubectl
 
-echo -n ${K8S_LIVE_CLUSTER_CERT} | base64 -d > ./ca.crt
-kubectl config set-cluster ${K8S_LIVE_CLUSTER_NAME} --certificate-authority=./ca.crt --server=https://${K8S_LIVE_CLUSTER_NAME}
-kubectl config set-credentials ${SERVICE_ACCOUNT} --token=${K8S_LIVE_TOKEN}
-kubectl config set-context ${K8S_LIVE_CLUSTER_NAME} --cluster=${K8S_LIVE_CLUSTER_NAME} --user=${SERVICE_ACCOUNT} --namespace=${K8S_NAMESPACE}
-kubectl config use-context ${K8S_LIVE_CLUSTER_NAME}
+echo -n ${K8S_CLUSTER_CERT} | base64 -d > ./ca.crt
+kubectl config set-cluster ${K8S_CLUSTER_NAME} --certificate-authority=./ca.crt --server=https://api.${K8S_CLUSTER_NAME}
+kubectl config set-credentials ${SERVICE_ACCOUNT} --token=${K8S_TOKEN}
+kubectl config set-context ${K8S_CLUSTER_NAME} --cluster=${K8S_CLUSTER_NAME} --user=${SERVICE_ACCOUNT} --namespace=${K8S_NAMESPACE}
+kubectl config use-context ${K8S_CLUSTER_NAME}
 
 export AWS_DEFAULT_REGION=eu-west-2
 export AWS_ACCESS_KEY_ID=$(kubectl get secrets -n ${K8S_NAMESPACE} ${ECR_CREDENTIALS_SECRET} -o json | jq -r '.data["access_key_id"]' | base64 --decode)
