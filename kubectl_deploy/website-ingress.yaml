@@ -3,14 +3,14 @@ kind: Ingress
 metadata:
   name: laa-apply-slack-bot-ingress
   annotations:
-    external-dns.alpha.kubernetes.io/aws-weight: "100"
-    external-dns.alpha.kubernetes.io/set-identifier: laa-apply-slack-bot-ingress-laa-apply-bot-production-blue
+    external-dns.alpha.kubernetes.io/aws-weight: "0"
+    external-dns.alpha.kubernetes.io/set-identifier: laa-apply-slack-bot-ingress-laa-apply-bot-production-green
 spec:
   tls:
   - hosts:
-    - laa-apply-slack-bot.apps.live-1.cloud-platform.service.justice.gov.uk
+    - laa-apply-slack-bot.cloud-platform.service.justice.gov.uk
   rules:
-  - host: laa-apply-slack-bot.apps.live-1.cloud-platform.service.justice.gov.uk
+  - host: laa-apply-slack-bot.cloud-platform.service.justice.gov.uk
     http:
       paths:
       - path: /
