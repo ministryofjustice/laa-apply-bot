@@ -41,7 +41,7 @@ jobs:
           K8S_CLUSTER_NAME: ${{ secrets.K8S_LIVE_CLUSTER_NAME }}
           K8S_CLUSTER_PREFIX: ''
           K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
-          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+          SERVICE_ACCOUNT: ${{ secrets.LIVE_SERVICE_ACCOUNT }}
           ECR_USERNAME: ${{ secrets.ECR_USERNAME }}
           ECR_CREDENTIALS_SECRET: ${{ secrets.ECR_CREDENTIALS_SECRET }}
         run: |
