@@ -40,8 +40,7 @@ class App < Sinatra::Base
   get '/ping' do
     {
       build_date: ENV['BUILD_DATE'] || 'Not Available',
-      build_tag: ENV['BUILD_TAG'] || 'Not Available',
-      cluster: ENV['CLUSTER_ID'] || 'Not Available'
+      build_tag: ENV['BUILD_TAG'] || 'Not Available'
     }.to_json
   end
 
