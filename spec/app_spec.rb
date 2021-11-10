@@ -18,23 +18,19 @@ describe 'Sinatra App' do
       allow(ENV).to receive(:[]).and_call_original
       allow(ENV).to receive(:[]).with('BUILD_DATE').and_return(build_date)
       allow(ENV).to receive(:[]).with('BUILD_TAG').and_return(build_tag)
-      allow(ENV).to receive(:[]).with('CLUSTER_ID').and_return(cluster_id)
       get '/ping'
     end
     let(:build_date) { nil }
     let(:build_tag) { nil }
-    let(:cluster_id) { nil }
 
     context 'when environment variables set' do
       let(:build_date) { '20150721' }
       let(:build_tag) { 'test' }
-      let(:cluster_id) { 'live' }
 
       let(:expected_json) do
         {
           'build_date' => '20150721',
-          'build_tag' => 'test',
-          'cluster' => 'live'
+          'build_tag' => 'test'
         }
       end
 

@@ -50,11 +50,9 @@ RUN apk update && apk del build-dependencies curl openssl bash
 # expect ping environment variables
 ARG BUILD_DATE
 ARG BUILD_TAG
-ARG CLUSTER
 # set ping environment variables
 ENV BUILD_DATE=${BUILD_DATE}
 ENV BUILD_TAG=${BUILD_TAG}
-ENV CLUSTER_ID=${CLUSTER}
 
 USER 1000
 CMD "./scripts/docker-startup.sh"

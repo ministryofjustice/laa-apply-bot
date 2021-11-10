@@ -10,25 +10,6 @@ jobs:
   rspec:
     uses: ministryofjustice/laa-reusable-github-actions/.github/workflows/rspec.yml@main
 
-  deploy-production:
-    needs: [rubocop, rspec]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@master
-      - name: Build and push production - live-1
-        env:
-          K8S_TOKEN: ${{ secrets.K8S_TOKEN }}
-          K8S_CLUSTER_CERT: ${{ secrets.K8S_CLUSTER_CERT }}
-          K8S_CLUSTER_NAME: ${{ secrets.K8S_CLUSTER_NAME }}
-          K8S_CLUSTER_PREFIX: 'api.'
-          K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
-          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
-          ECR_USERNAME: ${{ secrets.ECR_USERNAME }}
-          ECR_CREDENTIALS_SECRET: ${{ secrets.ECR_CREDENTIALS_SECRET }}
-          CLUSTER_ID: 'live-1'
-        run: |
-          ./scripts/environment_setup.sh build_and_push.sh
   deploy-live-production:
     needs: [rubocop, rspec]
     runs-on: ubuntu-latest
@@ -45,6 +26,5 @@ jobs:
           SERVICE_ACCOUNT: ${{ secrets.LIVE_SERVICE_ACCOUNT }}
           ECR_USERNAME: ${{ secrets.ECR_USERNAME }}
           ECR_CREDENTIALS_SECRET: ${{ secrets.ECR_CREDENTIALS_SECRET }}
-          CLUSTER_ID: 'live'
         run: |
           ./scripts/environment_setup.sh build_and_push.sh
