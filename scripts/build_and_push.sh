@@ -5,7 +5,7 @@ echo  'Building docker image...'
 out=$(docker build \
         --build-arg BUILD_DATE=$(date +%Y-%m-%dT%H:%M:%S%z) \
         --build-arg BUILD_TAG="app-${GITHUB_SHA}" \
-        --build-arg CLUSTER=$(CLUSTER_ID) \
+        --build-arg CLUSTER="${CLUSTER_ID}" \
         -t "app-latest"\
         -t "${TAG}" .)
 echo "$out"
