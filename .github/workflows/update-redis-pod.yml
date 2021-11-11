@@ -8,11 +8,11 @@ jobs:
         uses: actions/checkout@main
       - name: Build and push production
         env:
-          K8S_TOKEN: ${{ secrets.K8S_TOKEN }}
-          K8S_CLUSTER_CERT: ${{ secrets.K8S_CLUSTER_CERT }}
-          K8S_CLUSTER_NAME: ${{ secrets.K8S_CLUSTER_NAME }}
+          K8S_TOKEN: ${{ secrets.K8S_LIVE_TOKEN }}
+          K8S_CLUSTER_CERT: ${{ secrets.K8S_LIVE_CLUSTER_CERT }}
+          K8S_CLUSTER_NAME: ${{ secrets.K8S_LIVE_CLUSTER_NAME }}
           K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
-          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+          SERVICE_ACCOUNT: ${{ secrets.LIVE_SERVICE_ACCOUNT }}
           ECR_USERNAME: ${{ secrets.ECR_USERNAME }}
           ECR_CREDENTIALS_SECRET: ${{ secrets.ECR_CREDENTIALS_SECRET }}
         run: ./scripts/environment_setup.sh build_and_push_redis.sh
