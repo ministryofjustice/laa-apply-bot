@@ -15,13 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@master
+        uses: actions/checkout@main
       - name: Build and push production - live
         env:
           K8S_TOKEN: ${{ secrets.K8S_LIVE_TOKEN }}
           K8S_CLUSTER_CERT: ${{ secrets.K8S_LIVE_CLUSTER_CERT }}
           K8S_CLUSTER_NAME: ${{ secrets.K8S_LIVE_CLUSTER_NAME }}
-          K8S_CLUSTER_PREFIX: ''
           K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
           SERVICE_ACCOUNT: ${{ secrets.LIVE_SERVICE_ACCOUNT }}
           ECR_USERNAME: ${{ secrets.ECR_USERNAME }}
