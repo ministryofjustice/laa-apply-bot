@@ -13,10 +13,10 @@ RSpec.describe TokenGenerator do
 
     it { is_expected.to be_a String }
 
-    context 'that can be parsed via JSON into an OStruct' do
-      subject(:decode) { JSON.parse(Base64.urlsafe_decode64(call), object_class: OpenStruct) }
+    context 'that can be parsed via JSON' do
+      subject(:decode) { JSON.parse(Base64.urlsafe_decode64(call)) }
 
-      it { is_expected.to be_a OpenStruct }
+      it { expect(decode.keys).to match_array %w[expires_at secret slack_id] }
     end
   end
 end
