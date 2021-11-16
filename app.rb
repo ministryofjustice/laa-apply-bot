@@ -19,7 +19,6 @@ Dir[File.join('lib/**/*.rb')].sort.each do |f|
 end
 require './models/user'
 require './config/sidekiq_config'
-
 class App < Sinatra::Base
   register Sinatra::ActiveRecordExtension
 
@@ -45,8 +44,59 @@ class App < Sinatra::Base
   end
 
   post '/interactive' do
-    # return empty success response to prevent
+    payload = JSON.parse(params['payload'], symbolize_names: true)
+    interactive_type = interactive_return(payload)
+    send(interactive_type, payload)
+  rescue StandardError => e
+    SlackRubyBot::Client.logger.warn(e.inspect)
+  ensure
+    # always return empty success response to prevent
     # warnings in slack when buttons are clicked
     [200, {}, ['']]
+  end
+
+  private
+
+  def interactive_return(params)
+    params.dig(:actions, 0, :block_id)
+  end
+
+  def new_user_response(values)
+    url = values[:response_url]
+    action = values[:actions].first
+    payload = new_user_response_json(approve_reject_text(action[:value].eql?('approve')))
+    RestClient.post(url, payload.to_json, { 'Content-Type': 'application/json' })
+    send_file_upload_message(values)
+  end
+
+  def send_file_upload_message(values)
+    raw_script = values.dig(:message, :blocks).select { |x| x[:block_id].eql? 'user-script' }.dig(0, :text, :text)
+    script = raw_script.gsub('```', '')
+    user = values.dig(:user, :id)
+    SendSlackMessage.new.upload_file(message_params(script, user))
+  end
+
+  def message_params(script, user)
+    { channels: Portal::OutputChannel.is, content: script, filename: 'output.ldif', initial_comment: notify_text(user) }
+  end
+
+  def notify_text(user)
+    '<!here> can you add the following users? ' \
+      "<@#{user}> has raised the request and the apply service is ready for them"
+  end
+
+  def new_user_response_json(message)
+    {
+      'replace_original': 'true',
+      'text': message
+    }
+  end
+
+  def approve_reject_text(approve)
+    if approve
+      "Thanks for your approving, we'll process it and raise the request in <#new-users-apply>."
+    else
+      "Rejection noted, we aren't taking it personally"
+    end
   end
 end
