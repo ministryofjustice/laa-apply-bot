@@ -66,7 +66,7 @@ class App < Sinatra::Base
     action = values[:actions].first
     payload = new_user_response_json(approve_reject_text(action[:value].eql?('approve')))
     RestClient.post(url, payload.to_json, { 'Content-Type': 'application/json' })
-    send_file_upload_message(values)
+    send_file_upload_message(values) if action[:value].eql?('approve')
   end
 
   def send_file_upload_message(values)

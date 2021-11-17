@@ -121,6 +121,7 @@ describe 'Sinatra App' do
         end
 
         it 'a post to replace the text is made' do
+          expect_any_instance_of(SendSlackMessage).to_not receive(:upload_file)
           post '/interactive', submitted_data
           expect(a_request(:post, %r{\Ahttps://hooks.slack.com/actions/.*\z})).to have_been_made.times(1)
         end
