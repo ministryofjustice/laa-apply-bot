@@ -33,6 +33,15 @@ server itself (```bundle exec rackup -r ./app.rb``)
 As an alternative you can use ```foreman start``` which will run all three services in a single window, but that is not as helpful for debugging.  
 Binding.pry breakpoints tend to freeze and/or get lost in the threaded services as they run. YMMV
 
+As interactive elements have been developed you will now need to run a service that allows passing a url to the slack instance
+e.g. [ngrok](https://ngrok.com/)  [**Note**: I used ngrok but do not necessarily endorse it for all users, use it at your own risk!] 
+
+Set this up and start it running on your machine. 
+Then, when it's running and pointing at your local 9292 port (e.g. `ngrok http 9292`), it will give you a url
+(e.g. `https://1234-56-7-250-215.ngrok.io`) that you can add to your 
+Slack instance api/application Interactivity & shortcuts section with the suffix `/interactive`
+(e.g. `https://1234-56-7-250-215.ngrok.io/interactive`) this will allow callbacks from slack button clicks to your local test server while ngrok runs
+
 ## Deploying
 
 This is handled via github actions - on a pull request being merged to master, rspec and rubocop run.  
