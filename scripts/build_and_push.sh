@@ -14,6 +14,7 @@ out=$(docker push ${TAG})
 echo $out
 
 echo "Applying namespace configuration to ${K8S_NAMESPACE}..."
+kubectl -n ${K8S_NAMESPACE} apply -f kubectl_deploy/secrets.yaml
 kubectl -n ${K8S_NAMESPACE} set image -f kubectl_deploy/website-deployment.yaml website=${TAG} --local -o yaml | kubectl -n ${K8S_NAMESPACE} apply -f -
 kubectl -n ${K8S_NAMESPACE} set image -f kubectl_deploy/sidekiq-deployment.yaml sidekiq=${TAG} --local -o yaml | kubectl -n ${K8S_NAMESPACE} apply -f -
 kubectl -n ${K8S_NAMESPACE} rollout status deployments/website
