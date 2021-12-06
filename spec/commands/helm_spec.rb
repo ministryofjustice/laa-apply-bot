@@ -3,8 +3,10 @@ require 'spec_helper'
 describe SlackApplybot::Commands::Helm, :vcr do
   before do
     stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
-    allow(Helm::List).to receive(:call).and_return("ap1234\nap2345")
-    allow(Helm::Tidy).to receive(:call).and_return(tidy_return)
+    allow(Helm::List).to receive(:call).with('hmrc').and_return("ap3456\nap4567")
+    allow(Helm::List).to receive(:call).with('apply').and_return("ap1234\nap2345")
+    allow(Helm::Tidy).to receive(:call).with('hmrc').and_return(tidy_hmrc_return)
+    allow(Helm::Tidy).to receive(:call).with('apply').and_return(tidy_return)
   end
   let(:expected_body) do
     {
@@ -17,6 +19,11 @@ describe SlackApplybot::Commands::Helm, :vcr do
   let(:tidy_return) do
     ':nope: apply-ap-2345-second-name - branch deleted - you can run the following locally  - ' \
       "`helm delete apply-ap-2345-second-name --dry-run`\n" \
+      '1 branch retained'
+  end
+  let(:tidy_hmrc_return) do
+    ':nope: ap-2345-second-name - branch deleted - you can run the following locally  - ' \
+      "`helm delete ap-2345-second-name --dry-run`\n" \
       '1 branch retained'
   end
   let(:user_input) { "#{SlackRubyBot.config.user} helm #{command}" }
@@ -47,6 +54,22 @@ describe SlackApplybot::Commands::Helm, :vcr do
       it 'returns the expected message' do
         expect(message: user_input, channel: channel).to respond_with_slack_message(command_response)
       end
+
+      context 'and has a context listed' do
+        let(:command) { 'list hmrc' }
+        let(:command_response) { "ap3456\nap4567" }
+        it 'returns the expected message' do
+          expect(message: user_input, channel: channel).to respond_with_slack_message(command_response)
+        end
+      end
+
+      context 'and has an invalid context listed' do
+        let(:command) { 'list portal' }
+        let(:command_response) { '`portal` is not a valid context, you can only use `apply,hmrc`' }
+        it 'returns the expected message' do
+          expect(message: user_input, channel: channel).to respond_with_slack_message(command_response)
+        end
+      end
     end
 
     context 'when the command is tidy' do
@@ -54,6 +77,23 @@ describe SlackApplybot::Commands::Helm, :vcr do
 
       it 'returns the expected message' do
         expect(message: user_input, channel: channel).to respond_with_slack_message(tidy_return)
+      end
+
+      context 'and has a context listed' do
+        let(:command) { 'tidy hmrc' }
+        let(:command_response) { "ap3456\nap4567" }
+
+        it 'returns the expected message' do
+          expect(message: user_input, channel: channel).to respond_with_slack_message(tidy_hmrc_return)
+        end
+      end
+
+      context 'and has an invalid context listed' do
+        let(:command) { 'tidy portal' }
+        let(:command_response) { '`portal` is not a valid context, you can only use `apply,hmrc`' }
+        it 'returns the expected message' do
+          expect(message: user_input, channel: channel).to respond_with_slack_message(command_response)
+        end
       end
     end
 
