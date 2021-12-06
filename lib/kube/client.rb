@@ -18,7 +18,7 @@ module Kube
     private
 
     def auth_options
-      { bearer_token: ENV.fetch('KUBE_TOKEN') }
+      { bearer_token: ENV.fetch('KUBE_TOKEN_APPLY') }
     end
 
     def ssl_options
