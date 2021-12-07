@@ -96,11 +96,16 @@ spec:
             secretKeyRef:
               name: apply-bot-secrets
               key: KUBE_CRT
-        - name: KUBE_TOKEN
+        - name: KUBE_TOKEN_APPLY
           valueFrom:
             secretKeyRef:
               name: apply-bot-secrets
-              key: KUBE_TOKEN
+              key: KUBE_TOKEN_APPLY
+        - name: KUBE_TOKEN_HMRC
+          valueFrom:
+            secretKeyRef:
+              name: apply-bot-secrets
+              key: KUBE_TOKEN_HMRC
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:

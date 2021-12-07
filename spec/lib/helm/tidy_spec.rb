@@ -6,7 +6,7 @@ RSpec.describe Helm::Tidy do
 
     let(:github_url) { 'https://api.github.com/repos/moj/project-app' }
     before do
-      allow(described_class).to receive(:`).with('helm list -o json').and_return(raw_json)
+      allow(described_class).to receive(:`).with('helm list --kube-context apply-context -o json').and_return(raw_json)
       stub_request(:get, "#{github_url}/branches?per_page=100").to_return(status: 200,
                                                                           body: truncated_branch_data.to_json,
                                                                           headers: {})

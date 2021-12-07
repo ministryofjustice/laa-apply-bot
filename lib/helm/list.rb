@@ -1,7 +1,8 @@
 module Helm
   class List
-    def self.call
-      releases = JSON.parse(`helm list -o json`, symbolize_names: true)
+    def self.call(context = 'apply')
+      context = "--kube-context #{context}-context"
+      releases = JSON.parse(`helm list #{context} -o json`, symbolize_names: true)
       values = releases.pluck(:name, :status, :updated)
       result = "#{header}\n#{values.map { |row| parse_row(row) }.join("\n")}"
       "```#{result}```"

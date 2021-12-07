@@ -1,6 +1,7 @@
 module Helm
   class Tidy
-    def self.call
+    def self.call(context = 'apply')
+      @context = "--kube-context #{context}-context"
       @output = ''
       @count = 0
       active_uat_namespaces.each do |environment|
@@ -16,7 +17,7 @@ module Helm
       private
 
       def active_uat_namespaces
-        uat_releases = JSON.parse(`helm list -o json`, symbolize_names: true)
+        uat_releases = JSON.parse(`helm list #{@context} -o json`, symbolize_names: true)
         uat_releases.map { |helm| helm[:name] } - ["#{PREFIX}master"]
       end
 

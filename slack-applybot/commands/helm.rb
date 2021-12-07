@@ -8,8 +8,8 @@ module SlackApplybot
         raise ChannelValidity::PublicError.new(message: error_message, channel: @data.channel) unless channel_is_valid?
 
         message = case match['expression']
-                  when 'list', 'tidy'
-                    "::Helm::#{match['expression'].capitalize}".constantize.call
+                  when /^list/, /^tidy/
+                    process_command(match)
                   when /^delete/
                     process_delete(match)
                   when nil
@@ -22,6 +22,7 @@ module SlackApplybot
       end
 
       class << self
+        VALID_CONTEXTS = %w[apply hmrc].freeze
         include ChannelValidity
         include TwoFactorAuthShared
         include UserCommand
@@ -37,6 +38,21 @@ module SlackApplybot
           else
             'OTP password did not match, please check your authenticator app'
           end
+        end
+
+        def process_command(match)
+          parts = match['expression'].split
+          command = parts[0]
+          context = parts[1] || 'apply'
+          if validate_context(context)
+            "::Helm::#{command.capitalize}".constantize.call(context)
+          else
+            "`#{context}` is not a valid context, you can only use `#{VALID_CONTEXTS.join(',')}`"
+          end
+        end
+
+        def validate_context(name)
+          VALID_CONTEXTS.include?(name.downcase)
         end
       end
     end
