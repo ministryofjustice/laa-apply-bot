@@ -12,7 +12,7 @@ sudo add-apt-repository \
 
 sudo apt-get update && sudo apt-get install -y awscli docker-ce docker-ce-cli containerd.io
 
-sudo curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v1.17.8/bin/linux/amd64/kubectl
+sudo curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v1.21.7/bin/linux/amd64/kubectl
 sudo chmod +x /usr/bin/kubectl
 
 echo -n ${K8S_CLUSTER_CERT} | base64 -d > ./ca.crt
