@@ -14,7 +14,7 @@ gem 'rotp'
 gem 'rqrcode'
 gem 'sidekiq'
 gem 'sinatra'
-gem 'sinatra-activerecord'
+gem 'sinatra-activerecord', github: 'colinbruce/sinatra-activerecord', branch: 'master'
 gem 'slack-ruby-bot'
 gem 'tzinfo-data'
 

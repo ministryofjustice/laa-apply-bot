@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/colinbruce/sinatra-activerecord.git
+  revision: 85d3c182495bb564187334178ffeebf3e744f8a8
+  branch: master
+  specs:
+    sinatra-activerecord (2.0.23)
+      activerecord (>= 4.1)
+      sinatra (>= 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -248,9 +257,6 @@ GEM
       rack (~> 2.2)
       rack-protection (= 2.1.0)
       tilt (~> 2.0)
-    sinatra-activerecord (2.0.23)
-      activerecord (>= 4.1)
-      sinatra (>= 1.0)
     slack-ruby-bot (0.16.1)
       activesupport
       hashie
@@ -328,7 +334,7 @@ DEPENDENCIES
   simplecov
   simplecov-rcov
   sinatra
-  sinatra-activerecord
+  sinatra-activerecord!
   slack-ruby-bot
   timecop
   tzinfo-data
