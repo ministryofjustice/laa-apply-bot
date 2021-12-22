@@ -65,7 +65,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
 
       context 'and has an invalid context listed' do
         let(:command) { 'list portal' }
-        let(:command_response) { '`portal` is not a valid context, you can only use `apply,hmrc`' }
+        let(:command_response) { '`portal` is not a valid context, you can only use `apply, cfe, hmrc, and lfa`' }
         it 'returns the expected message' do
           expect(message: user_input, channel: channel).to respond_with_slack_message(command_response)
         end
@@ -90,7 +90,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
 
       context 'and has an invalid context listed' do
         let(:command) { 'tidy portal' }
-        let(:command_response) { '`portal` is not a valid context, you can only use `apply,hmrc`' }
+        let(:command_response) { '`portal` is not a valid context, you can only use `apply, cfe, hmrc, and lfa`' }
         it 'returns the expected message' do
           expect(message: user_input, channel: channel).to respond_with_slack_message(command_response)
         end
