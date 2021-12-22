@@ -256,7 +256,7 @@ GEM
       activesupport
       hashie
       slack-ruby-client (>= 0.14.0)
-    slack-ruby-client (0.17.0)
+    slack-ruby-client (1.0.0)
       faraday (>= 1.0)
       faraday_middleware
       gli
