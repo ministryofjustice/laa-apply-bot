@@ -101,11 +101,21 @@ spec:
             secretKeyRef:
               name: apply-bot-secrets
               key: KUBE_TOKEN_APPLY
+        - name: KUBE_TOKEN_CFE
+          valueFrom:
+            secretKeyRef:
+              name: apply-bot-secrets
+              key: KUBE_TOKEN_CFE
         - name: KUBE_TOKEN_HMRC
           valueFrom:
             secretKeyRef:
               name: apply-bot-secrets
               key: KUBE_TOKEN_HMRC
+        - name: KUBE_TOKEN_LFA
+          valueFrom:
+            secretKeyRef:
+              name: apply-bot-secrets
+              key: KUBE_TOKEN_LFA
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
