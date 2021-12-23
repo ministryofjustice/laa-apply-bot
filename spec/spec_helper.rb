@@ -28,6 +28,7 @@ require 'slack-ruby-bot/rspec'
 require 'vcr_helper'
 require 'app'
 require 'shoulda/matchers'
+require 'json_expressions/rspec'
 require 'database_cleaner'
 require 'dotenv'
 Dotenv.load('.env.test')
