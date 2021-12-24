@@ -22,7 +22,7 @@ module SlackApplybot
       end
 
       class << self
-        VALID_CONTEXTS = %w[apply hmrc].freeze
+        VALID_CONTEXTS = %w[apply cfe hmrc lfa].freeze
         include ChannelValidity
         include TwoFactorAuthShared
         include UserCommand
@@ -47,7 +47,7 @@ module SlackApplybot
           if validate_context(context)
             "::Helm::#{command.capitalize}".constantize.call(context)
           else
-            "`#{context}` is not a valid context, you can only use `#{VALID_CONTEXTS.join(',')}`"
+            "`#{context}` is not a valid context, you can only use `#{VALID_CONTEXTS.to_sentence}`"
           end
         end
 
