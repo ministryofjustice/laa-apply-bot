@@ -36,6 +36,28 @@ RSpec.describe SendSlackMessage do
     end
   end
 
+  describe '.open_modal' do
+    subject(:upload_file) { slack.open_modal(params) }
+
+    let(:params) { { trigger_id: '123456', view: {} } }
+
+    it 'sends a message to slack' do
+      subject
+      expect(a_request(:post, 'https://slack.com/api/views.open')).to have_been_made.times(1)
+    end
+  end
+
+  describe '.update_modal' do
+    subject(:upload_file) { slack.update_modal(params) }
+
+    let(:params) { { view_id: '123456', view: {} } }
+
+    it 'sends a message to slack' do
+      subject
+      expect(a_request(:post, 'https://slack.com/api/views.update')).to have_been_made.times(1)
+    end
+  end
+
   describe '.conversations_info' do
     subject(:conversations_info) { slack.conversations_info(params) }
 
