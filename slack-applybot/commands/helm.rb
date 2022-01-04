@@ -8,7 +8,9 @@ module SlackApplybot
         raise ChannelValidity::PublicError.new(message: error_message, channel: @data.channel) unless channel_is_valid?
 
         message = case match['expression']
-                  when /^list/, /^tidy/
+                  when /^tidy/
+                    ::Helm::Tidy.call(match, data.channel)
+                  when /^list/
                     process_command(match)
                   when /^delete/
                     process_delete(match)
@@ -17,8 +19,7 @@ module SlackApplybot
                   else
                     "You called `helm` with `#{match['expression']}`. This is not supported."
                   end
-
-        client.say(channel: data.channel, text: message)
+        client.say(channel: data.channel, text: message) unless message.nil?
       end
 
       class << self

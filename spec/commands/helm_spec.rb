@@ -7,6 +7,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
     allow(Helm::List).to receive(:call).with('apply').and_return("ap1234\nap2345")
     allow(Helm::Tidy).to receive(:call).with('hmrc').and_return(tidy_hmrc_return)
     allow(Helm::Tidy).to receive(:call).with('apply').and_return(tidy_return)
+    allow(Helm::Messages::DeletePrompt).to receive(:call).and_return('big prompting message')
   end
   let(:expected_body) do
     {
@@ -74,24 +75,28 @@ describe SlackApplybot::Commands::Helm, :vcr do
 
     context 'when the command is tidy' do
       let(:command) { 'tidy' }
+      before { allow(Helm::Tidy).to receive(:call).and_return(nil) }
 
       it 'returns the expected message' do
-        expect(message: user_input, channel: channel).to respond_with_slack_message(tidy_return)
+        expect(Helm::Tidy).to receive(:call)
+        expect(message: user_input, channel: channel).to not_respond
       end
 
       context 'and has a context listed' do
         let(:command) { 'tidy hmrc' }
-        let(:command_response) { "ap3456\nap4567" }
 
         it 'returns the expected message' do
-          expect(message: user_input, channel: channel).to respond_with_slack_message(tidy_hmrc_return)
+          expect(Helm::Tidy).to receive(:call)
+          expect(message: user_input, channel: channel).to not_respond
         end
       end
 
       context 'and has an invalid context listed' do
+        before { allow(Helm::Tidy).to receive(:call).and_return(command_response) }
         let(:command) { 'tidy portal' }
         let(:command_response) { '`portal` is not a valid context, you can only use `apply, cfe, hmrc, and lfa`' }
         it 'returns the expected message' do
+          expect(Helm::Tidy).to receive(:call)
           expect(message: user_input, channel: channel).to respond_with_slack_message(command_response)
         end
       end
