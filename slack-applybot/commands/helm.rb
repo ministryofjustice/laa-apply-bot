@@ -12,8 +12,6 @@ module SlackApplybot
                     ::Helm::Tidy.call(match, data.channel)
                   when /^list/
                     process_command(match)
-                  when /^delete/
-                    process_delete(match)
                   when nil
                     SlackRubyBot::Commands::Support::Help.instance.command_full_desc('helm')
                   else
@@ -25,21 +23,7 @@ module SlackApplybot
       class << self
         VALID_CONTEXTS = %w[apply cfe hmrc lfa].freeze
         include ChannelValidity
-        include TwoFactorAuthShared
         include UserCommand
-
-        def process_delete(match)
-          parts = match['expression'].split - ['delete']
-          if parts.empty?
-            'Unable to delete - insufficient data, please call as `helm delete name-of-release 000000`'
-          elsif parts.count.eql?(1)
-            'OTP password not provided, please call as `helm delete name-of-release 000000`'
-          elsif validate_otp_part(parts[1])
-            ::Helm::Delete.call(parts[0]) ? "#{parts[0]} deleted" : 'Unable to delete'
-          else
-            'OTP password did not match, please check your authenticator app'
-          end
-        end
 
         def process_command(match)
           parts = match['expression'].split
