@@ -28,6 +28,7 @@ require 'slack-ruby-bot/rspec'
 require 'vcr_helper'
 require 'app'
 require 'shoulda/matchers'
+require 'json_expressions/rspec'
 require 'database_cleaner'
 require 'dotenv'
 Dotenv.load('.env.test')
@@ -41,6 +42,8 @@ Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 
 RSpec.configure do |config|
   config.before do
+    stub_request(:post, %r{\Ahttps://slack.com/api/auth.test\z})
+      .to_return(status: 200, body: '{ "ok": true }', headers: {})
     stub_request(:post, %r{\Ahttps://slack.com/api/.*\z}).to_return(status: 200, body: '', headers: {})
     stub_request(:any, %r{\Ahttps://(www|api).github.com/.*\z}).to_return(status: 200, body: '', headers: {})
   end

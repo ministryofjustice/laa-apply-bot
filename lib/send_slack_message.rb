@@ -22,6 +22,16 @@ class SendSlackMessage
     client.files_upload(params)
   end
 
+  def open_modal(params)
+    # params = { trigger_id: value from button push, view: modal block }
+    client.views_open(params)
+  end
+
+  def update_modal(params)
+    # params = { view_id: existing modal view_id, view: new modal block }
+    client.views_update(params)
+  end
+
   def conversations_info(channel_id)
     client.conversations_info(channel_id)
   end

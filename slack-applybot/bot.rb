@@ -43,11 +43,9 @@ module SlackApplybot
         name: 'helm',
         desc: '`@apply-bot helm <instruction>` e.g. `@apply-bot helm list`',
         long_desc: 'This will run a helm command against the UAT helm kubernetes cluster ' \
-                   "currently supported instructions are: `list`, `tidy` & `delete` \n " \
+                   "currently supported instructions are: `list` & `tidy`\n " \
                    '- `list` and `tidy` can be followed by an optional (default is `apply`) context ' \
-                   "current values are `apply`, `cfe`, `hmrc` or `lfa` \n" \
-                   '- `delete` will need to be followed by a 2fa code, see `help 2fa`, but does not ' \
-                   'currently support contexts and will default to, and only work on, apply'
+                   'current values are `apply`, `cfe`, `hmrc` or `lfa`'
       },
       {
         name: 'github',

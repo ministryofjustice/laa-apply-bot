@@ -27,6 +27,7 @@ group :development, :test do
   gem 'byebug'
   gem 'foreman'
   gem 'highline'
+  gem 'json_expressions'
   gem 'pry-byebug'
   gem 'rake'
   gem 'rubocop'
