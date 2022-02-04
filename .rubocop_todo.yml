@@ -12,18 +12,6 @@ Lint/RedundantCopDisableDirective:
   Exclude:
     - 'spec/support/commit.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Performance/RedundantMatch:
-  Exclude:
-    - 'slack-applybot/commands/_two_factor_auth_shared.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Performance/RegexpMatch:
-  Exclude:
-    - 'slack-applybot/commands/_two_factor_auth_shared.rb'
-
 # Offense count: 28
 RSpec/AnyInstance:
   Exclude:
