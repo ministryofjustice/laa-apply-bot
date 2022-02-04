@@ -11,7 +11,7 @@ module Kube
         "#{url}/apis/networking.k8s.io",
         "v1beta1",
         auth_options:,
-        ssl_options:
+        ssl_options:,
       )
     end
 

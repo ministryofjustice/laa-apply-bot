@@ -58,7 +58,7 @@ module SlackApplybot
             as_user: true,
             file: Faraday::FilePart.new(StringIO.new(build_qr_code(token)), "image/png", "apply_bot_qr.png"),
             title: "Your apply-bot QR",
-            initial_comment: "Scan with an authenticator app"
+            initial_comment: "Scan with an authenticator app",
           )
         end
 
@@ -69,7 +69,7 @@ module SlackApplybot
           qrcode.as_png(
             border_modules: 1,
             resize_exactly_to: true,
-            size: 180
+            size: 180,
           ).to_s
         end
       end

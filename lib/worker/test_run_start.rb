@@ -10,12 +10,12 @@ module Worker
       start_test_run
 
       message = SendSlackMessage.new.generic(
-        { channel: @channel, as_user: true }.merge(Slack::BlockBuilder.call(:start))
+        { channel: @channel, as_user: true }.merge(Slack::BlockBuilder.call(:start)),
       )
       TestRunLocate.perform_in(GithubValues.wait_time, @channel, message["ts"], 1, {})
     rescue GithubStartJobError => e
       SendSlackMessage.new.generic(
-        { channel: @channel, as_user: true }.merge(Slack::BlockBuilder.start_error(e.message))
+        { channel: @channel, as_user: true }.merge(Slack::BlockBuilder.start_error(e.message)),
       )
     end
 
