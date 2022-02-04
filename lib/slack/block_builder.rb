@@ -25,7 +25,7 @@ module Slack
       }
     end
 
-    private
+  private
 
     def start
       ":spinner2: A test run has been requested from Github"

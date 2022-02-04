@@ -17,7 +17,7 @@ module SlackRubyBot
       class << self
         include ChannelValidity
 
-        private
+      private
 
         def text_when_channel_is_public
           if @command.present?

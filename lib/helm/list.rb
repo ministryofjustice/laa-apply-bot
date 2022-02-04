@@ -12,7 +12,7 @@ module Helm
     class << self
       include GithubBits
 
-      private
+    private
 
       def helm_list_as_json(context)
         `helm list #{context} -o json`

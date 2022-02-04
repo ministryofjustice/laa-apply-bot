@@ -30,7 +30,7 @@ module SlackApplybot
         include ChannelValidity
         include UserCommand
 
-        private
+      private
 
         def display(ingresses)
           ingresses.map do |ingress|

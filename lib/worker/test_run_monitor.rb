@@ -13,7 +13,7 @@ module Worker
       end
     end
 
-    private
+  private
 
     def call_github(monitor_url)
       JSON.parse(RestClient.get(monitor_url, GithubValues.headers))

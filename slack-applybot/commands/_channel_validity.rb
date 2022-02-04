@@ -8,7 +8,7 @@ module ChannelValidity
     end
   end
 
-  private
+private
 
   # def send_fail
   #   message_text = "Sorry <@#{@data.user}>, I don't understand that command!"

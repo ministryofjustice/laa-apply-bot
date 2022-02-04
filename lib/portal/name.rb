@@ -29,7 +29,7 @@ module Portal
       @display_name ||= parse_name.upcase
     end
 
-    private
+  private
 
     def parse_name
       @name = strip_email if name_is_slack_email?

@@ -17,7 +17,7 @@ module Worker
       send_message(Slack::BlockBuilder.timeout_error, channel, message_ts)
     end
 
-    private
+  private
 
     def update_process(channel, iteration, message_ts, running_job)
       if running_job.is_a?(Hash)

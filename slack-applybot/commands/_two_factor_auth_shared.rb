@@ -1,7 +1,7 @@
 module TwoFactorAuthShared
   require "rotp"
 
-  private
+private
 
   def validate_otp_part(otp)
     validate(user, otp) if otp.match(/\d*/)

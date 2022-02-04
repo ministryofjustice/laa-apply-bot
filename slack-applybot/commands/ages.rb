@@ -17,7 +17,7 @@ module SlackApplybot
       class << self
         include ChannelValidity
 
-        private
+      private
 
         def age_message(app)
           application = "#{app.humanize}Application".constantize.new

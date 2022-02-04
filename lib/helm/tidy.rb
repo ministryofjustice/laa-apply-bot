@@ -14,7 +14,7 @@ module Helm
     class << self
       include GithubBits
 
-      private
+    private
 
       def active_uat_namespaces
         uat_releases = JSON.parse(`helm list #{@context} -o json`, symbolize_names: true)

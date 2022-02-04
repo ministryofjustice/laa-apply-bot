@@ -14,7 +14,7 @@ module Portal
       new(name).call
     end
 
-    private
+  private
 
     def validate
       return error_state unless parse_uri

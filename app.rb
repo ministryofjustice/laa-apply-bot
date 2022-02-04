@@ -55,7 +55,7 @@ class App < Sinatra::Base
     [200, {}, [""]]
   end
 
-  private
+private
 
   def interactive_return(params)
     params.dig(:actions, 0, :block_id)

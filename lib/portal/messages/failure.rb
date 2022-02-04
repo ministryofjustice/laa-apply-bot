@@ -17,7 +17,7 @@ module Portal
         result
       end
 
-      private
+    private
 
       def block(message)
         { 'type': "section", 'text': { 'type': "mrkdwn", 'text': message } }

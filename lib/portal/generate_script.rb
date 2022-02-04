@@ -12,7 +12,7 @@ module Portal
       header + names
     end
 
-    private
+  private
 
     def names
       result = []

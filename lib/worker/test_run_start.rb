@@ -19,7 +19,7 @@ module Worker
       )
     end
 
-    private
+  private
 
     def build_data(data)
       @channel = data["channel"]
