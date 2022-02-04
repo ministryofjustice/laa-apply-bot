@@ -2,9 +2,6 @@ require "spec_helper"
 
 describe SlackApplybot::Commands::IntegrationTests, :vcr do
   let(:user_input) { "#{SlackRubyBot.config.user} run tests" }
-  before do
-    stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
-  end
   let(:expected_body) do
     {
       'ok': true,
@@ -14,6 +11,10 @@ describe SlackApplybot::Commands::IntegrationTests, :vcr do
     }.to_json
   end
   let(:channel) { "channel" }
+
+  before do
+    stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
+  end
 
   context "when user requests a test run" do
     it "starts typing and triggers the sidekiq job" do

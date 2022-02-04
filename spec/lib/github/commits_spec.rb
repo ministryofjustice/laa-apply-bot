@@ -10,7 +10,6 @@ RSpec.describe Github::Commits do
     allow(Github::Status).to receive(:passed?).with("678912").and_return(true)
   end
   let(:application) { ApplyApplication.new }
-  load_shared_commit_data
   let(:expected_response) do
     <<~RESPONSE.chomp
       :nope: Merge pull request #1999 from moj/AA-1234
@@ -20,6 +19,8 @@ RSpec.describe Github::Commits do
       :yep: Merge pull request #1995 from moj/AA-444
     RESPONSE
   end
+
+  load_shared_commit_data
 
   describe ".call" do
     subject(:call) { described_class.call(application) }

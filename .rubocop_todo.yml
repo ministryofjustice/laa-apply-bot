@@ -191,19 +191,6 @@ RSpec/RepeatedExampleGroupDescription:
     - 'spec/commands/helm_spec.rb'
     - 'spec/lib/portal/name_validator_spec.rb'
 
-# Offense count: 18
-# Cop supports --auto-correct.
-RSpec/ScatteredLet:
-  Exclude:
-    - 'spec/commands/ages_spec.rb'
-    - 'spec/commands/details_spec.rb'
-    - 'spec/commands/integration_tests_spec.rb'
-    - 'spec/lib/github/branches_spec.rb'
-    - 'spec/lib/github/commits_spec.rb'
-    - 'spec/lib/github/pull_requests_spec.rb'
-    - 'spec/lib/helm/list_spec.rb'
-    - 'spec/lib/helm/tidy_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Rails/ApplicationRecord:

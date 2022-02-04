@@ -2,14 +2,6 @@ require "spec_helper"
 require "support/commit"
 describe SlackApplybot::Commands::Ages, :vcr do
   let(:user_input) { "#{SlackRubyBot.config.user} ages" }
-  let(:expected_data) { { channel: { name: "test" } } }
-  before do
-    stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
-    stub_request(:any, %r{\Ahttps://(www|api).github.com/.*\z}).to_return(status: 200, body: commits, headers: {})
-    allow(Github::Status).to receive(:passed?).and_return(false)
-    allow(Github::Status).to receive(:passed?).with("678912").and_return(true)
-  end
-  load_shared_commit_data
   let(:expected_body) do
     {
       'ok': true,
@@ -18,6 +10,15 @@ describe SlackApplybot::Commands::Ages, :vcr do
       },
     }.to_json
   end
+  let(:expected_data) { { channel: { name: "test" } } }
+
+  before do
+    stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
+    stub_request(:any, %r{\Ahttps://(www|api).github.com/.*\z}).to_return(status: 200, body: commits, headers: {})
+    allow(Github::Status).to receive(:passed?).and_return(false)
+    allow(Github::Status).to receive(:passed?).with("678912").and_return(true)
+  end
+  load_shared_commit_data
 
   context "when the values are all valid" do
     let(:expected_response) do
