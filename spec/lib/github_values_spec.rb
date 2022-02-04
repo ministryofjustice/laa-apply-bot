@@ -2,6 +2,7 @@ require "spec_helper"
 
 describe GithubValues do
   subject(:base) { described_class.new }
+
   before { allow(ENV).to receive(:[]).and_call_original }
 
   let(:base_url) { "https://api.github.com/repos/moj/project" }
@@ -10,6 +11,7 @@ describe GithubValues do
 
   describe "#headers" do
     subject(:headers) { described_class.headers }
+
     let(:json_keys) { %i[content_type accept Authorization] }
 
     it { is_expected.to be_a Hash }
@@ -24,6 +26,7 @@ describe GithubValues do
 
   describe "#build_url" do
     subject(:build_url) { described_class.build_url(extension) }
+
     let(:extension) { "/extend" }
 
     it { is_expected.to eql("https://api.github.com/repos/moj/project/extend") }

@@ -5,6 +5,7 @@ RSpec.describe SlackApplybot::Commands::TwoFactorAuth do
     stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
     stub_request(:post, %r{\Ahttps://slack.com/api/conversations.open\z}).to_return(status: 200, body: user_body)
   end
+
   let(:expected_body) do
     {
       'ok': true,
@@ -107,6 +108,7 @@ RSpec.describe SlackApplybot::Commands::TwoFactorAuth do
           allow_any_instance_of(Encryption::Service).to receive(:decrypt).with(:any).and_return("123456789")
           allow_any_instance_of(ROTP::TOTP).to receive(:verify).with("123456").and_return(valid_token?)
         end
+
         let(:encrypted_secret) { Encryption::Service.encrypt("secret") }
         let(:otp_code) { "123456" }
 

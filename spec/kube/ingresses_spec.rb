@@ -2,6 +2,7 @@ require "rspec"
 
 describe Kube::Ingresses do
   subject(:kube_ingresses) { described_class.new(namespace) }
+
   before do
     stub_request(:get, %r{\Ahttp://api.fake.k8s.host/.*\z})
       .to_return(status: 200, body: ingress_response, headers: {})

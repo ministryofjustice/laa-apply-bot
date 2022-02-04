@@ -2,6 +2,7 @@ require "rspec"
 
 RSpec.describe Worker::TestRunLocate do
   subject(:worker) { described_class.new }
+
   before { allow(ENV).to receive(:[]).and_call_original }
 
   it { is_expected.to be_a described_class }
@@ -13,6 +14,7 @@ RSpec.describe Worker::TestRunLocate do
       stub_request(:get, %r{\Ahttps://(www|api).github.com/.*/runs.*\z})
         .to_return(status:, body: response, headers: {})
     end
+
     let(:response) { { 'total_count': 1 }.to_json }
 
     let(:status) { 200 }
@@ -83,6 +85,7 @@ RSpec.describe Worker::TestRunLocate do
 
     context "when github does not have any in progress jobs" do
       before { allow(ENV).to receive(:[]).with("GITHUB_WAIT_SECONDS").and_return(5) }
+
       let(:iteration) { 2 }
 
       let(:expected_hash) do
@@ -118,6 +121,7 @@ RSpec.describe Worker::TestRunLocate do
 
     context "when github does not respond as expected" do
       before { allow(ENV).to receive(:[]).with("GITHUB_WAIT_SECONDS").and_return(5) }
+
       let(:iteration) { 2 }
 
       let(:expected_hash) do

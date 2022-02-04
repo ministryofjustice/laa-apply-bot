@@ -18,6 +18,7 @@ describe SlackApplybot::Commands::Ages, :vcr do
     allow(Github::Status).to receive(:passed?).and_return(false)
     allow(Github::Status).to receive(:passed?).with("678912").and_return(true)
   end
+
   load_shared_commit_data
 
   context "when the values are all valid" do

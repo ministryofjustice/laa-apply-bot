@@ -2,12 +2,14 @@ require "spec_helper"
 
 RSpec.describe Portal::Names::Collator do
   subject(:collator) { described_class.new(names) }
+
   before do
     allow(Portal::Name).to receive(:new).with("TEST.NAME").and_return(one)
     allow(Portal::Name).to receive(:new).with("TEST TWO").and_return(two)
     allow(Portal::Name).to receive(:new).with("TEST").and_return(three)
     class_double(Portal::NameValidator, call: true).as_stubbed_const
   end
+
   let(:names) { "test two,test.name ,test" }
   let(:one) do
     instance_double(Portal::Name, display_name: "TEST NAME",
@@ -32,6 +34,7 @@ RSpec.describe Portal::Names::Collator do
     before do
       class_double(Portal::NameValidator, call: false).as_stubbed_const
     end
+
     subject(:unmatched_names) { collator.unmatched_names }
 
     it "returns an array of name objects" do

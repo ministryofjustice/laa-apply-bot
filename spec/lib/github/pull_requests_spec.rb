@@ -2,6 +2,7 @@ require "rspec"
 
 RSpec.describe Github::PullRequests do
   subject(:pull_requests) { described_class.new(application) }
+
   let(:application) { ApplyApplication.new }
   let(:truncated_data) do
     [

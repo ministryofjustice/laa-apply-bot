@@ -2,6 +2,7 @@ require "spec_helper"
 
 describe Portal::Messages::Failure do
   subject(:failure) { described_class.call(names) }
+
   let(:names) { %w[name1 name2] }
   let(:expected_response) do
     [

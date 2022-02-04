@@ -2,6 +2,7 @@ require "rspec"
 
 RSpec.describe Portal::NameErrorMessage do
   subject { described_class.call(names) }
+
   let(:names) { [one, two] }
   let(:one) { instance_double(Portal::Name, display_name: "TEST NAME", errors: "User TEST.NAME not known to CCMS") }
   let(:two) { instance_double(Portal::Name, display_name: "TEST TWO", errors: nil) }

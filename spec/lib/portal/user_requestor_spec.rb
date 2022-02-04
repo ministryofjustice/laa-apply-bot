@@ -3,6 +3,7 @@ require "spec_helper"
 RSpec.describe Portal::UserRequester do
   describe "initiate" do
     subject(:user_requester) { described_class.initiate(names, "channel") }
+
     let(:names) { "test1, test2, test3" }
 
     context "when all names are matched by portal" do

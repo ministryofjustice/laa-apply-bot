@@ -9,6 +9,7 @@ RSpec.describe Slack::BlockBuilder do
 
   describe "#call" do
     subject(:class_call) { described_class.call(state, **args) }
+
     let(:state) { :start }
 
     it { is_expected.to be_a Hash }
@@ -84,6 +85,7 @@ RSpec.describe Slack::BlockBuilder do
 
   describe "#start_error" do
     subject(:error_call) { described_class.start_error("this is an error message") }
+
     let(:expected_result) do
       {
         blocks:
@@ -107,6 +109,7 @@ RSpec.describe Slack::BlockBuilder do
 
   describe "#timeout_error" do
     subject(:error_call) { described_class.timeout_error }
+
     let(:expected_result) do
       {
         blocks:

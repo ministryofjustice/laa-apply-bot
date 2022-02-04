@@ -2,6 +2,7 @@ require "spec_helper"
 
 describe ApplyInstance do
   subject(:application_instance) { described_class.new(level) }
+
   let(:level) { "live" }
 
   it { is_expected.to be_a described_class }

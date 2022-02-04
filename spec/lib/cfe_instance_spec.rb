@@ -5,6 +5,7 @@ STAGING_URL = "https://check-financial-eligibility-staging.apps.live-1.cloud-pla
 
 describe CfeInstance do
   subject(:application_instance) { described_class.new(level) }
+
   let(:level) { "live" }
 
   it { is_expected.to be_a described_class }

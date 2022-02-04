@@ -20,6 +20,7 @@ describe "Sinatra App" do
       allow(ENV).to receive(:[]).with("BUILD_TAG").and_return(build_tag)
       get "/ping"
     end
+
     let(:build_date) { nil }
     let(:build_tag) { nil }
 

@@ -4,6 +4,7 @@ describe SlackApplybot::Commands::DeployReminder do
   before do
     stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
   end
+
   let(:expected_body) do
     {
       'ok': true,

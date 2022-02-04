@@ -2,6 +2,7 @@ require "spec_helper"
 
 RSpec.describe Portal::Messages::Success do
   subject(:success) { described_class.call(script) }
+
   let(:script) { "contents of script" }
   let(:expected_response) do
     [

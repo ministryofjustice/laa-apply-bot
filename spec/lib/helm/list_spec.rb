@@ -3,6 +3,7 @@ require "spec_helper"
 RSpec.describe Helm::List do
   describe "#call" do
     subject(:call) { described_class.call }
+
     let(:github_url) { "https://api.github.com/repos/moj/project-app" }
     let(:truncated_branch_data) do
       [

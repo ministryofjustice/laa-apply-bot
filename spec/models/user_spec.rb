@@ -3,11 +3,13 @@ require "models/user"
 
 describe User, type: :model do
   subject(:user) { described_class.find_or_create_by!(slack_id: "fake_id") }
+
   it { is_expected.to validate_presence_of(:slack_id) }
   it { is_expected.to validate_uniqueness_of(:slack_id) }
 
   describe "#otp_secret=" do
     before { user.otp_secret = "secret" }
+
     it "records an encrypted string" do
       expect(user.reload.encrypted_2fa_secret).to_not eql "secret"
     end

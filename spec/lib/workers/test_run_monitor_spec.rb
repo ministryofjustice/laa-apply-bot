@@ -7,6 +7,7 @@ describe Worker::TestRunMonitor do
 
   describe ".perform" do
     subject(:perform) { worker.perform(monitor_url, delay, data, web_url, timestamp) }
+
     before do
       stub_request(:any, %r{\Ahttps://(www|api).github.com/.*\z})
         .to_return(status: 200, body: response, headers: {})

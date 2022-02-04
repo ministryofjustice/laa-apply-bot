@@ -8,6 +8,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
     allow(Helm::Tidy).to receive(:call).with("hmrc").and_return(tidy_hmrc_return)
     allow(Helm::Tidy).to receive(:call).with("apply").and_return(tidy_return)
   end
+
   let(:expected_body) do
     {
       'ok': true,
@@ -140,6 +141,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
           allow_any_instance_of(ROTP::TOTP).to receive(:verify).with("123456").and_return(valid_token?)
           allow(::Helm::Delete).to receive(:call).with("ap1234").and_return(true)
         end
+
         let(:encrypted_secret) { Encryption::Service.encrypt("secret") }
         let(:command) { "delete ap1234 123456" }
 
