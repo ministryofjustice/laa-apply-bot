@@ -1,4 +1,4 @@
-require 'rspec'
+require "rspec"
 
 RSpec.describe Worker::TestRunLocate do
   subject(:worker) { described_class.new }
@@ -6,12 +6,12 @@ RSpec.describe Worker::TestRunLocate do
 
   it { is_expected.to be_a Worker::TestRunLocate }
 
-  describe '.perform' do
-    subject(:perform) { worker.perform('channel', '000.000', iteration, etag) }
+  describe ".perform" do
+    subject(:perform) { worker.perform("channel", "000.000", iteration, etag) }
 
     before do
       stub_request(:get, %r{\Ahttps://(www|api).github.com/.*/runs.*\z})
-        .to_return(status: status, body: response, headers: {})
+        .to_return(status:, body: response, headers: {})
     end
     let(:response) { { 'total_count': 1 }.to_json }
 
@@ -19,11 +19,11 @@ RSpec.describe Worker::TestRunLocate do
     let(:iteration) { 1 }
     let(:etag) { nil }
 
-    context 'when github has an in progress job' do
+    context "when github has an in progress job" do
       before do
-        allow(ENV).to receive(:[]).with('GITHUB_WAIT_SECONDS').and_return(5)
+        allow(ENV).to receive(:[]).with("GITHUB_WAIT_SECONDS").and_return(5)
         stub_request(:get, "#{GithubValues.repo_url}/actions/runs/30433642/jobs")
-          .to_return(status: status, body: job_response, headers: {})
+          .to_return(status:, body: job_response, headers: {})
       end
 
       let(:response) do
@@ -54,123 +54,123 @@ RSpec.describe Worker::TestRunLocate do
       let(:expected_hash) do
         {
           as_user: true,
-          channel: 'channel',
+          channel: "channel",
           blocks: [
             {
-              block_id: 'waiting',
+              block_id: "waiting",
               text:
                 {
                   text: ":spinner2: The tests are running.\n I'll update you on completion, or you can "\
                         "click on <#{web_url}?check_suite_focus=true|this link> for details",
-                  type: 'mrkdwn'
+                  type: "mrkdwn"
                 },
-              type: 'section'
+              type: "section"
             }
           ],
-          ts: '000.000'
+          ts: "000.000"
         }
       end
 
-      it 'sends an update command to slack with a progress message' do
+      it "sends an update command to slack with a progress message" do
         expect_any_instance_of(SendSlackMessage).to receive(:update).with(expected_hash)
         perform
       end
 
-      it 'creates a new MonitorTestRunWorker' do
+      it "creates a new MonitorTestRunWorker" do
         expect { perform }.to change(Worker::TestRunMonitor.jobs, :size).by(1)
       end
     end
 
-    context 'when github does not have any in progress jobs' do
-      before { allow(ENV).to receive(:[]).with('GITHUB_WAIT_SECONDS').and_return(5) }
+    context "when github does not have any in progress jobs" do
+      before { allow(ENV).to receive(:[]).with("GITHUB_WAIT_SECONDS").and_return(5) }
       let(:iteration) { 2 }
 
       let(:expected_hash) do
         {
           as_user: true,
-          channel: 'channel',
+          channel: "channel",
           blocks: [
             {
-              block_id: 'searching',
+              block_id: "searching",
               text:
                 {
-                  text: ':spinner2: A test run has been requested from Github. Time spent looking so far: 10 seconds',
-                  type: 'mrkdwn'
+                  text: ":spinner2: A test run has been requested from Github. Time spent looking so far: 10 seconds",
+                  type: "mrkdwn"
                 },
-              type: 'section'
+              type: "section"
             }
           ],
-          ts: '000.000'
+          ts: "000.000"
         }
       end
 
       let(:response) { { 'total_count': 0 }.to_json }
 
-      it 'sends an update command to slack with a timeout message' do
+      it "sends an update command to slack with a timeout message" do
         expect_any_instance_of(SendSlackMessage).to receive(:update).with(expected_hash)
         perform
       end
 
-      it 'creates a new TestRunLocateWorker' do
+      it "creates a new TestRunLocateWorker" do
         expect { perform }.to change(Worker::TestRunLocate.jobs, :size).by(1)
       end
     end
 
-    context 'when github does not respond as expected' do
-      before { allow(ENV).to receive(:[]).with('GITHUB_WAIT_SECONDS').and_return(5) }
+    context "when github does not respond as expected" do
+      before { allow(ENV).to receive(:[]).with("GITHUB_WAIT_SECONDS").and_return(5) }
       let(:iteration) { 2 }
 
       let(:expected_hash) do
         {
           as_user: true,
-          channel: 'channel',
+          channel: "channel",
           blocks: [
             {
-              block_id: 'searching',
+              block_id: "searching",
               text:
               {
-                text: ':spinner2: A test run has been requested from Github. Time spent looking so far: 10 seconds',
-                type: 'mrkdwn'
+                text: ":spinner2: A test run has been requested from Github. Time spent looking so far: 10 seconds",
+                type: "mrkdwn"
               },
-              type: 'section'
+              type: "section"
             }
           ],
-          ts: '000.000'
+          ts: "000.000"
         }
       end
       let(:status) { 204 }
       let(:response) { { 'unexpected_value': 0 }.to_json }
 
-      it 'sends an update command to slack with a timeout message' do
+      it "sends an update command to slack with a timeout message" do
         expect_any_instance_of(SendSlackMessage).to receive(:update).with(expected_hash)
         perform
       end
     end
 
-    describe 'when the iteration count indicates a timeout' do
-      before { allow(ENV).to receive(:[]).with('GITHUB_WAIT_SECONDS').and_return(61) }
+    describe "when the iteration count indicates a timeout" do
+      before { allow(ENV).to receive(:[]).with("GITHUB_WAIT_SECONDS").and_return(61) }
 
       let(:iteration) { 2 }
       let(:expected_hash) do
         {
           as_user: true,
-          channel: 'channel',
+          channel: "channel",
           blocks: [
             {
-              block_id: 'error',
+              block_id: "error",
               text:
                 {
                   text: ":nope: It's been over two minutes, you'll need to check github manually",
-                  type: 'mrkdwn'
+                  type: "mrkdwn"
                 },
-              type: 'section'
+              type: "section"
             }
           ],
-          ts: '000.000'
+          ts: "000.000"
         }
       end
 
-      it 'sends an update command to slack with a timeout message' do
+      it "sends an update command to slack with a timeout message" do
         expect_any_instance_of(SendSlackMessage).to receive(:update).with(expected_hash)
         perform
       end

@@ -1,6 +1,6 @@
 module Github
   class TeamMembership
-    ORG_URL = 'https://api.github.com/orgs/'.freeze
+    ORG_URL = "https://api.github.com/orgs/".freeze
     def initialize(user, group)
       @user = user
       @group = group
@@ -11,7 +11,7 @@ module Github
     end
 
     def call
-      parsed_json_data.map { |x| x['login'] }
+      parsed_json_data.map { |x| x["login"] }
     end
 
     def self.member?(user, group)

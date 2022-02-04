@@ -15,8 +15,8 @@ module Github
       #   an amount e.g. ages 6 for 6 commits per application?
       output = []
       parsed_json_data.each do |pr|
-        message = pr['commit']['message'].split("\n").first
-        output << "#{state_icon_for(pr)} #{message}" if message.start_with?('Merge')
+        message = pr["commit"]["message"].split("\n").first
+        output << "#{state_icon_for(pr)} #{message}" if message.start_with?("Merge")
         break if output.count.eql?(5)
       end
       output.join("\n")
@@ -31,10 +31,10 @@ module Github
 
     def state_icon_for(pull_request)
       if @deploy_has_succeeded
-        ':yep:'
+        ":yep:"
       else
-        @deploy_has_succeeded = Github::Status.passed?(pull_request['url'])
-        @deploy_has_succeeded ? ':yep:' : ':nope:'
+        @deploy_has_succeeded = Github::Status.passed?(pull_request["url"])
+        @deploy_has_succeeded ? ":yep:" : ":nope:"
       end
     end
   end

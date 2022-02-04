@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe SlackRubyBot::Commands::Help, :vcr do
   before do
@@ -12,7 +12,7 @@ describe SlackRubyBot::Commands::Help, :vcr do
       }
     }.to_json
   end
-  let(:channel) { 'channel' }
+  let(:channel) { "channel" }
   let(:user_input) { "#{SlackRubyBot.config.user} help" }
   let(:expected_response) do
     "*Weather Bot* - This bot tells you the weather.\n"\
@@ -33,24 +33,24 @@ describe SlackRubyBot::Commands::Help, :vcr do
   end
   # TODO: find out why the ruby-slack-bot is inserting thw weather bot output into the test response!
 
-  it 'returns the expected message' do
-    expect(message: user_input, channel: channel).to respond_with_slack_message(expected_response)
+  it "returns the expected message" do
+    expect(message: user_input, channel:).to respond_with_slack_message(expected_response)
   end
 
-  context 'when passed an explicit command' do
+  context "when passed an explicit command" do
     let(:user_input) { "#{SlackRubyBot.config.user} help details" }
     let(:expected_response) do
       "*details* - `@apply-bot <application> details <environment>` e.g. `@apply-bot cfe details staging`\n"\
         "\nShows the ping details page for the selected application and non-uat environments, "\
-        'e.g.  `@apply-bot apply details staging` or `@apply-bot cfe details production`'
+        "e.g.  `@apply-bot apply details staging` or `@apply-bot cfe details production`"
     end
 
-    it 'returns the expected message' do
-      expect(message: user_input, channel: channel).to respond_with_slack_message(expected_response)
+    it "returns the expected message" do
+      expect(message: user_input, channel:).to respond_with_slack_message(expected_response)
     end
   end
 
-  context 'when in a public channel' do
+  context "when in a public channel" do
     let(:expected_response) do
       <<~ADDUSER.chomp
         *add users* - `@apply-bot add users <comma separated names>`
@@ -59,9 +59,9 @@ describe SlackRubyBot::Commands::Help, :vcr do
         e.g. `@applybot add user BENREID` or `@applybot add users benreid, NEETADESOR`
       ADDUSER
     end
-    let(:channel) { 'shared_channel' }
-    it 'returns the expected message' do
-      expect(message: user_input, channel: channel).to respond_with_slack_message(expected_response)
+    let(:channel) { "shared_channel" }
+    it "returns the expected message" do
+      expect(message: user_input, channel:).to respond_with_slack_message(expected_response)
     end
   end
 end

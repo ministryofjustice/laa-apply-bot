@@ -1,62 +1,62 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe Portal::Messages::Success do
   subject(:success) { described_class.call(script) }
-  let(:script) { 'contents of script' }
+  let(:script) { "contents of script" }
   let(:expected_response) do
     [
       {
-        'type': 'section',
+        'type': "section",
         'text': {
-          'type': 'mrkdwn',
-          'text': 'These user names matched in CCMS'
+          'type': "mrkdwn",
+          'text': "These user names matched in CCMS"
         }
       },
       {
-        'block_id': 'user-script',
-        'type': 'section',
+        'block_id': "user-script",
+        'type': "section",
         'text': {
-          'type': 'mrkdwn',
-          'text': '```contents of script```'
+          'type': "mrkdwn",
+          'text': "```contents of script```"
         }
       },
       {
-        'type': 'section',
+        'type': "section",
         'text': {
-          'type': 'mrkdwn',
-          'text': 'Send this script to the new_user channel?'
+          'type': "mrkdwn",
+          'text': "Send this script to the new_user channel?"
         }
       },
       {
-        'block_id': 'new_user_response',
-        'type': 'actions',
+        'block_id': "new_user_response",
+        'type': "actions",
         'elements': [
           {
-            'type': 'button',
+            'type': "button",
             'text': {
-              'type': 'plain_text',
+              'type': "plain_text",
               'emoji': true,
-              'text': 'Approve'
+              'text': "Approve"
             },
-            'style': 'primary',
-            'value': 'approve'
+            'style': "primary",
+            'value': "approve"
           },
           {
-            'type': 'button',
+            'type': "button",
             'text': {
-              'type': 'plain_text',
+              'type': "plain_text",
               'emoji': true,
-              'text': 'Reject'
+              'text': "Reject"
             },
-            'style': 'danger',
-            'value': 'reject'
+            'style': "danger",
+            'value': "reject"
           }
         ]
       }
     ]
   end
 
-  it 'returns the expected blocks' do
+  it "returns the expected blocks" do
     expect(success).to eq expected_response
   end
 end

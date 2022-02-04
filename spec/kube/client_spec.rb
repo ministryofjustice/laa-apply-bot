@@ -1,4 +1,4 @@
-require 'rspec'
+require "rspec"
 
 describe Kube::Client do
   subject(:kube_client) { described_class.call }

@@ -1,12 +1,12 @@
 module ApplyService
   class AbstractClassError < RuntimeError
-    def initialize(message = 'ApplyService::Base is an abstract class and cannot be instantiated')
+    def initialize(message = "ApplyService::Base is an abstract class and cannot be instantiated")
       super(message)
     end
   end
 
   class InvalidApplicationError < RuntimeError
-    def initialize(message = 'ApplyService must have a matching _GITHUB_REPO ENV var')
+    def initialize(message = "ApplyService must have a matching _GITHUB_REPO ENV var")
       super(message)
     end
   end

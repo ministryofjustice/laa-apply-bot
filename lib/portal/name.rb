@@ -5,9 +5,9 @@ module Portal
     def initialize(name)
       @name = name
       @result = {
-        original_name: original_name,
-        display_name: display_name,
-        portal_username: portal_username,
+        original_name:,
+        display_name:,
+        portal_username:,
         portal_name_valid: nil,
         errors: nil
       }
@@ -22,7 +22,7 @@ module Portal
     end
 
     def portal_username
-      @portal_username ||= parse_name.upcase.gsub(' ', '%20')
+      @portal_username ||= parse_name.upcase.gsub(" ", "%20")
     end
 
     def display_name
