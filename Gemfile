@@ -30,9 +30,8 @@ group :development, :test do
   gem 'highline'
   gem 'pry-byebug'
   gem 'rake'
-  gem 'rubocop'
-  gem 'rubocop-rake'
-  gem 'rubocop-rspec'
+  gem 'rubocop-govuk'
+  gem 'rubocop-performance'
 end
 
 group :test do

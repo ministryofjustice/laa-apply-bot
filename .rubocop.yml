@@ -1,31 +1,6 @@
 inherit_from: .rubocop_todo.yml
 
-AllCops:
-  DisplayCopNames: true
-  TargetRubyVersion: 2.6
-  NewCops: enable
-
-Layout/LineLength:
-  Max: 120
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
-Style/Documentation:
-  Enabled: false
-
-Metrics/BlockLength:
-  Exclude:
-    - 'spec/**/*'
-
-Style/StringLiterals:
-  Exclude:
-    - './db/schema.rb'
-
-Layout/EmptyLinesAroundBlockBody:
-  Exclude:
-    - './db/schema.rb'
-
-Style/NumericLiterals:
-  Exclude:
-    - './db/schema.rb'
+inherit_gem:
+  rubocop-govuk:
+    - config/default.yml
+    - config/rspec.yml
