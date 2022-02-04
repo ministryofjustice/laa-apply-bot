@@ -33,9 +33,9 @@ module SlackApplybot
       private
 
         def display(ingresses)
-          ingresses.map do |ingress|
+          ingresses.map { |ingress|
             "<https://#{ingress}|#{ingress.gsub('-applyforlegalaid-uat', '').split('.').first}>"
-          end.join("\n")
+          }.join("\n")
         end
       end
     end

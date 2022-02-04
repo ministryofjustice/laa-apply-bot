@@ -35,7 +35,7 @@ module SlackApplybot
         include UserCommand
 
         def process_confirmation(match)
-          parts = match["expression"].split - ["confirm"]
+          parts = match["expression"].split - %w[confirm]
           if parts.empty?
             "OTP password not provided, please call as `2fa confirm 000000`"
           elsif validate_otp_part(parts[0])
