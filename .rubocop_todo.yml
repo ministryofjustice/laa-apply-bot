@@ -305,28 +305,6 @@ Style/TrailingCommaInArguments:
     - 'lib/worker/test_run_start.rb'
     - 'slack-applybot/commands/two_factor_auth.rb'
 
-# Offense count: 30
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleForMultiline.
-# SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInArrayLiteral:
-  Exclude:
-    - 'lib/helm/list.rb'
-    - 'slack-applybot/bot.rb'
-    - 'spec/commands/deploy_reminder_spec.rb'
-    - 'spec/lib/github/branches_spec.rb'
-    - 'spec/lib/github/pull_requests_spec.rb'
-    - 'spec/lib/github/team_membership_spec.rb'
-    - 'spec/lib/helm/list_spec.rb'
-    - 'spec/lib/helm/tidy_spec.rb'
-    - 'spec/lib/portal/messages/failure_spec.rb'
-    - 'spec/lib/portal/messages/success_spec.rb'
-    - 'spec/lib/portal/name_validator_spec.rb'
-    - 'spec/lib/slack/block_builder_spec.rb'
-    - 'spec/lib/workers/test_run_locate_spec.rb'
-    - 'spec/lib/workers/test_run_start_spec.rb'
-    - 'spec/support/commit.rb'
-
 # Offense count: 110
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyleForMultiline.

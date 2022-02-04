@@ -25,7 +25,7 @@ describe Portal::Messages::Failure do
           'type': "mrkdwn",
           'text': "You will need to confirm their account names and re-submit"
         }
-      }
+      },
     ]
   end
 

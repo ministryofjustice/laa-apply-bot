@@ -30,7 +30,7 @@ describe SlackApplybot::Commands::DeployReminder do
             'title': "Job Number",
             'value': "5009",
             'short': true
-          }
+          },
         ],
         'actions': [
           {
@@ -39,9 +39,9 @@ describe SlackApplybot::Commands::DeployReminder do
             'type': "button",
             'style': "",
             'url': "https://circleci.com/workflow-run/1234"
-          }
+          },
         ]
-      }
+      },
     ]
   end
 

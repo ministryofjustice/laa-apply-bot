@@ -60,7 +60,7 @@ module SlackApplybot
         desc: "`@apply-bot 2fa <instruction>` e.g. `@apply-bot 2fa setup`",
         long_desc: "This will enable two-factor authentication for you to issue potentially " \
                    "destructive commands, currently supported instructions are: `setup`, `confirm`"
-      }
+      },
     ].freeze
 
     help do

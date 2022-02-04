@@ -33,7 +33,7 @@ RSpec.describe Worker::TestRunLocate do
             {
               'html_url': "https://github.com/repos/#{ENV['GITHUB_OWNER']}/#{ENV['GITHUB_REPO']}/actions/runs/30433642",
               'jobs_url': "#{GithubValues.repo_url}/actions/runs/30433642/jobs"
-            }
+            },
           ]
         }.to_json
       end
@@ -44,7 +44,7 @@ RSpec.describe Worker::TestRunLocate do
           'jobs': [
             {
               'html_url': web_url
-            }
+            },
           ]
         }.to_json
       end
@@ -65,7 +65,7 @@ RSpec.describe Worker::TestRunLocate do
                   type: "mrkdwn"
                 },
               type: "section"
-            }
+            },
           ],
           ts: "000.000"
         }
@@ -98,7 +98,7 @@ RSpec.describe Worker::TestRunLocate do
                   type: "mrkdwn"
                 },
               type: "section"
-            }
+            },
           ],
           ts: "000.000"
         }
@@ -133,7 +133,7 @@ RSpec.describe Worker::TestRunLocate do
                 type: "mrkdwn"
               },
               type: "section"
-            }
+            },
           ],
           ts: "000.000"
         }
@@ -164,7 +164,7 @@ RSpec.describe Worker::TestRunLocate do
                   type: "mrkdwn"
                 },
               type: "section"
-            }
+            },
           ],
           ts: "000.000"
         }

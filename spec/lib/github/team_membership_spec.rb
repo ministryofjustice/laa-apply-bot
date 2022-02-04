@@ -21,7 +21,7 @@ RSpec.describe Github::TeamMembership do
         "login" => "colleague",
         "id" => "654321",
         "type" => "user"
-      }
+      },
 
     ].to_json
   end

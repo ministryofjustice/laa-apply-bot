@@ -12,7 +12,7 @@ RSpec.describe Github::Branches do
   let(:truncated_data) do
     [
       { "name" => "ap-1234" },
-      { "name" => "ap-5432" }
+      { "name" => "ap-5432" },
     ]
   end
 

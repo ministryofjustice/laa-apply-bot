@@ -80,7 +80,7 @@ RSpec.describe Portal::NameValidator do
       "contactUserId" => 47_096,
       "contacts" => [
         { "id" => 3_043_807, "name" => "NAME.ONE" },
-        { "id" => 3_178_792, "name" => "DJXANKAZTAL" }
+        { "id" => 3_178_792, "name" => "DJXANKAZTAL" },
       ],
       "feeEarners" => [],
       "providerOffices" => [{ "id" => "81333", "name" => "LOCAL LAW & CO LTD-8B869F" }]

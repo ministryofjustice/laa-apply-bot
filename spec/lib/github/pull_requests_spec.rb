@@ -12,7 +12,7 @@ RSpec.describe Github::PullRequests do
   let(:truncated_data) do
     [
       { "head" => { "ref" => "ap-1234" } },
-      { "head" => { "ref" => "ap-5432" } }
+      { "head" => { "ref" => "ap-5432" } },
     ]
   end
 

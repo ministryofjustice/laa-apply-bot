@@ -50,9 +50,9 @@ RSpec.describe Portal::Messages::Success do
             },
             'style': "danger",
             'value': "reject"
-          }
+          },
         ]
-      }
+      },
     ]
   end
 

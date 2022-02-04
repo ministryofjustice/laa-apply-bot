@@ -54,7 +54,7 @@ RSpec.describe Worker::TestRunStart do
                   type: "mrkdwn"
                 },
               type: "section"
-            }
+            },
           ]
         }
       end
