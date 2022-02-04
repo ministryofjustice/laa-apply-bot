@@ -51,11 +51,11 @@ RSpec.describe Worker::TestRunStart do
               text:
                 {
                   text: "Could not trigger job on Github ```422 Unprocessable Entity```",
-                  type: "mrkdwn"
+                  type: "mrkdwn",
                 },
-              type: "section"
+              type: "section",
             },
-          ]
+          ],
         }
       end
 

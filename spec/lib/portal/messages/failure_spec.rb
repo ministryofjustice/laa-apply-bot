@@ -9,22 +9,22 @@ describe Portal::Messages::Failure do
         'type': "section",
         'text': {
           'type': "mrkdwn",
-          'text': "The following name(s) could not be matched in CCMS"
-        }
+          'text': "The following name(s) could not be matched in CCMS",
+        },
       },
       {
         'type': "section",
         'text': {
           'type': "mrkdwn",
-          'text': "```name1\nname2```"
-        }
+          'text': "```name1\nname2```",
+        },
       },
       {
         'type': "section",
         'text': {
           'type': "mrkdwn",
-          'text': "You will need to confirm their account names and re-submit"
-        }
+          'text': "You will need to confirm their account names and re-submit",
+        },
       },
     ]
   end

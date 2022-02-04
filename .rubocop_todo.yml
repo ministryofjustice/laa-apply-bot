@@ -305,13 +305,6 @@ Style/TrailingCommaInArguments:
     - 'lib/worker/test_run_start.rb'
     - 'slack-applybot/commands/two_factor_auth.rb'
 
-# Offense count: 110
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleForMultiline.
-# SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInHashLiteral:
-  Enabled: false
-
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: WordRegex.

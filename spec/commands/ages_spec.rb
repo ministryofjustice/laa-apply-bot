@@ -14,8 +14,8 @@ describe SlackApplybot::Commands::Ages, :vcr do
     {
       'ok': true,
       'channel': {
-        name: channel
-      }
+        name: channel,
+      },
     }.to_json
   end
 

@@ -11,8 +11,8 @@ describe SlackApplybot::Commands::UatUrl, :vcr do
     {
       'ok': true,
       'channel': {
-        name: channel
-      }
+        name: channel,
+      },
     }.to_json
   end
 

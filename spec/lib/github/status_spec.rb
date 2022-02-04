@@ -10,7 +10,7 @@ RSpec.describe Github::Status do
   let(:url) { "https://api.github.com/repos/moj/project/commits/123456" }
   let(:expected) do
     {
-      "state" => "pending"
+      "state" => "pending",
     }.to_json
   end
   load_shared_commit_data

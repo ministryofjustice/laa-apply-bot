@@ -9,23 +9,23 @@ RSpec.describe Portal::Messages::Success do
         'type': "section",
         'text': {
           'type': "mrkdwn",
-          'text': "These user names matched in CCMS"
-        }
+          'text': "These user names matched in CCMS",
+        },
       },
       {
         'block_id': "user-script",
         'type': "section",
         'text': {
           'type': "mrkdwn",
-          'text': "```contents of script```"
-        }
+          'text': "```contents of script```",
+        },
       },
       {
         'type': "section",
         'text': {
           'type': "mrkdwn",
-          'text': "Send this script to the new_user channel?"
-        }
+          'text': "Send this script to the new_user channel?",
+        },
       },
       {
         'block_id': "new_user_response",
@@ -36,22 +36,22 @@ RSpec.describe Portal::Messages::Success do
             'text': {
               'type': "plain_text",
               'emoji': true,
-              'text': "Approve"
+              'text': "Approve",
             },
             'style': "primary",
-            'value': "approve"
+            'value': "approve",
           },
           {
             'type': "button",
             'text': {
               'type': "plain_text",
               'emoji': true,
-              'text': "Reject"
+              'text': "Reject",
             },
             'style': "danger",
-            'value': "reject"
+            'value': "reject",
           },
-        ]
+        ],
       },
     ]
   end

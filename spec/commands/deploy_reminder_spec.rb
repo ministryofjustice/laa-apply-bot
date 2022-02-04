@@ -8,8 +8,8 @@ describe SlackApplybot::Commands::DeployReminder do
     {
       'ok': true,
       'channel': {
-        name: "channel"
-      }
+        name: "channel",
+      },
     }.to_json
   end
   let(:user_input) do
@@ -24,12 +24,12 @@ describe SlackApplybot::Commands::DeployReminder do
           {
             'title': "Project",
             'value': "check-financial-eligibility",
-            'short': true
+            'short': true,
           },
           {
             'title': "Job Number",
             'value': "5009",
-            'short': true
+            'short': true,
           },
         ],
         'actions': [
@@ -38,9 +38,9 @@ describe SlackApplybot::Commands::DeployReminder do
             'text': "Visit Workflow",
             'type': "button",
             'style': "",
-            'url': "https://circleci.com/workflow-run/1234"
+            'url': "https://circleci.com/workflow-run/1234",
           },
-        ]
+        ],
       },
     ]
   end

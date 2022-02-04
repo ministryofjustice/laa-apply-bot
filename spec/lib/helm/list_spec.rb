@@ -34,7 +34,7 @@ RSpec.describe Helm::List do
           "updated" => "2021-02-10 14:31:22.723418433 +0000 UTC",
           "status" => "deployed",
           "chart" => "my-fake-chart-0.1.0",
-          "app_version" => "1.16.0"
+          "app_version" => "1.16.0",
         },
         {
           "name" => "apply-ap-2345-second-name",
@@ -43,7 +43,7 @@ RSpec.describe Helm::List do
           "updated" => "2021-02-10 11:52:16.566921696 +0000 UTC",
           "status" => "deployed",
           "chart" => "my-fake-chart-0.1.0",
-          "app_version" => "1.16.0"
+          "app_version" => "1.16.0",
         },
       ].to_json
     end

@@ -30,7 +30,7 @@ describe "Sinatra App" do
       let(:expected_json) do
         {
           "build_date" => "20150721",
-          "build_tag" => "test"
+          "build_tag" => "test",
         }
       end
 

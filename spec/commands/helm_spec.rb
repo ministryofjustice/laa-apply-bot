@@ -12,8 +12,8 @@ describe SlackApplybot::Commands::Helm, :vcr do
     {
       'ok': true,
       'channel': {
-        name: channel
-      }
+        name: channel,
+      },
     }.to_json
   end
   let(:tidy_return) do

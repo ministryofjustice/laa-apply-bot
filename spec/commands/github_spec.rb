@@ -15,8 +15,8 @@ describe SlackApplybot::Commands::Github, :vcr do
     {
       'ok': true,
       'channel': {
-        name: channel
-      }
+        name: channel,
+      },
     }.to_json
   end
   let!(:client) { SlackRubyBot::App.new.send(:client) }

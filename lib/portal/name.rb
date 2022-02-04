@@ -9,7 +9,7 @@ module Portal
         display_name:,
         portal_username:,
         portal_name_valid: nil,
-        errors: nil
+        errors: nil,
       }
     end
 

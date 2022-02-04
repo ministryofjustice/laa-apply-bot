@@ -15,12 +15,12 @@ RSpec.describe Github::TeamMembership do
       {
         "login" => "good_user",
         "id" => "123456",
-        "type" => "user"
+        "type" => "user",
       },
       {
         "login" => "colleague",
         "id" => "654321",
-        "type" => "user"
+        "type" => "user",
       },
 
     ].to_json

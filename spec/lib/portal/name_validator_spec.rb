@@ -83,7 +83,7 @@ RSpec.describe Portal::NameValidator do
         { "id" => 3_178_792, "name" => "DJXANKAZTAL" },
       ],
       "feeEarners" => [],
-      "providerOffices" => [{ "id" => "81333", "name" => "LOCAL LAW & CO LTD-8B869F" }]
+      "providerOffices" => [{ "id" => "81333", "name" => "LOCAL LAW & CO LTD-8B869F" }],
     }
   end
 
@@ -93,7 +93,7 @@ RSpec.describe Portal::NameValidator do
       "status" => 404,
       "error" => "Not Found",
       "message" => "No records found for [SARAH%20SMITH]",
-      "path" => "/api/providerDetails/SARAH%20SMITH"
+      "path" => "/api/providerDetails/SARAH%20SMITH",
     }
   end
 end

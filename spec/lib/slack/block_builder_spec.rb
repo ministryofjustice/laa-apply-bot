@@ -34,9 +34,9 @@ RSpec.describe Slack::BlockBuilder do
               text:
                 {
                   type: "mrkdwn",
-                  text: ":spinner2: A test run has been requested from Github"
-                }
-            }]
+                  text: ":spinner2: A test run has been requested from Github",
+                },
+            }],
         }
       end
 
@@ -64,10 +64,10 @@ RSpec.describe Slack::BlockBuilder do
                 {
                   type: "mrkdwn",
                   text: ":spinner2: The tests are running.\n I'll update you on completion, "\
-                        "or you can click on <http://github.com/test|this link> for details"
-                }
+                        "or you can click on <http://github.com/test|this link> for details",
+                },
             },
-          ]
+          ],
         }
       end
 
@@ -94,10 +94,10 @@ RSpec.describe Slack::BlockBuilder do
               text:
                 {
                   type: "mrkdwn",
-                  text: "Could not trigger job on Github ```this is an error message```"
-                }
+                  text: "Could not trigger job on Github ```this is an error message```",
+                },
             },
-          ]
+          ],
       }
     end
 
@@ -117,10 +117,10 @@ RSpec.describe Slack::BlockBuilder do
               text:
                 {
                   type: "mrkdwn",
-                  text: ":nope: It's been over two minutes, you'll need to check github manually"
-                }
+                  text: ":nope: It's been over two minutes, you'll need to check github manually",
+                },
             },
-          ]
+          ],
       }
     end
 

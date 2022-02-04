@@ -9,7 +9,7 @@ module SlackApplybot
         result = {
           channel: data.channel,
           channel_name: SendSlackMessage.new.conversations_info(channel: data.channel)["channel"]["name"],
-          proposal: "Find slack id for #{match[1]} and remind them to deploy #{app_name(match)} to production"
+          proposal: "Find slack id for #{match[1]} and remind them to deploy #{app_name(match)} to production",
         }
         SlackRubyBot::Client.logger.warn(result.to_json)
       end

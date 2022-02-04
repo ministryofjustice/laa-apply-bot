@@ -39,7 +39,7 @@ class App < Sinatra::Base
   get "/ping" do
     {
       build_date: ENV["BUILD_DATE"] || "Not Available",
-      build_tag: ENV["BUILD_TAG"] || "Not Available"
+      build_tag: ENV["BUILD_TAG"] || "Not Available",
     }.to_json
   end
 
@@ -88,7 +88,7 @@ class App < Sinatra::Base
   def new_user_response_json(message)
     {
       'replace_original': "true",
-      'text': message
+      'text': message,
     }
   end
 

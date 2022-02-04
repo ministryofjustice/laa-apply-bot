@@ -10,16 +10,16 @@ RSpec.describe SlackApplybot::Commands::TwoFactorAuth do
       'ok': true,
       'channel': {
         name: channel,
-        is_im: is_direct_message?
-      }
+        is_im: is_direct_message?,
+      },
     }.to_json
   end
   let(:user_body) do
     {
       'ok': true,
       'channel': {
-        id: "A0000B1CDEF"
-      }
+        id: "A0000B1CDEF",
+      },
     }.to_json
   end
   let(:channel) { "channel" }
@@ -29,7 +29,7 @@ RSpec.describe SlackApplybot::Commands::TwoFactorAuth do
   let(:expected_hash) do
     {
       channel: channel,
-      text: expected_message
+      text: expected_message,
     }
   end
   let!(:client) { SlackRubyBot::App.new.send(:client) }

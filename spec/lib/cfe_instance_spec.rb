@@ -46,7 +46,7 @@ describe CfeInstance do
         {
           "build_date" => "2020-05-26T09:46:42+0100",
           "build_tag" => "app-a1bd774c68094caa2a7f4b3d505e826a0aa68dc7",
-          "app_branch" => "master"
+          "app_branch" => "master",
         }
       end
 

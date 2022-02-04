@@ -15,7 +15,7 @@ RSpec.describe Portal::Name do
           display_name: "TEST.NAME",
           portal_username: "TEST.NAME",
           portal_name_valid: nil,
-          errors: nil
+          errors: nil,
         }
       end
 
@@ -30,7 +30,7 @@ RSpec.describe Portal::Name do
           display_name: "TEST NAME",
           portal_username: "TEST%20NAME",
           portal_name_valid: nil,
-          errors: nil
+          errors: nil,
         }
       end
 
@@ -45,7 +45,7 @@ RSpec.describe Portal::Name do
           display_name: "TEST.NAME@EXAMPLE.COM",
           portal_username: "TEST.NAME@EXAMPLE.COM",
           portal_name_valid: nil,
-          errors: nil
+          errors: nil,
         }
       end
 
@@ -60,7 +60,7 @@ RSpec.describe Portal::Name do
           display_name: "TEST.NAME@EXAMPLE.COM",
           portal_username: "TEST.NAME@EXAMPLE.COM",
           portal_name_valid: nil,
-          errors: nil
+          errors: nil,
         }
       end
 

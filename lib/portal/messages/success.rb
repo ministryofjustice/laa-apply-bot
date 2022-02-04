@@ -38,10 +38,10 @@ module Portal
           'text': {
             'type': "plain_text",
             'emoji': true,
-            'text': text.capitalize
+            'text': text.capitalize,
           },
           'style': style,
-          'value': text.downcase
+          'value': text.downcase,
         }
       end
 
