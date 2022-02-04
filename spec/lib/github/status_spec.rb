@@ -13,6 +13,7 @@ RSpec.describe Github::Status do
       "state" => "pending",
     }.to_json
   end
+
   load_shared_commit_data
 
   describe "#call" do

@@ -56,7 +56,7 @@ describe Kube::Ingresses do
     JSON
   end
 
-  it { is_expected.to be_a Kube::Ingresses }
+  it { is_expected.to be_a described_class }
 
   describe "#call" do
     subject(:call) { kube_ingresses.call }

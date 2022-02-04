@@ -7,7 +7,7 @@ describe CfeInstance do
   subject(:application_instance) { described_class.new(level) }
   let(:level) { "live" }
 
-  it { is_expected.to be_a CfeInstance }
+  it { is_expected.to be_a described_class }
 
   describe "url" do
     subject(:url) { application_instance.url }

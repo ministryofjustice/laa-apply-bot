@@ -21,6 +21,7 @@ RSpec.describe Portal::NameValidator do
     let(:response_body) { sarah_smith_response.to_json }
     let(:http_status) { 200 }
     let(:user) { Portal::Name.new("test.user") }
+
     describe "#call" do
       subject(:call_validate) { validate.call }
 
@@ -56,6 +57,7 @@ RSpec.describe Portal::NameValidator do
         context "other non-200 response" do
           let(:response_body) { "" }
           let(:http_status) { 505 }
+
           it "responds false" do
             expect(subject).to be false
           end

@@ -6,7 +6,7 @@ describe GithubValues do
 
   let(:base_url) { "https://api.github.com/repos/moj/project" }
 
-  it { is_expected.to be_a GithubValues }
+  it { is_expected.to be_a described_class }
 
   describe "#headers" do
     subject(:headers) { described_class.headers }

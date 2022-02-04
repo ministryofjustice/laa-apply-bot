@@ -4,7 +4,7 @@ RSpec.describe SendSlackMessage do
   subject(:slack) { described_class.new }
   before { allow(ENV).to receive(:[]).and_call_original }
 
-  it { is_expected.to be_a SendSlackMessage }
+  it { is_expected.to be_a described_class }
 
   context "when a slack token is not set" do
     before { allow(ENV).to receive(:[]).with("SLACK_API_TOKEN").and_return(nil) }

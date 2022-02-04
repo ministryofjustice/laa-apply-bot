@@ -5,7 +5,7 @@ RSpec.describe Slack::BlockBuilder do
 
   let(:args) { {} }
 
-  it { is_expected.to be_a Slack::BlockBuilder }
+  it { is_expected.to be_a described_class }
 
   describe "#call" do
     subject(:class_call) { described_class.call(state, **args) }

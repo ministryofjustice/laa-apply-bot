@@ -60,6 +60,7 @@ describe SlackRubyBot::Commands::Help, :vcr do
       ADDUSER
     end
     let(:channel) { "shared_channel" }
+
     it "returns the expected message" do
       expect(message: user_input, channel:).to respond_with_slack_message(expected_response)
     end

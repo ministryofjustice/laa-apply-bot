@@ -25,11 +25,13 @@ describe User, type: :model do
 
     context "when the passed value matches the decrypted version" do
       let(:value) { "secret" }
+
       it { expect(user.reload.otp_secret_valid?(value)).to be true }
     end
 
     context "when the encrypted value is different" do
       let(:value) { "public" }
+
       it { expect(user.reload.otp_secret_valid?(value)).to be false }
     end
   end

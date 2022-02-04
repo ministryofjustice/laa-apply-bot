@@ -24,6 +24,7 @@ RSpec.describe Portal::OutputChannel do
 
     context "when the channel is not the recorded output channel" do
       let(:channel) { "channel" }
+
       it { is_expected.to be false }
     end
   end

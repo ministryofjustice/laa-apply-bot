@@ -35,6 +35,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
 
     context "when the command is missing" do
       let(:missing_command_response) { SlackRubyBot::Commands::Support::Help.instance.command_full_desc("helm") }
+
       it "returns the expected message" do
         expect(message: user_input, channel:).to respond_with_slack_message(missing_command_response)
       end
@@ -43,6 +44,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
     context "when the command is unsupported" do
       let(:command) { "destroy" }
       let(:unsupported_command_response) { "You called `helm` with `destroy`. This is not supported." }
+
       it "returns the expected message" do
         expect(message: user_input, channel:).to respond_with_slack_message(unsupported_command_response)
       end
@@ -51,6 +53,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
     context "when the command is list" do
       let(:command) { "list" }
       let(:command_response) { "ap1234\nap2345" }
+
       it "returns the expected message" do
         expect(message: user_input, channel:).to respond_with_slack_message(command_response)
       end
@@ -58,6 +61,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
       context "and has a context listed" do
         let(:command) { "list hmrc" }
         let(:command_response) { "ap3456\nap4567" }
+
         it "returns the expected message" do
           expect(message: user_input, channel:).to respond_with_slack_message(command_response)
         end
@@ -66,6 +70,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
       context "and has an invalid context listed" do
         let(:command) { "list portal" }
         let(:command_response) { "`portal` is not a valid context, you can only use `apply, cfe, hmrc, and lfa`" }
+
         it "returns the expected message" do
           expect(message: user_input, channel:).to respond_with_slack_message(command_response)
         end
@@ -91,6 +96,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
       context "and has an invalid context listed" do
         let(:command) { "tidy portal" }
         let(:command_response) { "`portal` is not a valid context, you can only use `apply, cfe, hmrc, and lfa`" }
+
         it "returns the expected message" do
           expect(message: user_input, channel:).to respond_with_slack_message(command_response)
         end
@@ -103,6 +109,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
         let(:command_response) do
           "Unable to delete - insufficient data, please call as `helm delete name-of-release 000000`"
         end
+
         it "returns the expected message" do
           expect(message: user_input, channel:).to respond_with_slack_message(command_response)
         end
@@ -111,6 +118,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
       context "and no OTP is provided" do
         let(:command) { "delete ap1234" }
         let(:command_response) { "OTP password not provided, please call as `helm delete name-of-release 000000`" }
+
         it "returns the expected message" do
           expect(message: user_input, channel:).to respond_with_slack_message(command_response)
         end
@@ -119,6 +127,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
       context "and no OTP is provided" do
         let(:command) { "delete ap1234" }
         let(:command_response) { "OTP password not provided, please call as `helm delete name-of-release 000000`" }
+
         it "returns the expected message" do
           expect(message: user_input, channel:).to respond_with_slack_message(command_response)
         end
@@ -137,6 +146,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
         context "and it is correct" do
           let(:command_response) { "ap1234 deleted" }
           let(:valid_token?) { true }
+
           it "returns the expected message" do
             expect(message: user_input, channel:).to respond_with_slack_message(command_response)
           end
@@ -145,6 +155,7 @@ describe SlackApplybot::Commands::Helm, :vcr do
         context "but it is incorrect" do
           let(:command_response) { "OTP password did not match, please check your authenticator app" }
           let(:valid_token?) { false }
+
           it "returns the expected message" do
             expect(message: user_input, channel:).to respond_with_slack_message(command_response)
           end
