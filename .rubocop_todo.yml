@@ -55,26 +55,6 @@ RSpec/ContextWording:
     - 'spec/lib/portal/name_validator_spec.rb'
     - 'spec/lib/token_generator_spec.rb'
 
-# Offense count: 16
-# Cop supports --auto-correct.
-# Configuration parameters: SkipBlocks, EnforcedStyle.
-# SupportedStyles: described_class, explicit
-RSpec/DescribedClass:
-  Exclude:
-    - 'spec/bot_spec.rb'
-    - 'spec/kube/ingresses_spec.rb'
-    - 'spec/lib/apply_application_spec.rb'
-    - 'spec/lib/apply_instance_spec.rb'
-    - 'spec/lib/cfe_application_spec.rb'
-    - 'spec/lib/cfe_instance_spec.rb'
-    - 'spec/lib/date_display_spec.rb'
-    - 'spec/lib/github_values_spec.rb'
-    - 'spec/lib/send_slack_message_spec.rb'
-    - 'spec/lib/slack/block_builder_spec.rb'
-    - 'spec/lib/token_generator_spec.rb'
-    - 'spec/lib/workers/test_run_locate_spec.rb'
-    - 'spec/lib/workers/test_run_monitor_spec.rb'
-    - 'spec/lib/workers/test_run_start_spec.rb'
 
 # Offense count: 22
 # Cop supports --auto-correct.
