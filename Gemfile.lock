@@ -199,7 +199,7 @@ GEM
       netrc (~> 0.8)
     rexml (3.2.5)
     rotp (6.2.0)
-    rqrcode (2.1.0)
+    rqrcode (2.1.1)
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
