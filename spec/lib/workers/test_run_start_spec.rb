@@ -7,7 +7,7 @@ RSpec.describe Worker::TestRunStart do
     stub_user = Struct.new(:id, :real_name)
     stub_request(:post, %r{\Ahttps://(www|api).github.com/.*/dispatches\z}).to_return(response)
     allow_any_instance_of(SendSlackMessage).to receive(:user)
-      .and_return(stub_user.new(id: 'AB123CDEF', real_name: 'test user'))
+      .and_return(stub_user.new({ id: 'AB123CDEF', real_name: 'test user' }))
     allow_any_instance_of(SendSlackMessage).to receive(:generic).and_return({ ts: '1595341466.004300' })
   end
 
