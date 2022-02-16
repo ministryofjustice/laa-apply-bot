@@ -116,6 +116,11 @@ spec:
             secretKeyRef:
               name: apply-bot-secrets
               key: KUBE_TOKEN_LFA
+        - name: SESSION_KEY
+          valueFrom:
+            secretKeyRef:
+              name: apply-bot-secrets
+              key: SESSION_KEY
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
