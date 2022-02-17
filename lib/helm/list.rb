@@ -2,9 +2,13 @@ module Helm
   class List
     def self.call(context = 'apply')
       context = "--kube-context #{context}-context"
+      SlackRubyBot::Client.logger.warn("Helm::List.call with context: #{context}")
       releases = JSON.parse(`helm list #{context} -o json`, symbolize_names: true)
+      SlackRubyBot::Client.logger.warn('Releases populated')
       values = releases.pluck(:name, :status, :updated)
+      SlackRubyBot::Client.logger.warn('Values populated')
       result = "#{header}\n#{values.map { |row| parse_row(row) }.join("\n")}"
+      SlackRubyBot::Client.logger.warn('Result populated')
       "```#{result}```"
     end
 
