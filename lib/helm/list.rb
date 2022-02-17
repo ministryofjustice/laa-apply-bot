@@ -3,10 +3,8 @@ module Helm
     def self.call(context = 'apply')
       context = "--kube-context #{context}-context"
       SlackRubyBot::Client.logger.warn("Helm::List.call with context: #{context}")
-      raw_output = `helm list #{context} -o json`
-      SlackRubyBot::Client.logger.warn('raw_output populated')
-      releases = JSON.parse(raw_output, symbolize_names: true)
-      SlackRubyBot::Client.logger.warn('Releases populated')
+      raw_output = helm_list_as_json(context)
+      releases = parse_releases(raw_output)
       values = releases.pluck(:name, :status, :updated)
       SlackRubyBot::Client.logger.warn('Values populated')
       result = "#{header}\n#{values.map { |row| parse_row(row) }.join("\n")}"
@@ -18,6 +16,18 @@ module Helm
       include GithubBits
 
       private
+
+      def helm_list_as_json(context)
+        raw_data = `helm list #{context} -o json`
+        SlackRubyBot::Client.logger.warn('raw_output populated')
+        raw_data
+      end
+
+      def parse_releases(raw_output)
+        result = JSON.parse(raw_output, symbolize_names: true)
+        SlackRubyBot::Client.logger.warn('Releases populated')
+        result
+      end
 
       def header
         # "#{parse_name('Name')}#{parse_state('Status')}#{'Date'.ljust(11)}#{parse_data('Branch')}#{parse_data('PR')}"
