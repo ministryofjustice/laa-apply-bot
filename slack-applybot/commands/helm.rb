@@ -17,7 +17,6 @@ module SlackApplybot
                   else
                     "You called `helm` with `#{match['expression']}`. This is not supported."
                   end
-        SlackRubyBot::Client.logger.warn('About to send message')
         client.say(channel: data.channel, text: message)
       end
 
@@ -45,7 +44,6 @@ module SlackApplybot
           command = parts[0].capitalize
           context = parts[1] || 'apply'
           if validate_context(context)
-            SlackRubyBot::Client.logger.warn("Calling #{command} with context of #{context}")
             "::Helm::#{command}".constantize.call(context)
           else
             "`#{context}` is not a valid context, you can only use `#{VALID_CONTEXTS.to_sentence}`"
