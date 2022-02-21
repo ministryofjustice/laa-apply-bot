@@ -1,5 +1,5 @@
 sidekiq_config = { url: ENV['JOB_WORKER_URL'] }
-
+Sidekiq.strict_args!
 Sidekiq.configure_server do |config|
   config.redis = sidekiq_config
 end
