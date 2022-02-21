@@ -40,9 +40,9 @@ module SlackApplybot
         end
 
         def process_command(match)
-          parts = match['expression'].split
+          parts = match["expression"].split
           command = parts[0].capitalize
-          context = parts[1] || 'apply'
+          context = parts[1] || "apply"
           if validate_context(context)
             "::Helm::#{command}".constantize.call(context)
           else

@@ -5,7 +5,7 @@ RSpec.shared_examples "the channel is invalid" do
   let(:channel) { "dangerous" }
   let(:expected_response) { "Sorry <@user>, I don't understand that command!" }
   let(:expected_hash) do
-    { channel: channel, as_user: true, text: "Sorry <@user>, I don't understand that command!" }
+    { channel:, as_user: true, text: "Sorry <@user>, I don't understand that command!" }
   end
 
   it "raises a message-sending error" do

@@ -29,7 +29,7 @@ RSpec.describe SlackApplybot::Commands::TwoFactorAuth do
   let(:user_input) { "#{SlackRubyBot.config.user} 2fa #{command}" }
   let(:expected_hash) do
     {
-      channel: channel,
+      channel:,
       text: expected_message,
     }
   end

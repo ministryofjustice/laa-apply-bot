@@ -15,17 +15,10 @@ describe Worker::TestRunMonitor do
 
     let(:monitor_url) { "https://api.github.com/repos/moj/project/job/123" }
     let(:delay) { 45 }
-<<<<<<< HEAD
-    let(:data) { { 'channel' => 'test', 'user' => 'test' } }
-    let(:web_url) { 'https://www.github.com/repos/moj/project/job/123' }
-    let(:timestamp) { '1595341466.004300' }
-    let(:response) { { 'status': 'in_progress' }.to_json }
-=======
-    let(:data) { { channel: "test", user: "test" } }
+    let(:data) { { "channel" => "test", "user" => "test" } }
     let(:web_url) { "https://www.github.com/repos/moj/project/job/123" }
     let(:timestamp) { "1595341466.004300" }
-    let(:response) { { 'status': "in_progress" }.to_json }
->>>>>>> 67c58c9 (Address Style/StringLiterals)
+    let(:response) { { "status": "in_progress" }.to_json }
 
     context "when the job has not completed" do
       it "creates a new MonitorTestRunWorker" do
@@ -34,7 +27,7 @@ describe Worker::TestRunMonitor do
     end
 
     context "when the job has completed" do
-      let(:response) { { 'status': "completed" }.to_json }
+      let(:response) { { "status": "completed" }.to_json }
 
       it "updates the slack message" do
         expect_any_instance_of(SendSlackMessage).to receive(:update).once
