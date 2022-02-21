@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/vcr/vcr.git
+  revision: 7ac8292c289ca98dcb4254b59e1ee29e2205d8b3
+  specs:
+    vcr (6.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -287,7 +293,6 @@ GEM
     validate_url (1.0.13)
       activemodel (>= 3.0.0)
       public_suffix
-    vcr (6.0.0)
     webfinger (1.2.0)
       activesupport
       httpclient (>= 2.4)
@@ -337,7 +342,7 @@ DEPENDENCIES
   slack-ruby-bot
   timecop
   tzinfo-data
-  vcr
+  vcr!
   webmock
 
 RUBY VERSION
