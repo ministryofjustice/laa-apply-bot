@@ -11,13 +11,13 @@ module SlackRubyBot
                else
                  text_when_channel_is_shared
                end
-        client.say(channel: data.channel, text: text)
+        client.say(channel: data.channel, text:)
       end
 
       class << self
         include ChannelValidity
 
-        private
+      private
 
         def text_when_channel_is_public
           if @command.present?

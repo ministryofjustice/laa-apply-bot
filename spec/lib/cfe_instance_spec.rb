@@ -5,9 +5,10 @@ STAGING_URL = "https://check-financial-eligibility-staging.apps.live-1.cloud-pla
 
 describe CfeInstance do
   subject(:application_instance) { described_class.new(level) }
+
   let(:level) { "live" }
 
-  it { is_expected.to be_a CfeInstance }
+  it { is_expected.to be_a described_class }
 
   describe "url" do
     subject(:url) { application_instance.url }
@@ -46,7 +47,7 @@ describe CfeInstance do
         {
           "build_date" => "2020-05-26T09:46:42+0100",
           "build_tag" => "app-a1bd774c68094caa2a7f4b3d505e826a0aa68dc7",
-          "app_branch" => "master"
+          "app_branch" => "master",
         }
       end
 

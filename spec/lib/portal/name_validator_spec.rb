@@ -21,11 +21,12 @@ RSpec.describe Portal::NameValidator do
     let(:response_body) { sarah_smith_response.to_json }
     let(:http_status) { 200 }
     let(:user) { Portal::Name.new("test.user") }
+
     describe "#call" do
       subject(:call_validate) { validate.call }
 
       it do
-        expect { call_validate }.to change { user.portal_name_valid }.to true
+        expect { call_validate }.to change(user, :portal_name_valid).to true
       end
 
       describe "error handling" do
@@ -37,8 +38,8 @@ RSpec.describe Portal::NameValidator do
           let(:http_status) { 200 }
           let(:error_message) { "'BRAND NEW‒USER' contains unicode characters, please re-type if cut and pasted" }
 
-          it { expect { call_validate }.to change { user.portal_name_valid }.to false }
-          it { expect { call_validate }.to change { user.errors }.to error_message }
+          it { expect { call_validate }.to change(user, :portal_name_valid).to false }
+          it { expect { call_validate }.to change(user, :errors).to error_message }
         end
 
         context "username not on provider details api" do
@@ -49,13 +50,14 @@ RSpec.describe Portal::NameValidator do
             expect(subject).to be false
           end
 
-          it { expect { call_validate }.to change { user.portal_name_valid }.to false }
-          it { expect { call_validate }.to change { user.errors }.to "User TEST.USER not known to CCMS" }
+          it { expect { call_validate }.to change(user, :portal_name_valid).to false }
+          it { expect { call_validate }.to change(user, :errors).to "User TEST.USER not known to CCMS" }
         end
 
         context "other non-200 response" do
           let(:response_body) { "" }
           let(:http_status) { 505 }
+
           it "responds false" do
             expect(subject).to be false
           end
@@ -69,7 +71,7 @@ RSpec.describe Portal::NameValidator do
       let(:user) { Portal::Name.new("test.user") }
 
       it do
-        expect { call }.to change { user.portal_name_valid }.to true
+        expect { call }.to change(user, :portal_name_valid).to true
       end
     end
   end
@@ -80,10 +82,10 @@ RSpec.describe Portal::NameValidator do
       "contactUserId" => 47_096,
       "contacts" => [
         { "id" => 3_043_807, "name" => "NAME.ONE" },
-        { "id" => 3_178_792, "name" => "DJXANKAZTAL" }
+        { "id" => 3_178_792, "name" => "DJXANKAZTAL" },
       ],
       "feeEarners" => [],
-      "providerOffices" => [{ "id" => "81333", "name" => "LOCAL LAW & CO LTD-8B869F" }]
+      "providerOffices" => [{ "id" => "81333", "name" => "LOCAL LAW & CO LTD-8B869F" }],
     }
   end
 
@@ -93,7 +95,7 @@ RSpec.describe Portal::NameValidator do
       "status" => 404,
       "error" => "Not Found",
       "message" => "No records found for [SARAH%20SMITH]",
-      "path" => "/api/providerDetails/SARAH%20SMITH"
+      "path" => "/api/providerDetails/SARAH%20SMITH",
     }
   end
 end

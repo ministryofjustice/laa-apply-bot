@@ -4,7 +4,7 @@ require "date_display"
 describe ApplyApplication do
   subject(:base) { described_class.new }
 
-  it { is_expected.to be_a ApplyApplication }
+  it { is_expected.to be_a described_class }
   it { is_expected.to respond_to :name }
   it { is_expected.to respond_to :github_api_url }
 

@@ -5,11 +5,11 @@ module Portal
     def initialize(name)
       @name = name
       @result = {
-        original_name: original_name,
-        display_name: display_name,
-        portal_username: portal_username,
+        original_name:,
+        display_name:,
+        portal_username:,
         portal_name_valid: nil,
-        errors: nil
+        errors: nil,
       }
     end
 
@@ -29,7 +29,7 @@ module Portal
       @display_name ||= parse_name.upcase
     end
 
-    private
+  private
 
     def parse_name
       @name = strip_email if name_is_slack_email?

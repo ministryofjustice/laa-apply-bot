@@ -26,9 +26,9 @@ end
 
 def image_out_of_date?(image)
   delete_if_older_than = 2 # days
-  date_pushed = DateTime.strptime(image["imagePushedAt"].to_s, "%s")
+  date_pushed = Time.strptime(image["imagePushedAt"].to_s, "%s")
   @summary.add(date_pushed.to_date.to_s)
-  age_in_days = (DateTime.now - date_pushed).to_i
+  age_in_days = (Time.now - date_pushed).to_i
   age_in_days > delete_if_older_than
 end
 

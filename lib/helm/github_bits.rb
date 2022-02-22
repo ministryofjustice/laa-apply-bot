@@ -1,7 +1,7 @@
 module GithubBits
   PREFIX = "apply-".freeze
 
-  private
+private
 
   def open_branches
     application = ApplyApplication.new

@@ -1,4 +1,3 @@
-# rubocop:disable Layout/LineLength, Metrics/MethodLength
 def load_shared_commit_data
   let(:commits) do
     [
@@ -9,8 +8,7 @@ def load_shared_commit_data
       { 'sha': "678912", 'url': "678912", 'commit': { 'message': "Merge pull request #1997 from moj/AA-666\n\nMade everything shiny" } },
       { 'sha': "789123", 'url': "789123", 'commit': { 'message': "Merge pull request #1996 from moj/AA-555\n\nMade everything dull" } },
       { 'sha': "891234", 'url': "891234", 'commit': { 'message': "Merge pull request #1995 from moj/AA-444\n\nMade everything work" } },
-      { 'sha': "912345", 'url': "912345", 'commit': { 'message': "Merge pull request #1994 from moj/AA-333\n\nMade some stuff work" } }
+      { 'sha': "912345", 'url': "912345", 'commit': { 'message': "Merge pull request #1994 from moj/AA-333\n\nMade some stuff work" } },
     ].to_json
   end
 end
-# rubocop:enable Layout/LineLength, Metrics/MethodLength

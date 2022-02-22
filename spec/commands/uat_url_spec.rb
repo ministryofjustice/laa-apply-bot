@@ -5,14 +5,15 @@ describe SlackApplybot::Commands::UatUrl, :vcr do
     stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
     allow(Kube::Ingresses).to receive(:new).and_return(ingresses)
   end
+
   let(:ingresses) { instance_double(Kube::Ingresses, call: expected_environments) }
   let(:expected_environments) { %w[ap-1234-test.fake.service.uk ap-4321-bad.fake.service.uk] }
   let(:expected_body) do
     {
       'ok': true,
       'channel': {
-        name: channel
-      }
+        name: channel,
+      },
     }.to_json
   end
 
@@ -22,7 +23,7 @@ describe SlackApplybot::Commands::UatUrl, :vcr do
     let(:expected_response) { "You called `uat` with `delete`. This is not supported." }
 
     it "returns the expected message" do
-      expect(message: user_input, channel: channel).to respond_with_slack_message(expected_response)
+      expect(message: user_input, channel:).to respond_with_slack_message(expected_response)
     end
   end
 
@@ -36,7 +37,7 @@ describe SlackApplybot::Commands::UatUrl, :vcr do
     let(:channel) { "channel" }
 
     it "returns the expected message" do
-      expect(message: user_input, channel: channel).to respond_with_slack_message(expected_response)
+      expect(message: user_input, channel:).to respond_with_slack_message(expected_response)
     end
 
     it_behaves_like "the channel is invalid"
@@ -53,7 +54,7 @@ describe SlackApplybot::Commands::UatUrl, :vcr do
       end
 
       it "returns the expected message" do
-        expect(message: user_input, channel: channel).to respond_with_slack_message(expected_response)
+        expect(message: user_input, channel:).to respond_with_slack_message(expected_response)
       end
     end
 
@@ -66,7 +67,7 @@ describe SlackApplybot::Commands::UatUrl, :vcr do
       end
 
       it "returns the expected message" do
-        expect(message: user_input, channel: channel).to respond_with_slack_message(expected_response)
+        expect(message: user_input, channel:).to respond_with_slack_message(expected_response)
       end
     end
 

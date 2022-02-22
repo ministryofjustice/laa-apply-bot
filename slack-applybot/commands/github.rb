@@ -24,7 +24,7 @@ module SlackApplybot
         include UserCommand
 
         def process_link_request(match)
-          parts = match["expression"].split - ["link"]
+          parts = match["expression"].split - %w[link]
           if parts.empty?
             "Github ID not provided, please call as `github link <github_user_name>`"
           elsif link_account(parts[0])

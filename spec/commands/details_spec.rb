@@ -2,20 +2,21 @@ require "spec_helper"
 
 describe SlackApplybot::Commands::Details, :vcr do
   let(:user_input) { "#{SlackRubyBot.config.user} #{app} details #{env}" }
-  before do
-    stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
-  end
   let(:expected_body) do
     {
       'ok': true,
       'channel': {
-        name: channel
-      }
+        name: channel,
+      },
     }.to_json
   end
   let(:app) { "cfe" }
   let(:env) { "staging" }
   let(:channel) { "channel" }
+
+  before do
+    stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
+  end
 
   context "when user requests details for a valid application and environment" do
     let(:expected_response) do

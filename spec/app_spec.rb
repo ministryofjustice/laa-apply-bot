@@ -20,6 +20,7 @@ describe "Sinatra App" do
       allow(ENV).to receive(:[]).with("BUILD_TAG").and_return(build_tag)
       get "/ping"
     end
+
     let(:build_date) { nil }
     let(:build_tag) { nil }
 
@@ -30,7 +31,7 @@ describe "Sinatra App" do
       let(:expected_json) do
         {
           "build_date" => "20150721",
-          "build_tag" => "test"
+          "build_tag" => "test",
         }
       end
 
@@ -121,7 +122,7 @@ describe "Sinatra App" do
         end
 
         it "a post to replace the text is made" do
-          expect_any_instance_of(SendSlackMessage).to_not receive(:upload_file)
+          expect_any_instance_of(SendSlackMessage).not_to receive(:upload_file)
           post "/interactive", submitted_data
           expect(a_request(:post, %r{\Ahttps://hooks.slack.com/actions/.*\z})).to have_been_made.times(1)
         end

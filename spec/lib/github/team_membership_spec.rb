@@ -3,6 +3,7 @@ require "support/commit"
 
 RSpec.describe Github::TeamMembership do
   subject(:github_team_membership) { described_class.new(user, group) }
+
   before do
     stub_request(:any, %r{\Ahttps://(www|api).github.com/.*/members\z})
       .to_return(status: 200, body: expected, headers: {})
@@ -15,13 +16,13 @@ RSpec.describe Github::TeamMembership do
       {
         "login" => "good_user",
         "id" => "123456",
-        "type" => "user"
+        "type" => "user",
       },
       {
         "login" => "colleague",
         "id" => "654321",
-        "type" => "user"
-      }
+        "type" => "user",
+      },
 
     ].to_json
   end

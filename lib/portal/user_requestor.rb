@@ -14,7 +14,7 @@ module Portal
       send_success_message if names.matched.present?
     end
 
-    private
+  private
 
     def names
       @names ||= @collated_names

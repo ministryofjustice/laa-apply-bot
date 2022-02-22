@@ -8,6 +8,7 @@ end
 
 describe ApplyServiceInstance::Base do
   subject(:base) { described_class.new(type, level) }
+
   let(:type) { "apply" }
   let(:level) { "live" }
 

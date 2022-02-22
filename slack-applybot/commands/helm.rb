@@ -27,7 +27,7 @@ module SlackApplybot
         include UserCommand
 
         def process_delete(match)
-          parts = match["expression"].split - ["delete"]
+          parts = match["expression"].split - %w[delete]
           if parts.empty?
             "Unable to delete - insufficient data, please call as `helm delete name-of-release 000000`"
           elsif parts.count.eql?(1)

@@ -1,10 +1,10 @@
 module Encryption
   class Service
     KEY = ActiveSupport::KeyGenerator.new(
-      ENV.fetch("SECRET_KEY_BASE")
+      ENV.fetch("SECRET_KEY_BASE"),
     ).generate_key(
       ENV.fetch("ENCRYPTION_SERVICE_SALT"),
-      ActiveSupport::MessageEncryptor.key_len
+      ActiveSupport::MessageEncryptor.key_len,
     ).freeze
 
     private_constant :KEY
@@ -19,7 +19,7 @@ module Encryption
       new.decrypt_and_verify(value)
     end
 
-    private
+  private
 
     def encryptor
       ActiveSupport::MessageEncryptor.new(KEY)

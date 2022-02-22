@@ -12,7 +12,7 @@ module Helm
     class << self
       include GithubBits
 
-      private
+    private
 
       def helm_list_as_json(context)
         `helm list #{context} -o json`
@@ -29,7 +29,7 @@ module Helm
           parse_state("Status"),
           "Date".ljust(11),
           "PR".ljust(3, " "),
-          parse_data("Branch")
+          parse_data("Branch"),
         ].join
       end
 
@@ -40,7 +40,7 @@ module Helm
           parse_state(data[1]),
           parse_date(data[2]).strftime("%Y-%m-%d").ljust(11),
           (pr_still_exists(data[0]) ? "✔" : "").ljust(3, " "),
-          parse_data((branch_still_exists(data[0]) ? "✔" : ""))
+          parse_data((branch_still_exists(data[0]) ? "✔" : "")),
         ].join
       end
 
