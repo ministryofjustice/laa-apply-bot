@@ -8,6 +8,6 @@ RSpec.describe Helm::Delete do
 
     let(:response) { 'release "ap1234" uninstalled' }
 
-    it { expect(subject).to be(true) }
+    it { expect(call).to be(true) }
   end
 end

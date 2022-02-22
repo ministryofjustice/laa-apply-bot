@@ -21,7 +21,7 @@ RSpec.describe SendSlackMessage do
     let(:params) { { channel: "test", user: "test", attachments: [] } }
 
     it "sends a message to slack" do
-      subject
+      generic
       expect(a_request(:post, "https://slack.com/api/chat.postMessage")).to have_been_made.times(1)
     end
   end
@@ -32,7 +32,7 @@ RSpec.describe SendSlackMessage do
     let(:params) { { channels: "test", content: "test", filename: "output.txt" } }
 
     it "sends a message to slack" do
-      subject
+      upload_file
       expect(a_request(:post, "https://slack.com/api/files.upload")).to have_been_made.times(1)
     end
   end
@@ -43,7 +43,7 @@ RSpec.describe SendSlackMessage do
     let(:params) { { channel: "test" } }
 
     it "sends a message to slack" do
-      subject
+      conversations_info
       expect(a_request(:post, "https://slack.com/api/conversations.info")).to have_been_made.times(1)
     end
   end
@@ -54,7 +54,7 @@ RSpec.describe SendSlackMessage do
     let(:params) { { ts: "0000.000", channel: "test", user: "test", attachments: [] } }
 
     it "sends an update post to slack" do
-      subject
+      update
       expect(a_request(:post, "https://slack.com/api/chat.update")).to have_been_made.times(1)
     end
   end
@@ -65,7 +65,7 @@ RSpec.describe SendSlackMessage do
     let(:params) { { user_id: "test" } }
 
     it "sends an user POST request to slack" do
-      subject
+      update
       expect(a_request(:post, "https://slack.com/api/users.info")).to have_been_made.times(1)
     end
   end
