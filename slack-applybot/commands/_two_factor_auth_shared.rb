@@ -4,7 +4,7 @@ module TwoFactorAuthShared
   private
 
   def validate_otp_part(otp)
-    validate(user, otp) if otp.match(/\d*/)
+    validate(user, otp) if /\d*/.match?(otp)
   end
 
   def validate(user, otp)
