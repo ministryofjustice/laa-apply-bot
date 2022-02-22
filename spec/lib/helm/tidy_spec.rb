@@ -55,6 +55,6 @@ RSpec.describe Helm::Tidy do
                                                           headers: {})
     end
 
-    it { expect(subject).to eql(expected) }
+    it { expect(call).to eql(expected) }
   end
 end

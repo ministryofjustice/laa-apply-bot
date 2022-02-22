@@ -6,10 +6,10 @@ RSpec.describe Portal::NameValidator do
   context "when instantiated without a Portal::Name object" do
     let(:user) { "TEST.NAME" }
 
-    it { expect { subject }.to raise_error(StandardError, "Name is invalid type") }
+    it { expect { validate }.to raise_error(StandardError, "Name is invalid type") }
   end
 
-  context "when instantiated without a Portal::Name object" do
+  context "when instantiated with a Portal::Name object" do
     before do
       allow(ENV).to receive(:[]).and_call_original
       allow(ENV).to receive(:[]).with("PROVIDER_DETAILS_URL").and_return(dummy_provider_details_host)
@@ -47,7 +47,7 @@ RSpec.describe Portal::NameValidator do
           let(:http_status) { 404 }
 
           it "responds false" do
-            expect(subject).to be false
+            expect(call_validate).to be false
           end
 
           it { expect { call_validate }.to change(user, :portal_name_valid).to false }
@@ -59,7 +59,7 @@ RSpec.describe Portal::NameValidator do
           let(:http_status) { 505 }
 
           it "responds false" do
-            expect(subject).to be false
+            expect(call_validate).to be false
           end
         end
       end

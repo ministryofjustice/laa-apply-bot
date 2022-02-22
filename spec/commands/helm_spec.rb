@@ -125,15 +125,6 @@ describe SlackApplybot::Commands::Helm, :vcr do
         end
       end
 
-      context "and no OTP is provided" do
-        let(:command) { "delete ap1234" }
-        let(:command_response) { "OTP password not provided, please call as `helm delete name-of-release 000000`" }
-
-        it "returns the expected message" do
-          expect(message: user_input, channel:).to respond_with_slack_message(command_response)
-        end
-      end
-
       context "when OTP is provided" do
         before do
           allow_any_instance_of(User).to receive(:encrypted_2fa_secret).and_return(encrypted_secret)

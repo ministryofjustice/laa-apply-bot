@@ -15,7 +15,7 @@ describe GithubValues do
     let(:json_keys) { %i[content_type accept Authorization] }
 
     it { is_expected.to be_a Hash }
-    it { expect(subject.keys).to contain_exactly(*json_keys) }
+    it { expect(headers.keys).to contain_exactly(*json_keys) }
   end
 
   describe "#repo_url" do
