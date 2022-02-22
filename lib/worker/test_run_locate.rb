@@ -1,4 +1,4 @@
-require 'dotiw'
+require "dotiw"
 module Worker
   class TestRunLocate
     include Sidekiq::Worker
@@ -28,7 +28,7 @@ module Worker
     end
 
     def update_and_monitor(channel, message_ts, running_job)
-      polling_url = running_job['workflow_runs'][0]['url']
+      polling_url = running_job["workflow_runs"][0]["url"]
       web_url = get_web_url_from(running_job)
       TestRunMonitor.perform_in(45, polling_url, 30, channel, web_url, message_ts)
       send_message(Slack::BlockBuilder.call(:waiting, web_url: web_url), channel, message_ts)
@@ -48,11 +48,11 @@ module Worker
       result = rest_client_get_response(GithubValues.running_job_url, GithubValues.headers.merge(retry_headers || {}))
       if result.code.eql?(200)
         json_result = JSON.parse(result)
-        parsed_result = json_result['total_count'].positive? ? json_result : negative_result(json_result)
+        parsed_result = json_result["total_count"].positive? ? json_result : negative_result(json_result)
       else
-        parsed_result = 'negative - status'
+        parsed_result = "negative - status"
       end
-      @etag = { 'If-None-Match' => result.headers[:etag].to_s }
+      @etag = { "If-None-Match" => result.headers[:etag].to_s }
       parsed_result
     end
 
@@ -61,7 +61,7 @@ module Worker
     end
 
     def get_web_url_from(running_job)
-      job_data = rest_client_get_response(running_job['workflow_runs'][0]['jobs_url'])
+      job_data = rest_client_get_response(running_job["workflow_runs"][0]["jobs_url"])
       "#{JSON.parse(job_data)['jobs'][0]['html_url']}?check_suite_focus=true"
     end
 

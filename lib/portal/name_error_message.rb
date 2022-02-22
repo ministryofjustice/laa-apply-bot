@@ -15,7 +15,7 @@ module Portal
     private
 
     def build_name_errors
-      result = ''
+      result = ""
       @user_list.each do |name|
         result += good_name(name) if name.errors.nil?
         result += bad_name(name) if name.errors.present?

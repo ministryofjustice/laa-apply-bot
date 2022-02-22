@@ -1,4 +1,4 @@
-require 'rspec'
+require "rspec"
 
 describe Kube::Ingresses do
   subject(:kube_ingresses) { described_class.new(namespace) }
@@ -9,7 +9,7 @@ describe Kube::Ingresses do
       .to_return(status: 200, body: resource_response, headers: {})
   end
 
-  let(:namespace) { 'test' }
+  let(:namespace) { "test" }
   let(:ingress_response) do
     <<~JSON.as_json
       {"kind": "APIResourceList",
@@ -58,13 +58,13 @@ describe Kube::Ingresses do
 
   it { is_expected.to be_a Kube::Ingresses }
 
-  describe '#call' do
+  describe "#call" do
     subject(:call) { kube_ingresses.call }
 
-    it { is_expected.to eq ['ap-1234.test.service.uk'] }
+    it { is_expected.to eq ["ap-1234.test.service.uk"] }
   end
 
-  describe '.call' do
+  describe ".call" do
     subject(:call) { described_class.call(namespace) }
 
     it { is_expected.to be_an Array }

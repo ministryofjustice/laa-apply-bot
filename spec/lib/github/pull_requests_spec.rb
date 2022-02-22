@@ -1,4 +1,4 @@
-require 'rspec'
+require "rspec"
 
 RSpec.describe Github::PullRequests do
   subject(:pull_requests) { described_class.new(application) }
@@ -11,18 +11,18 @@ RSpec.describe Github::PullRequests do
 
   let(:truncated_data) do
     [
-      { 'head' => { 'ref' => 'ap-1234' } },
-      { 'head' => { 'ref' => 'ap-5432' } }
+      { "head" => { "ref" => "ap-1234" } },
+      { "head" => { "ref" => "ap-5432" } }
     ]
   end
 
-  describe '.call' do
+  describe ".call" do
     subject(:call) { described_class.call(application) }
 
     it { is_expected.to eq truncated_data }
   end
 
-  describe '#call' do
+  describe "#call" do
     subject(:call) { pull_requests.call }
 
     it { is_expected.to eq truncated_data }

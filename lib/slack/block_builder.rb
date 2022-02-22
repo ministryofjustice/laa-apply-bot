@@ -15,7 +15,7 @@ module Slack
     end
 
     def call(state, **args)
-      raise 'State error' unless STATES.include?(state)
+      raise "State error" unless STATES.include?(state)
 
       @args = args
       @block_id = state.to_s
@@ -28,7 +28,7 @@ module Slack
     private
 
     def start
-      ':spinner2: A test run has been requested from Github'
+      ":spinner2: A test run has been requested from Github"
     end
 
     def searching
@@ -41,17 +41,17 @@ module Slack
     end
 
     def complete
-      result = @args[:result] ? 'Successfully' : 'Failed'
-      icon = @args[:result] ? 'yep' : 'nope'
+      result = @args[:result] ? "Successfully" : "Failed"
+      icon = @args[:result] ? "yep" : "nope"
       "*Test run has completed*\n:#{icon}: <#{@args[:web_url]}|#{result}>"
     end
 
     def block
       {
-        'type': 'section',
+        'type': "section",
         'block_id': @block_id.to_s,
         'text': {
-          'type': 'mrkdwn',
+          'type': "mrkdwn",
           'text': @message.to_s
         }
       }

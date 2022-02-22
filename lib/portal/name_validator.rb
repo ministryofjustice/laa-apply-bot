@@ -1,7 +1,7 @@
 module Portal
   class NameValidator
     def initialize(name)
-      raise 'Name is invalid type' unless name.is_a?(Portal::Name)
+      raise "Name is invalid type" unless name.is_a?(Portal::Name)
 
       @name = name
     end
@@ -18,7 +18,7 @@ module Portal
 
     def validate
       return error_state unless parse_uri
-      return error_state(format_error_message) if raw_response.code != '200'
+      return error_state(format_error_message) if raw_response.code != "200"
 
       @name.portal_name_valid = true
       true
@@ -42,11 +42,11 @@ module Portal
     end
 
     def provider_details_url
-      File.join(ENV['PROVIDER_DETAILS_URL'], @name.portal_username)
+      File.join(ENV["PROVIDER_DETAILS_URL"], @name.portal_username)
     end
 
     def format_error_message
-      if raw_response.code == '404'
+      if raw_response.code == "404"
         "User #{@name.portal_username} not known to CCMS"
       else
         "Bad response from Provider Details API: HTTP status #{raw_response.code}"

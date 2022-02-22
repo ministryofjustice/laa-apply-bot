@@ -1,18 +1,18 @@
 module SlackApplybot
   module Commands
     class TwoFactorAuth < SlackRubyBot::Commands::Base
-      require 'rotp'
-      require 'rqrcode'
+      require "rotp"
+      require "rqrcode"
 
-      command '2fa' do |client, data, match|
+      command "2fa" do |client, data, match|
         @client = client
         @data = data
         @user = user
         raise ChannelValidity::PublicError.new(message: error_message, channel: @data.channel) unless channel_is_valid?
 
         client.typing(channel: data.channel)
-        case match['expression']&.downcase
-        when 'setup'
+        case match["expression"]&.downcase
+        when "setup"
           user_dm = user_dm_channel(client)
           if user_has_github_linked?
             send_qr_message(user_dm)
@@ -35,18 +35,18 @@ module SlackApplybot
         include UserCommand
 
         def process_confirmation(match)
-          parts = match['expression'].split - ['confirm']
+          parts = match["expression"].split - ["confirm"]
           if parts.empty?
-            'OTP password not provided, please call as `2fa confirm 000000`'
+            "OTP password not provided, please call as `2fa confirm 000000`"
           elsif validate_otp_part(parts[0])
-            'OTP has been successfully configured'
+            "OTP has been successfully configured"
           else
-            'OTP password did not match, please check your authenticator app'
+            "OTP password did not match, please check your authenticator app"
           end
         end
 
         def send_dm_to_link_github(channel)
-          message = 'You need to link your github account before you can setup 2FA'
+          message = "You need to link your github account before you can setup 2FA"
           @client.say(channel: channel, text: message)
         end
 
@@ -56,15 +56,15 @@ module SlackApplybot
           SendSlackMessage.new.upload_file(
             channels: channel,
             as_user: true,
-            file: Faraday::FilePart.new(StringIO.new(build_qr_code(token)), 'image/png', 'apply_bot_qr.png'),
-            title: 'Your apply-bot QR',
-            initial_comment: 'Scan with an authenticator app'
+            file: Faraday::FilePart.new(StringIO.new(build_qr_code(token)), "image/png", "apply_bot_qr.png"),
+            title: "Your apply-bot QR",
+            initial_comment: "Scan with an authenticator app"
           )
         end
 
         def build_qr_code(token)
-          totp = ROTP::TOTP.new(token, issuer: ENV.fetch('SERVICE_NAME'))
-          qrcode = RQRCode::QRCode.new(totp.provisioning_uri(ENV.fetch('SERVICE_EMAIL')))
+          totp = ROTP::TOTP.new(token, issuer: ENV.fetch("SERVICE_NAME"))
+          qrcode = RQRCode::QRCode.new(totp.provisioning_uri(ENV.fetch("SERVICE_EMAIL")))
 
           qrcode.as_png(
             border_modules: 1,

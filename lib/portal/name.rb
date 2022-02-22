@@ -22,7 +22,7 @@ module Portal
     end
 
     def portal_username
-      @portal_username ||= parse_name.upcase.gsub(' ', '%20')
+      @portal_username ||= parse_name.upcase.gsub(" ", "%20")
     end
 
     def display_name

@@ -1,5 +1,5 @@
-require 'rspec'
-require 'support/commit'
+require "rspec"
+require "support/commit"
 
 RSpec.describe Github::Commits do
   subject(:github_commits) { described_class.new(application) }
@@ -7,7 +7,7 @@ RSpec.describe Github::Commits do
     stub_request(:any, %r{\Ahttps://(www|api).github.com/.*\z}).to_return(status: 200, body: commits, headers: {})
     # pass = 678912
     allow(Github::Status).to receive(:passed?).and_return(false)
-    allow(Github::Status).to receive(:passed?).with('678912').and_return(true)
+    allow(Github::Status).to receive(:passed?).with("678912").and_return(true)
   end
   let(:application) { ApplyApplication.new }
   load_shared_commit_data
@@ -21,13 +21,13 @@ RSpec.describe Github::Commits do
     RESPONSE
   end
 
-  describe '.call' do
+  describe ".call" do
     subject(:call) { described_class.call(application) }
 
     it { is_expected.to eq expected_response }
   end
 
-  describe '#call' do
+  describe "#call" do
     subject(:call) { github_commits.call }
 
     it { is_expected.to eq expected_response }
