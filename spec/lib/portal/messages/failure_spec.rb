@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Portal::Messages::Failure do
   subject(:failure) { described_class.call(names) }
@@ -6,30 +6,30 @@ describe Portal::Messages::Failure do
   let(:expected_response) do
     [
       {
-        'type': 'section',
+        'type': "section",
         'text': {
-          'type': 'mrkdwn',
-          'text': 'The following name(s) could not be matched in CCMS'
+          'type': "mrkdwn",
+          'text': "The following name(s) could not be matched in CCMS"
         }
       },
       {
-        'type': 'section',
+        'type': "section",
         'text': {
-          'type': 'mrkdwn',
+          'type': "mrkdwn",
           'text': "```name1\nname2```"
         }
       },
       {
-        'type': 'section',
+        'type': "section",
         'text': {
-          'type': 'mrkdwn',
-          'text': 'You will need to confirm their account names and re-submit'
+          'type': "mrkdwn",
+          'text': "You will need to confirm their account names and re-submit"
         }
       }
     ]
   end
 
-  it 'returns the expected blocks' do
+  it "returns the expected blocks" do
     expect(failure).to eq expected_response
   end
 end

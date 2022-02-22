@@ -1,5 +1,5 @@
-require 'spec_helper'
-require 'date_display'
+require "spec_helper"
+require "date_display"
 
 describe DateDisplay do
   subject(:date_display) { described_class.new(date) }
@@ -8,29 +8,29 @@ describe DateDisplay do
 
   it { is_expected.to be_a DateDisplay }
 
-  describe '.call' do
+  describe ".call" do
     subject(:call) { date_display.call }
 
-    context 'when passed today' do
-      it { is_expected.to eq 'today' }
+    context "when passed today" do
+      it { is_expected.to eq "today" }
     end
 
-    context 'when passed yesterday ' do
+    context "when passed yesterday " do
       let(:date) { Date.yesterday }
 
-      it { is_expected.to eq 'yesterday' }
+      it { is_expected.to eq "yesterday" }
     end
 
-    context 'when passed the day before yesterday ' do
+    context "when passed the day before yesterday " do
       let(:date) { Date.today - 2.days }
 
-      it { is_expected.to eq '2 days ago' }
+      it { is_expected.to eq "2 days ago" }
     end
   end
 
-  describe '#call' do
+  describe "#call" do
     subject(:call) { described_class.call(date) }
 
-    it { is_expected.to eq 'today' }
+    it { is_expected.to eq "today" }
   end
 end

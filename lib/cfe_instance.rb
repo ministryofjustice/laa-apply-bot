@@ -1,8 +1,8 @@
 class CfeInstance < ApplyServiceInstance::Base
-  SERVICE_URL = 'check-financial-eligibility.apps.live-1.cloud-platform.service.justice.gov.uk'.freeze
+  SERVICE_URL = "check-financial-eligibility.apps.live-1.cloud-platform.service.justice.gov.uk".freeze
 
   def initialize(level)
-    super('cfe', level)
+    super("cfe", level)
   end
 
   def url

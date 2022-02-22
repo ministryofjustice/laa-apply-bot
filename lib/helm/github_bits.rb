@@ -1,5 +1,5 @@
 module GithubBits
-  PREFIX = 'apply-'.freeze
+  PREFIX = "apply-".freeze
 
   private
 
@@ -25,7 +25,7 @@ module GithubBits
 
   def pull_request_data
     @pull_request_data ||= JSON.parse(open_pull_requests.to_json, symbolize_names: true).map do |pr|
-      pr[:head][:ref].gsub(%r{[()\[\]_/\s.]}, '-')
+      pr[:head][:ref].gsub(%r{[()\[\]_/\s.]}, "-")
     end
   end
 

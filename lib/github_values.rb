@@ -1,8 +1,8 @@
 class GithubValues
   def self.headers
     {
-      'content_type': ':json',
-      'accept': 'application/vnd.github.everest-preview+json',
+      'content_type': ":json",
+      'accept': "application/vnd.github.everest-preview+json",
       'Authorization': "token #{ENV['GITHUB_API_TOKEN']}"
     }
   end
@@ -16,10 +16,10 @@ class GithubValues
   end
 
   def self.running_job_url
-    build_url('/actions/workflows/manual-integration-tests.yml/runs?status=in_progress')
+    build_url("/actions/workflows/manual-integration-tests.yml/runs?status=in_progress")
   end
 
   def self.wait_time
-    ENV['GITHUB_WAIT_SECONDS'].to_i || 0
+    ENV["GITHUB_WAIT_SECONDS"].to_i || 0
   end
 end

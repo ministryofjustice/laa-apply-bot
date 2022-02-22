@@ -1,8 +1,8 @@
 module Helm
   class Tidy
-    def self.call(context = 'apply')
+    def self.call(context = "apply")
       @context = "--kube-context #{context}-context"
-      @output = ''
+      @output = ""
       @count = 0
       active_uat_namespaces.each do |environment|
         update_output_for(environment)

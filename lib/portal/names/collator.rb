@@ -6,7 +6,7 @@ module Portal
 
       def initialize(names)
         # this should be passed the raw match data
-        @names = names.split(',').map(&:strip).map(&:upcase)
+        @names = names.split(",").map(&:strip).map(&:upcase)
         @status = :created
         process
       end

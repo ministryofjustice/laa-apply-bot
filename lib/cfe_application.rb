@@ -1,5 +1,5 @@
 class CfeApplication < ApplyService::Base
   def initialize
-    super('CFE')
+    super("CFE")
   end
 end

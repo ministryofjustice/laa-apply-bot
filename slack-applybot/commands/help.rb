@@ -1,7 +1,7 @@
 module SlackRubyBot
   module Commands
     class Help < Base
-      command 'help' do |client, data, match|
+      command "help" do |client, data, match|
         @client = client
         @data = data
         @command = match[:expression]
@@ -28,7 +28,7 @@ module SlackRubyBot
         end
 
         def text_when_channel_is_shared
-          Support::Help.instance.command_full_desc('add users')
+          Support::Help.instance.command_full_desc("add users")
         end
 
         def general_text

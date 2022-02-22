@@ -1,5 +1,5 @@
 class ApplyApplication < ApplyService::Base
   def initialize
-    super('Apply')
+    super("Apply")
   end
 end

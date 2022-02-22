@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe SlackApplybot::Commands::IntegrationTests, :vcr do
   let(:user_input) { "#{SlackRubyBot.config.user} run tests" }
@@ -13,18 +13,18 @@ describe SlackApplybot::Commands::IntegrationTests, :vcr do
       }
     }.to_json
   end
-  let(:channel) { 'channel' }
+  let(:channel) { "channel" }
 
-  context 'when user requests a test run' do
-    it 'starts typing and triggers the sidekiq job' do
+  context "when user requests a test run" do
+    it "starts typing and triggers the sidekiq job" do
       expect(Worker::TestRunStart).to receive(:perform_async)
-      expect(message: user_input, channel: 'channel').to start_typing(channel: 'channel')
+      expect(message: user_input, channel: "channel").to start_typing(channel: "channel")
     end
 
-    it 'returns the expected message' do
+    it "returns the expected message" do
       expect(message: user_input, channel: channel).to be_a Hash
     end
   end
 
-  it_behaves_like 'the channel is invalid'
+  it_behaves_like "the channel is invalid"
 end

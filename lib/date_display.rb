@@ -11,9 +11,9 @@ class DateDisplay
     count = (Date.today - @date).to_i
     case count
     when 0
-      'today'
+      "today"
     when 1
-      'yesterday'
+      "yesterday"
     else
       "#{count} days ago"
     end

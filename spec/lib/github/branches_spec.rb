@@ -1,4 +1,4 @@
-require 'rspec'
+require "rspec"
 
 RSpec.describe Github::Branches do
   subject(:pull_requests) { described_class.new(application) }
@@ -11,18 +11,18 @@ RSpec.describe Github::Branches do
 
   let(:truncated_data) do
     [
-      { 'name' => 'ap-1234' },
-      { 'name' => 'ap-5432' }
+      { "name" => "ap-1234" },
+      { "name" => "ap-5432" }
     ]
   end
 
-  describe '.call' do
+  describe ".call" do
     subject(:call) { described_class.call(application) }
 
     it { is_expected.to eq truncated_data }
   end
 
-  describe '#call' do
+  describe "#call" do
     subject(:call) { pull_requests.call }
 
     it { is_expected.to eq truncated_data }

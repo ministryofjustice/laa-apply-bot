@@ -1,18 +1,18 @@
 module SlackApplybot
   module Commands
     class UatUrl < SlackRubyBot::Commands::Base
-      command 'uat' do |client, data, match|
+      command "uat" do |client, data, match|
         @client = client
         @data = data
         @user = user
         raise ChannelValidity::PublicError.new(message: error_message, channel: @data.channel) unless channel_is_valid?
 
-        ingresses = Kube::Ingresses.call('laa-apply-for-legalaid-uat')
-        message = case match['expression']&.downcase
+        ingresses = Kube::Ingresses.call("laa-apply-for-legalaid-uat")
+        message = case match["expression"]&.downcase
                   when /^urls$/
                     "Apply UAT urls:\n#{display(ingresses)}"
                   when /^url/
-                    branch = match['expression'].gsub(/url /, '')
+                    branch = match["expression"].gsub(/url /, "")
                     single_match = ingresses.find { |e| e.starts_with?(branch) }
                     if single_match
                       "Branch <https://#{single_match}|#{branch}> is available"
