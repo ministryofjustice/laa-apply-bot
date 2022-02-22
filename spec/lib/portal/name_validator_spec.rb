@@ -30,7 +30,7 @@ RSpec.describe Portal::NameValidator do
       end
 
       describe "error handling" do
-        context "user adds non-ascii characters to their name" do
+        context "when the user adds non-ascii characters to their name" do
           # we suspect that this comes from a cut and paste from MS into
           # the login box when parsed it returns BRAND%20NEW\u2011USER
           let(:user) { Portal::Name.new("brand new‒user") }
@@ -42,7 +42,7 @@ RSpec.describe Portal::NameValidator do
           it { expect { call_validate }.to change(user, :errors).to error_message }
         end
 
-        context "username not on provider details api" do
+        context "when the username is not on provider details api" do
           let(:response_body) { user_not_found_response.to_json }
           let(:http_status) { 404 }
 
@@ -54,7 +54,7 @@ RSpec.describe Portal::NameValidator do
           it { expect { call_validate }.to change(user, :errors).to "User TEST.USER not known to CCMS" }
         end
 
-        context "other non-200 response" do
+        context "when it returns an a non-200 response" do
           let(:response_body) { "" }
           let(:http_status) { 505 }
 

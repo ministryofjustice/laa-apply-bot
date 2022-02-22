@@ -48,7 +48,7 @@ describe SlackApplybot::Commands::UatUrl, :vcr do
     let(:channel) { "channel" }
     let(:branch) { "ap-1234" }
 
-    context "that exists" do
+    context "and it exists" do
       let(:expected_response) do
         "Branch <https://ap-1234-test.fake.service.uk|ap-1234> is available"
       end
@@ -58,7 +58,7 @@ describe SlackApplybot::Commands::UatUrl, :vcr do
       end
     end
 
-    context "that does not exist" do
+    context "and it does not exist" do
       let(:branch) { "ap-666" }
       let(:expected_response) do
         "Sorry I can't find a branch for #{branch} I only have:\n"\
