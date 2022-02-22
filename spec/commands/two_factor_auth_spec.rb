@@ -5,21 +5,22 @@ RSpec.describe SlackApplybot::Commands::TwoFactorAuth do
     stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
     stub_request(:post, %r{\Ahttps://slack.com/api/conversations.open\z}).to_return(status: 200, body: user_body)
   end
+
   let(:expected_body) do
     {
       'ok': true,
       'channel': {
         name: channel,
-        is_im: is_direct_message?
-      }
+        is_im: is_direct_message?,
+      },
     }.to_json
   end
   let(:user_body) do
     {
       'ok': true,
       'channel': {
-        id: "A0000B1CDEF"
-      }
+        id: "A0000B1CDEF",
+      },
     }.to_json
   end
   let(:channel) { "channel" }
@@ -28,13 +29,13 @@ RSpec.describe SlackApplybot::Commands::TwoFactorAuth do
   let(:user_input) { "#{SlackRubyBot.config.user} 2fa #{command}" }
   let(:expected_hash) do
     {
-      channel: channel,
-      text: expected_message
+      channel:,
+      text: expected_message,
     }
   end
   let!(:client) { SlackRubyBot::App.new.send(:client) }
   let(:message_hook) { SlackRubyBot::Hooks::Message.new }
-  let(:params) { Hashie::Mash.new(text: user_input, channel: channel, user: "user") }
+  let(:params) { Hashie::Mash.new(text: user_input, channel:, user: "user") }
 
   describe "#setup" do
     let(:command) { "setup" }
@@ -83,6 +84,7 @@ RSpec.describe SlackApplybot::Commands::TwoFactorAuth do
   describe "#confirm" do
     let(:user_input) { "#{SlackRubyBot.config.user} 2fa #{command} #{otp_code}" }
     let(:command) { "confirm" }
+
     context "when the message is a DM to the bot" do
       let(:channel) { "A0000B1CDEF" }
       let(:is_direct_message?) { true }
@@ -106,6 +108,7 @@ RSpec.describe SlackApplybot::Commands::TwoFactorAuth do
           allow_any_instance_of(Encryption::Service).to receive(:decrypt).with(:any).and_return("123456789")
           allow_any_instance_of(ROTP::TOTP).to receive(:verify).with("123456").and_return(valid_token?)
         end
+
         let(:encrypted_secret) { Encryption::Service.encrypt("secret") }
         let(:otp_code) { "123456" }
 
@@ -139,6 +142,7 @@ RSpec.describe SlackApplybot::Commands::TwoFactorAuth do
       let(:dm_hash) do
         { channel: "A0000B1CDEF", text: "OTP password not provided, please call as `2fa confirm 000000`" }
       end
+
       it "starts typing, sends a DM and then replies in the public channel" do
         expect(client).to receive(:typing)
         expect(client).to receive(:say).with(expected_hash)
@@ -151,6 +155,7 @@ RSpec.describe SlackApplybot::Commands::TwoFactorAuth do
   context "when the command is unsupported" do
     let(:command) { "cancel" }
     let(:expected_message) { "You called `2fa` with `cancel`. This is not supported." }
+
     it "returns the expected message" do
       expect(client).to receive(:typing)
       expect(client).to receive(:say).with(expected_hash)

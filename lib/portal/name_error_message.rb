@@ -12,7 +12,7 @@ module Portal
       new(users).call
     end
 
-    private
+  private
 
     def build_name_errors
       result = ""

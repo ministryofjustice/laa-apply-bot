@@ -3,6 +3,7 @@ require "spec_helper"
 RSpec.describe Portal::UserRequester do
   describe "initiate" do
     subject(:user_requester) { described_class.initiate(names, "channel") }
+
     let(:names) { "test1, test2, test3" }
 
     context "when all names are matched by portal" do
@@ -13,7 +14,7 @@ RSpec.describe Portal::UserRequester do
       end
 
       it "expect the following calls to occur" do
-        expect_any_instance_of(Portal::Messages::Failure).to_not receive(:call)
+        expect_any_instance_of(Portal::Messages::Failure).not_to receive(:call)
         expect_any_instance_of(Portal::Messages::Success).to receive(:call).once
         expect_any_instance_of(Portal::GenerateScript).to receive(:call).once
         expect_any_instance_of(SendSlackMessage).to receive(:generic).once
@@ -30,8 +31,8 @@ RSpec.describe Portal::UserRequester do
 
       it "expect the following calls to occur" do
         expect_any_instance_of(Portal::Messages::Failure).to receive(:call).once
-        expect_any_instance_of(Portal::Messages::Success).to_not receive(:call)
-        expect_any_instance_of(Portal::GenerateScript).to_not receive(:call)
+        expect_any_instance_of(Portal::Messages::Success).not_to receive(:call)
+        expect_any_instance_of(Portal::GenerateScript).not_to receive(:call)
         expect_any_instance_of(SendSlackMessage).to receive(:generic).once
         user_requester
       end

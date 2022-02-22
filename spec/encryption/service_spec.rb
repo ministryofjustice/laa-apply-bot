@@ -8,7 +8,7 @@ describe Encryption::Service do
 
     let(:value) { "plain_text" }
 
-    it { is_expected.to_not eq value }
+    it { is_expected.not_to eq value }
   end
 
   describe ".decrypt" do
@@ -18,7 +18,7 @@ describe Encryption::Service do
     let(:encoded) { described_class.encrypt(input) }
 
     it "can be decoded" do
-      is_expected.to eq input
+      expect(decrypting).to eq input
     end
   end
 end

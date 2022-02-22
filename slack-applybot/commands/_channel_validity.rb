@@ -3,12 +3,12 @@ module ChannelValidity
 
   class PublicError < RuntimeError
     def initialize(channel:, message: "Channel is too public")
-      SendSlackMessage.new.generic(channel: channel, as_user: true, text: message)
+      SendSlackMessage.new.generic(channel:, as_user: true, text: message)
       super(message)
     end
   end
 
-  private
+private
 
   # def send_fail
   #   message_text = "Sorry <@#{@data.user}>, I don't understand that command!"

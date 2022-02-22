@@ -4,12 +4,13 @@ describe SlackRubyBot::Commands::Help, :vcr do
   before do
     stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
   end
+
   let(:expected_body) do
     {
       'ok': true,
       'channel': {
-        name: channel
-      }
+        name: channel,
+      },
     }.to_json
   end
   let(:channel) { "channel" }
@@ -34,7 +35,7 @@ describe SlackRubyBot::Commands::Help, :vcr do
   # TODO: find out why the ruby-slack-bot is inserting thw weather bot output into the test response!
 
   it "returns the expected message" do
-    expect(message: user_input, channel: channel).to respond_with_slack_message(expected_response)
+    expect(message: user_input, channel:).to respond_with_slack_message(expected_response)
   end
 
   context "when passed an explicit command" do
@@ -46,7 +47,7 @@ describe SlackRubyBot::Commands::Help, :vcr do
     end
 
     it "returns the expected message" do
-      expect(message: user_input, channel: channel).to respond_with_slack_message(expected_response)
+      expect(message: user_input, channel:).to respond_with_slack_message(expected_response)
     end
   end
 
@@ -60,8 +61,9 @@ describe SlackRubyBot::Commands::Help, :vcr do
       ADDUSER
     end
     let(:channel) { "shared_channel" }
+
     it "returns the expected message" do
-      expect(message: user_input, channel: channel).to respond_with_slack_message(expected_response)
+      expect(message: user_input, channel:).to respond_with_slack_message(expected_response)
     end
   end
 end

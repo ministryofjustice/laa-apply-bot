@@ -21,11 +21,11 @@ module Slack
       @block_id = state.to_s
       @message = args[:message] || send(state)
       {
-        'blocks': [block]
+        'blocks': [block],
       }
     end
 
-    private
+  private
 
     def start
       ":spinner2: A test run has been requested from Github"
@@ -52,8 +52,8 @@ module Slack
         'block_id': @block_id.to_s,
         'text': {
           'type': "mrkdwn",
-          'text': @message.to_s
-        }
+          'text': @message.to_s,
+        },
       }
     end
   end

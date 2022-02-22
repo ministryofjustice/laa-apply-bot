@@ -6,7 +6,7 @@ describe DateDisplay do
 
   let(:date) { Date.today }
 
-  it { is_expected.to be_a DateDisplay }
+  it { is_expected.to be_a described_class }
 
   describe ".call" do
     subject(:call) { date_display.call }

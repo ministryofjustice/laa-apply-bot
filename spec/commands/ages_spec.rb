@@ -2,22 +2,24 @@ require "spec_helper"
 require "support/commit"
 describe SlackApplybot::Commands::Ages, :vcr do
   let(:user_input) { "#{SlackRubyBot.config.user} ages" }
+  let(:expected_body) do
+    {
+      'ok': true,
+      'channel': {
+        name: channel,
+      },
+    }.to_json
+  end
   let(:expected_data) { { channel: { name: "test" } } }
+
   before do
     stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
     stub_request(:any, %r{\Ahttps://(www|api).github.com/.*\z}).to_return(status: 200, body: commits, headers: {})
     allow(Github::Status).to receive(:passed?).and_return(false)
     allow(Github::Status).to receive(:passed?).with("678912").and_return(true)
   end
+
   load_shared_commit_data
-  let(:expected_body) do
-    {
-      'ok': true,
-      'channel': {
-        name: channel
-      }
-    }.to_json
-  end
 
   context "when the values are all valid" do
     let(:expected_response) do
@@ -32,7 +34,7 @@ describe SlackApplybot::Commands::Ages, :vcr do
 
     it "returns the expected message" do
       Timecop.travel(Date.new(2020, 4, 16)) do
-        expect(message: user_input, channel: channel).to respond_with_slack_message(expected_response)
+        expect(message: user_input, channel:).to respond_with_slack_message(expected_response)
       end
     end
 

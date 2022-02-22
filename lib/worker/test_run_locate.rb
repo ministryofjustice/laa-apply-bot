@@ -17,7 +17,7 @@ module Worker
       send_message(Slack::BlockBuilder.timeout_error, channel, message_ts)
     end
 
-    private
+  private
 
     def update_process(channel, iteration, message_ts, running_job)
       if running_job.is_a?(Hash)
@@ -31,7 +31,7 @@ module Worker
       polling_url = running_job["workflow_runs"][0]["url"]
       web_url = get_web_url_from(running_job)
       TestRunMonitor.perform_in(45, polling_url, 30, channel, web_url, message_ts)
-      send_message(Slack::BlockBuilder.call(:waiting, web_url: web_url), channel, message_ts)
+      send_message(Slack::BlockBuilder.call(:waiting, web_url:), channel, message_ts)
     end
 
     def wait_and_try_again(channel, iteration, message_ts)
@@ -78,7 +78,7 @@ module Worker
     end
 
     def build_params(block, channel, timestamp)
-      { ts: timestamp, channel: channel, as_user: true }.merge(block)
+      { ts: timestamp, channel:, as_user: true }.merge(block)
     end
   end
 end

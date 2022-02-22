@@ -2,9 +2,10 @@ require "spec_helper"
 
 describe ApplyInstance do
   subject(:application_instance) { described_class.new(level) }
+
   let(:level) { "live" }
 
-  it { is_expected.to be_a ApplyInstance }
+  it { is_expected.to be_a described_class }
 
   describe "url" do
     subject(:url) { application_instance.url }
@@ -43,7 +44,7 @@ describe ApplyInstance do
         {
           "build_date" => "2020-03-20T13:59:40+0000",
           "build_tag" => "app-ccf322d51b508fd16316d24593a44e9c887be281",
-          "app_branch" => "master"
+          "app_branch" => "master",
         }
       end
 

@@ -16,7 +16,7 @@ RSpec.describe Worker::TestRunStart do
   let(:good_response) { { status: 204, body: "", headers: {} } }
   let(:bad_response) { { status: 422, body: "", headers: {} } }
 
-  it { is_expected.to be_a Worker::TestRunStart }
+  it { is_expected.to be_a described_class }
 
   describe ".perform" do
     subject(:perform) { worker.perform(data) }
@@ -51,11 +51,11 @@ RSpec.describe Worker::TestRunStart do
               text:
                 {
                   text: "Could not trigger job on Github ```422 Unprocessable Entity```",
-                  type: "mrkdwn"
+                  type: "mrkdwn",
                 },
-              type: "section"
-            }
-          ]
+              type: "section",
+            },
+          ],
         }
       end
 

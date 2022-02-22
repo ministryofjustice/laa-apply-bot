@@ -9,6 +9,7 @@ describe SlackApplybot::Commands::AddUser, :vcr do
       class_double(Portal::UserRequester).as_stubbed_const
       class_double(Portal::NameValidator, call: true).as_stubbed_const
     end
+
     let(:command) { "add user" }
 
     it "calls the user requester and sends a `typing` message to the channel" do

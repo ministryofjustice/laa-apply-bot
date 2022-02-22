@@ -35,7 +35,7 @@ module SlackApplybot
         include UserCommand
 
         def process_confirmation(match)
-          parts = match["expression"].split - ["confirm"]
+          parts = match["expression"].split - %w[confirm]
           if parts.empty?
             "OTP password not provided, please call as `2fa confirm 000000`"
           elsif validate_otp_part(parts[0])
@@ -47,7 +47,7 @@ module SlackApplybot
 
         def send_dm_to_link_github(channel)
           message = "You need to link your github account before you can setup 2FA"
-          @client.say(channel: channel, text: message)
+          @client.say(channel:, text: message)
         end
 
         def send_qr_message(channel)
@@ -58,7 +58,7 @@ module SlackApplybot
             as_user: true,
             file: Faraday::FilePart.new(StringIO.new(build_qr_code(token)), "image/png", "apply_bot_qr.png"),
             title: "Your apply-bot QR",
-            initial_comment: "Scan with an authenticator app"
+            initial_comment: "Scan with an authenticator app",
           )
         end
 
@@ -69,7 +69,7 @@ module SlackApplybot
           qrcode.as_png(
             border_modules: 1,
             resize_exactly_to: true,
-            size: 180
+            size: 180,
           ).to_s
         end
       end

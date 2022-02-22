@@ -12,7 +12,7 @@ module Github
       parsed_json_data
     end
 
-    private
+  private
 
     def parsed_json_data
       raw_data = RestClient.get("#{@application.github_api_url}/pulls", GithubValues.headers)

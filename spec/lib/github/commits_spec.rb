@@ -3,14 +3,15 @@ require "support/commit"
 
 RSpec.describe Github::Commits do
   subject(:github_commits) { described_class.new(application) }
+
   before do
     stub_request(:any, %r{\Ahttps://(www|api).github.com/.*\z}).to_return(status: 200, body: commits, headers: {})
     # pass = 678912
     allow(Github::Status).to receive(:passed?).and_return(false)
     allow(Github::Status).to receive(:passed?).with("678912").and_return(true)
   end
+
   let(:application) { ApplyApplication.new }
-  load_shared_commit_data
   let(:expected_response) do
     <<~RESPONSE.chomp
       :nope: Merge pull request #1999 from moj/AA-1234
@@ -20,6 +21,8 @@ RSpec.describe Github::Commits do
       :yep: Merge pull request #1995 from moj/AA-444
     RESPONSE
   end
+
+  load_shared_commit_data
 
   describe ".call" do
     subject(:call) { described_class.call(application) }

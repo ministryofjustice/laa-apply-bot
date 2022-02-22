@@ -19,7 +19,7 @@ module Portal
         @unmatched_names ||= @unmatched.map(&:portal_username)
       end
 
-      private
+    private
 
       def process
         name_list.each do |name|

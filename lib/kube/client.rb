@@ -10,12 +10,12 @@ module Kube
       Kubeclient::Client.new(
         "#{url}/apis/networking.k8s.io",
         "v1beta1",
-        auth_options: auth_options,
-        ssl_options: ssl_options
+        auth_options:,
+        ssl_options:,
       )
     end
 
-    private
+  private
 
     def auth_options
       { bearer_token: ENV.fetch("KUBE_TOKEN_APPLY") }

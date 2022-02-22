@@ -2,17 +2,19 @@ require "rspec"
 
 RSpec.describe Worker::TestRunLocate do
   subject(:worker) { described_class.new }
+
   before { allow(ENV).to receive(:[]).and_call_original }
 
-  it { is_expected.to be_a Worker::TestRunLocate }
+  it { is_expected.to be_a described_class }
 
   describe ".perform" do
     subject(:perform) { worker.perform("channel", "000.000", iteration, etag) }
 
     before do
       stub_request(:get, %r{\Ahttps://(www|api).github.com/.*/runs.*\z})
-        .to_return(status: status, body: response, headers: {})
+        .to_return(status:, body: response, headers: {})
     end
+
     let(:response) { { 'total_count': 1 }.to_json }
 
     let(:status) { 200 }
@@ -23,7 +25,7 @@ RSpec.describe Worker::TestRunLocate do
       before do
         allow(ENV).to receive(:[]).with("GITHUB_WAIT_SECONDS").and_return(5)
         stub_request(:get, "#{GithubValues.repo_url}/actions/runs/30433642/jobs")
-          .to_return(status: status, body: job_response, headers: {})
+          .to_return(status:, body: job_response, headers: {})
       end
 
       let(:response) do
@@ -32,9 +34,9 @@ RSpec.describe Worker::TestRunLocate do
           'workflow_runs': [
             {
               'html_url': "https://github.com/repos/#{ENV['GITHUB_OWNER']}/#{ENV['GITHUB_REPO']}/actions/runs/30433642",
-              'jobs_url': "#{GithubValues.repo_url}/actions/runs/30433642/jobs"
-            }
-          ]
+              'jobs_url': "#{GithubValues.repo_url}/actions/runs/30433642/jobs",
+            },
+          ],
         }.to_json
       end
 
@@ -43,9 +45,9 @@ RSpec.describe Worker::TestRunLocate do
           'total_count': 1,
           'jobs': [
             {
-              'html_url': web_url
-            }
-          ]
+              'html_url': web_url,
+            },
+          ],
         }.to_json
       end
 
@@ -62,12 +64,12 @@ RSpec.describe Worker::TestRunLocate do
                 {
                   text: ":spinner2: The tests are running.\n I'll update you on completion, or you can "\
                         "click on <#{web_url}?check_suite_focus=true|this link> for details",
-                  type: "mrkdwn"
+                  type: "mrkdwn",
                 },
-              type: "section"
-            }
+              type: "section",
+            },
           ],
-          ts: "000.000"
+          ts: "000.000",
         }
       end
 
@@ -83,6 +85,7 @@ RSpec.describe Worker::TestRunLocate do
 
     context "when github does not have any in progress jobs" do
       before { allow(ENV).to receive(:[]).with("GITHUB_WAIT_SECONDS").and_return(5) }
+
       let(:iteration) { 2 }
 
       let(:expected_hash) do
@@ -95,12 +98,12 @@ RSpec.describe Worker::TestRunLocate do
               text:
                 {
                   text: ":spinner2: A test run has been requested from Github. Time spent looking so far: 10 seconds",
-                  type: "mrkdwn"
+                  type: "mrkdwn",
                 },
-              type: "section"
-            }
+              type: "section",
+            },
           ],
-          ts: "000.000"
+          ts: "000.000",
         }
       end
 
@@ -112,12 +115,13 @@ RSpec.describe Worker::TestRunLocate do
       end
 
       it "creates a new TestRunLocateWorker" do
-        expect { perform }.to change(Worker::TestRunLocate.jobs, :size).by(1)
+        expect { perform }.to change(described_class.jobs, :size).by(1)
       end
     end
 
     context "when github does not respond as expected" do
       before { allow(ENV).to receive(:[]).with("GITHUB_WAIT_SECONDS").and_return(5) }
+
       let(:iteration) { 2 }
 
       let(:expected_hash) do
@@ -130,12 +134,12 @@ RSpec.describe Worker::TestRunLocate do
               text:
               {
                 text: ":spinner2: A test run has been requested from Github. Time spent looking so far: 10 seconds",
-                type: "mrkdwn"
+                type: "mrkdwn",
               },
-              type: "section"
-            }
+              type: "section",
+            },
           ],
-          ts: "000.000"
+          ts: "000.000",
         }
       end
       let(:status) { 204 }
@@ -161,12 +165,12 @@ RSpec.describe Worker::TestRunLocate do
               text:
                 {
                   text: ":nope: It's been over two minutes, you'll need to check github manually",
-                  type: "mrkdwn"
+                  type: "mrkdwn",
                 },
-              type: "section"
-            }
+              type: "section",
+            },
           ],
-          ts: "000.000"
+          ts: "000.000",
         }
       end
 

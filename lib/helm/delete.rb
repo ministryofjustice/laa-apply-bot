@@ -6,7 +6,7 @@ module Helm
     end
 
     class << self
-      private
+    private
 
       def remove_release
         result = `helm delete #{@release}`.chomp

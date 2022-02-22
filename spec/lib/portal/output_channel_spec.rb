@@ -2,16 +2,18 @@ require "rspec"
 
 RSpec.describe Portal::OutputChannel do
   subject(:output_channel) { described_class.new(channel) }
+
   before do
     stub_request(:post, %r{\Ahttps://slack.com/api/conversations.info\z}).to_return(status: 200, body: expected_body)
   end
+
   let(:channel) { "shared_channel" }
   let(:expected_body) do
     {
       'ok': true,
       'channel': {
-        name: channel
-      }
+        name: channel,
+      },
     }.to_json
   end
 
@@ -24,6 +26,7 @@ RSpec.describe Portal::OutputChannel do
 
     context "when the channel is not the recorded output channel" do
       let(:channel) { "channel" }
+
       it { is_expected.to be false }
     end
   end

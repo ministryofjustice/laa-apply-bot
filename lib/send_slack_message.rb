@@ -34,7 +34,7 @@ class SendSlackMessage
     client.users_info(user: user_id)&.user
   end
 
-  private
+private
 
   def client
     @client ||= Slack::Web::Client.new

@@ -15,14 +15,14 @@ describe SlackApplybot::Commands::Github, :vcr do
     {
       'ok': true,
       'channel': {
-        name: channel
-      }
+        name: channel,
+      },
     }.to_json
   end
   let!(:client) { SlackRubyBot::App.new.send(:client) }
   let(:message_hook) { SlackRubyBot::Hooks::Message.new }
-  let(:params) { Hashie::Mash.new(text: user_input, channel: channel, user: "user") }
-  let(:expected_hash) { { channel: channel, text: expected_message } }
+  let(:params) { Hashie::Mash.new(text: user_input, channel:, user: "user") }
+  let(:expected_hash) { { channel:, text: expected_message } }
 
   it_behaves_like "the channel is invalid"
 

@@ -18,7 +18,7 @@ module Github
       call(user, group).include?(user)
     end
 
-    private
+  private
 
     def parsed_json_data
       raw_data = RestClient.get("#{ORG_URL}#{ENV.fetch('GITHUB_OWNER')}/teams/#{@group}/members", GithubValues.headers)

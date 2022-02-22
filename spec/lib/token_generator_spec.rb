@@ -4,7 +4,7 @@ require "lib/token_generator"
 RSpec.describe TokenGenerator do
   subject(:token_generator) { described_class.new }
 
-  it { is_expected.to be_a TokenGenerator }
+  it { is_expected.to be_a described_class }
 
   describe "#call" do
     subject(:call) { described_class.call(slack_id) }
