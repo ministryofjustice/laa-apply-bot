@@ -52,7 +52,7 @@ module Worker
       else
         parsed_result = "negative - status"
       end
-      @etag = { 'If-None-Match' => result.headers[:etag].to_s }
+      @etag = { "If-None-Match" => result.headers[:etag].to_s }
       parsed_result
     end
 
