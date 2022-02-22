@@ -9,7 +9,7 @@ RSpec.describe Portal::NameValidator do
     it { expect { subject }.to raise_error(StandardError, "Name is invalid type") }
   end
 
-  context "when instantiated without a Portal::Name object" do
+  context "when instantiated with a Portal::Name object" do
     before do
       allow(ENV).to receive(:[]).and_call_original
       allow(ENV).to receive(:[]).with("PROVIDER_DETAILS_URL").and_return(dummy_provider_details_host)
