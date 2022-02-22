@@ -8,7 +8,7 @@ RSpec.describe Portal::Name do
   describe "#build" do
     subject(:build) { portal_name.build }
 
-    context "name is text" do
+    context "when the name is text" do
       let(:expected_hash) do
         {
           original_name: "test.name",
@@ -22,7 +22,7 @@ RSpec.describe Portal::Name do
       it { expect(build.as_json.symbolize_keys).to eq expected_hash }
     end
 
-    context "name has a space" do
+    context "when the name has a space" do
       let(:name) { "test name" }
       let(:expected_hash) do
         {
@@ -37,7 +37,7 @@ RSpec.describe Portal::Name do
       it { expect(build.as_json.symbolize_keys).to eq expected_hash }
     end
 
-    context "name is an email" do
+    context "when the name is an email" do
       let(:name) { "test.name@example.com" }
       let(:expected_hash) do
         {
@@ -52,7 +52,7 @@ RSpec.describe Portal::Name do
       it { expect(build.as_json.symbolize_keys).to eq expected_hash }
     end
 
-    context "name is a slack parsed email" do
+    context "when the name is a slack parsed email" do
       let(:name) { "<MAILTO:test.name@example.com|test.name@example.com>" }
       let(:expected_hash) do
         {

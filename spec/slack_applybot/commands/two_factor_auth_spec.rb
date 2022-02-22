@@ -40,7 +40,7 @@ RSpec.describe SlackApplybot::Commands::TwoFactorAuth do
   describe "#setup" do
     let(:command) { "setup" }
 
-    context "the user is in a direct message channel" do
+    context "when the user is in a direct message channel" do
       let(:is_direct_message?) { true }
 
       context "when the user has not connected github" do
@@ -66,7 +66,7 @@ RSpec.describe SlackApplybot::Commands::TwoFactorAuth do
       end
     end
 
-    context "the user is in a public, valid channel" do
+    context "when the user is in a public, valid channel" do
       let(:expected_message) { "I've sent you a DM, we probably shouldn't be talking about this in public!" }
       let(:dm_hash) do
         { channel: "A0000B1CDEF", text: "You need to link your github account before you can setup 2FA" }

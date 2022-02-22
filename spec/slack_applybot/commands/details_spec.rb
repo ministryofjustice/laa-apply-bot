@@ -30,7 +30,7 @@ describe SlackApplybot::Commands::Details, :vcr do
       expect(message: user_input, channel: "channel").to respond_with_slack_message(expected_response)
     end
 
-    context "in non-lower case" do
+    context "and it is in non-lower case" do
       let(:app) { "Cfe" }
 
       it "returns the expected message" do
