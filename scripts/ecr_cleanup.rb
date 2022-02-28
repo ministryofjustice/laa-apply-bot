@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require "json"
 require "date"
+require "time"
 
 class Summary
   def initialize
