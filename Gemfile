@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby "3.1.0"
+ruby "3.1.1"
 
 gem "activerecord", "> 6.1.4", "< 8"
 gem "async", "~> 1.30.1"
