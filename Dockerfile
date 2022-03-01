@@ -31,12 +31,9 @@ WORKDIR /usr/src/app
 ######################
 COPY Gemfile* ./
 
-# only install production dependencies,
-# build nokogiri using libxml2-dev, libxslt-dev
-# note: installs bundler version used in Gemfile.lock
-#
-RUN gem install bundler -v $(cat Gemfile.lock | tail -1 | tr -d " ") \
-&& bundle config --global without test development \
+# only install production dependencies
+RUN gem update --system \
+&& bundle config --local without test development \
 && bundle install
 
 ####################
