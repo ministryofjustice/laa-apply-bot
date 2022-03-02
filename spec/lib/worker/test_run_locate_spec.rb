@@ -13,10 +13,12 @@ RSpec.describe Worker::TestRunLocate do
     before do
       stub_request(:get, %r{\Ahttps://(www|api).github.com/.*/runs.*\z})
         .to_return(status:, body: response, headers: {})
+      allow(SendSlackMessage).to receive(:new).and_return(ssm)
+      allow(ssm).to receive(:update).and_return({ ts: "1595341466.004300" })
     end
 
     let(:response) { { 'total_count': 1 }.to_json }
-
+    let(:ssm) { instance_double("SendSlackMessage") }
     let(:status) { 200 }
     let(:iteration) { 1 }
     let(:etag) { nil }
@@ -74,7 +76,7 @@ RSpec.describe Worker::TestRunLocate do
       end
 
       it "sends an update command to slack with a progress message" do
-        expect_any_instance_of(SendSlackMessage).to receive(:update).with(expected_hash)
+        expect(ssm).to receive(:update).with(expected_hash)
         perform
       end
 
@@ -110,7 +112,7 @@ RSpec.describe Worker::TestRunLocate do
       let(:response) { { 'total_count': 0 }.to_json }
 
       it "sends an update command to slack with a timeout message" do
-        expect_any_instance_of(SendSlackMessage).to receive(:update).with(expected_hash)
+        expect(ssm).to receive(:update).with(expected_hash)
         perform
       end
 
@@ -146,7 +148,7 @@ RSpec.describe Worker::TestRunLocate do
       let(:response) { { 'unexpected_value': 0 }.to_json }
 
       it "sends an update command to slack with a timeout message" do
-        expect_any_instance_of(SendSlackMessage).to receive(:update).with(expected_hash)
+        expect(ssm).to receive(:update).with(expected_hash)
         perform
       end
     end
@@ -175,7 +177,7 @@ RSpec.describe Worker::TestRunLocate do
       end
 
       it "sends an update command to slack with a timeout message" do
-        expect_any_instance_of(SendSlackMessage).to receive(:update).with(expected_hash)
+        expect(ssm).to receive(:update).with(expected_hash)
         perform
       end
     end
