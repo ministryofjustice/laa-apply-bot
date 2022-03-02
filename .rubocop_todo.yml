@@ -14,5 +14,4 @@ RSpec/AnyInstance:
     - 'spec/lib/worker/test_run_locate_spec.rb'
     - 'spec/lib/worker/test_run_monitor_spec.rb'
     - 'spec/lib/worker/test_run_start_spec.rb'
-    - 'spec/slack_applybot/commands/two_factor_auth_spec.rb'
     - 'spec/support/shared_examples/invalid_channel.rb'

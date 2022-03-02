@@ -56,11 +56,19 @@ RSpec.describe SlackApplybot::Commands::TwoFactorAuth do
       end
 
       context "when the user has connected github" do
-        before { allow_any_instance_of(User).to receive(:github_id).and_return("123456") }
+        let(:user) { FactoryBot.create :user, github_id: "123456" }
+        let(:ssm) { instance_double("SendSlackMessage") }
+
+        before do
+          allow(User).to receive(:find_or_create_by).and_return(user)
+          allow(ssm).to receive(:upload_file).and_return(true)
+          allow(ssm).to receive(:conversations_info).and_return(JSON.parse(expected_body))
+          allow(SendSlackMessage).to receive(:new).and_return(ssm)
+        end
 
         it "starts typing, sends a DM and then replies in the public channel" do
           expect(client).to receive(:typing)
-          expect_any_instance_of(SendSlackMessage).to receive(:upload_file)
+          expect(ssm).to receive(:upload_file)
           message_hook.call(client, params)
         end
       end
@@ -104,11 +112,14 @@ RSpec.describe SlackApplybot::Commands::TwoFactorAuth do
 
       context "when OTP is provided" do
         before do
-          allow_any_instance_of(User).to receive(:encrypted_2fa_secret).and_return(encrypted_secret)
-          allow_any_instance_of(Encryption::Service).to receive(:decrypt).with(:any).and_return("123456789")
-          allow_any_instance_of(ROTP::TOTP).to receive(:verify).with("123456").and_return(valid_token?)
+          allow(User).to receive(:find_or_create_by).and_return(user)
+          allow(ROTP::TOTP).to receive(:new).and_return(rotp)
+          allow(rotp).to receive(:verify).with("123456").and_return(valid_token?)
+          allow(::Helm::Delete).to receive(:call).with("ap1234").and_return(true)
         end
 
+        let(:user) { FactoryBot.create :user, encrypted_2fa_secret: encrypted_secret }
+        let(:rotp) { instance_double(ROTP::TOTP) }
         let(:encrypted_secret) { Encryption::Service.encrypt("secret") }
         let(:otp_code) { "123456" }
 
