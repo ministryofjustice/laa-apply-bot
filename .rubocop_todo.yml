@@ -9,5 +9,4 @@
 # Offense count: 28
 RSpec/AnyInstance:
   Exclude:
-    - 'spec/app_spec.rb'
     - 'spec/support/shared_examples/invalid_channel.rb'

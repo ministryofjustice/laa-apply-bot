@@ -52,6 +52,10 @@ describe "Sinatra App" do
   end
 
   describe "/interactive" do
+    let(:ssm) { instance_double("SendSlackMessage") }
+
+    before { allow(SendSlackMessage).to receive(:new).and_return(ssm) }
+
     context "when general data is posted to interactive" do
       let(:submitted_data) { { data: "something" } }
 
@@ -92,7 +96,7 @@ describe "Sinatra App" do
         end
 
         it "a post to replace the text is made" do
-          expect_any_instance_of(SendSlackMessage).to receive(:upload_file)
+          expect(ssm).to receive(:upload_file)
           post "/interactive", submitted_data
           expect(a_request(:post, %r{\Ahttps://hooks.slack.com/actions/.*\z})).to have_been_made.times(1)
         end
@@ -122,7 +126,7 @@ describe "Sinatra App" do
         end
 
         it "a post to replace the text is made" do
-          expect_any_instance_of(SendSlackMessage).not_to receive(:upload_file)
+          expect(ssm).not_to receive(:upload_file)
           post "/interactive", submitted_data
           expect(a_request(:post, %r{\Ahttps://hooks.slack.com/actions/.*\z})).to have_been_made.times(1)
         end
