@@ -29,10 +29,11 @@ require "vcr_helper"
 require "app"
 require "shoulda/matchers"
 require "database_cleaner"
+require "factory_bot"
 require "dotenv"
 Dotenv.load(".env.test")
 
-Dir[File.join("slack-applybot/**/*.rb"), File.join("lib/**/*.rb")].sort.each do |f|
+Dir[File.join("slack-applybot/**/*.rb"), File.join("models/**/*.rb"), File.join("lib/**/*.rb")].sort.each do |f|
   file = File.join(File.dirname(f), File.basename(f, File.extname(f)))
   require file
 end
@@ -46,6 +47,10 @@ RSpec.configure do |config|
   end
   config.include(Shoulda::Matchers::ActiveModel, type: :model)
   config.include(Shoulda::Matchers::ActiveRecord, type: :model)
+  config.include FactoryBot::Syntax::Methods
+  config.before(:suite) do
+    FactoryBot.find_definitions
+  end
 end
 
 Shoulda::Matchers.configure do |config|
