@@ -5,6 +5,17 @@ RSpec.describe Portal::UserRequester do
     subject(:user_requester) { described_class.initiate(names, "channel") }
 
     let(:names) { "test1, test2, test3" }
+    let(:ssm) { instance_double("SendSlackMessage") }
+    let(:pm_failure) { instance_double("Portal::Messages::Failure") }
+    let(:pm_success) { instance_double("Portal::Messages::Success") }
+    let(:pm_generate_script) { instance_double("Portal::GenerateScript") }
+
+    before do
+      allow(SendSlackMessage).to receive(:new).and_return(ssm)
+      allow(Portal::Messages::Failure).to receive(:new).and_return(pm_failure)
+      allow(Portal::Messages::Success).to receive(:new).and_return(pm_success)
+      allow(Portal::GenerateScript).to receive(:new).and_return(pm_generate_script)
+    end
 
     context "when all names are matched by portal" do
       before do
@@ -14,10 +25,10 @@ RSpec.describe Portal::UserRequester do
       end
 
       it "expect the following calls to occur" do
-        expect_any_instance_of(Portal::Messages::Failure).not_to receive(:call)
-        expect_any_instance_of(Portal::Messages::Success).to receive(:call).once
-        expect_any_instance_of(Portal::GenerateScript).to receive(:call).once
-        expect_any_instance_of(SendSlackMessage).to receive(:generic).once
+        expect(pm_failure).not_to receive(:call)
+        expect(pm_success).to receive(:call).once
+        expect(pm_generate_script).to receive(:call).once
+        expect(ssm).to receive(:generic).once
         user_requester
       end
     end
@@ -30,10 +41,10 @@ RSpec.describe Portal::UserRequester do
       end
 
       it "expect the following calls to occur" do
-        expect_any_instance_of(Portal::Messages::Failure).to receive(:call).once
-        expect_any_instance_of(Portal::Messages::Success).not_to receive(:call)
-        expect_any_instance_of(Portal::GenerateScript).not_to receive(:call)
-        expect_any_instance_of(SendSlackMessage).to receive(:generic).once
+        expect(pm_failure).to receive(:call).once
+        expect(pm_success).not_to receive(:call)
+        expect(pm_generate_script).not_to receive(:call)
+        expect(ssm).to receive(:generic).once
         user_requester
       end
     end

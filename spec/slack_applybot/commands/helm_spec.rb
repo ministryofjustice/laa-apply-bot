@@ -127,12 +127,14 @@ describe SlackApplybot::Commands::Helm, :vcr do
 
       context "when OTP is provided" do
         before do
-          allow_any_instance_of(User).to receive(:encrypted_2fa_secret).and_return(encrypted_secret)
-          allow_any_instance_of(Encryption::Service).to receive(:decrypt).with(:any).and_return("123456789")
-          allow_any_instance_of(ROTP::TOTP).to receive(:verify).with("123456").and_return(valid_token?)
+          allow(User).to receive(:find_or_create_by).and_return(user)
+          allow(ROTP::TOTP).to receive(:new).and_return(rotp)
+          allow(rotp).to receive(:verify).with("123456").and_return(valid_token?)
           allow(::Helm::Delete).to receive(:call).with("ap1234").and_return(true)
         end
 
+        let(:user) { FactoryBot.create :user, encrypted_2fa_secret: encrypted_secret }
+        let(:rotp) { instance_double(ROTP::TOTP) }
         let(:encrypted_secret) { Encryption::Service.encrypt("secret") }
         let(:command) { "delete ap1234 123456" }
 

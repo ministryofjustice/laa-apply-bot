@@ -5,15 +5,3 @@
 # one by one as the offenses are removed from the code base.
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
-
-# Offense count: 28
-RSpec/AnyInstance:
-  Exclude:
-    - 'spec/app_spec.rb'
-    - 'spec/lib/portal/user_requester_spec.rb'
-    - 'spec/lib/worker/test_run_locate_spec.rb'
-    - 'spec/lib/worker/test_run_monitor_spec.rb'
-    - 'spec/lib/worker/test_run_start_spec.rb'
-    - 'spec/slack_applybot/commands/helm_spec.rb'
-    - 'spec/slack_applybot/commands/two_factor_auth_spec.rb'
-    - 'spec/support/shared_examples/invalid_channel.rb'

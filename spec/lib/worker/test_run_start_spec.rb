@@ -6,11 +6,12 @@ RSpec.describe Worker::TestRunStart do
   before do
     stub_user = Struct.new(:id, :real_name)
     stub_request(:post, %r{\Ahttps://(www|api).github.com/.*/dispatches\z}).to_return(response)
-    allow_any_instance_of(SendSlackMessage).to receive(:user)
-      .and_return(stub_user.new({ id: "AB123CDEF", real_name: "test user" }))
-    allow_any_instance_of(SendSlackMessage).to receive(:generic).and_return({ ts: "1595341466.004300" })
+    allow(SendSlackMessage).to receive(:new).and_return(ssm)
+    allow(ssm).to receive(:user).and_return(stub_user.new({ id: "AB123CDEF", real_name: "test user" }))
+    allow(ssm).to receive(:generic).and_return({ ts: "1595341466.004300" })
   end
 
+  let(:ssm) { instance_double("SendSlackMessage") }
   let(:slack_user_response) { { status: 200, body: { id: "UQ785LQGH", real_name: "test user" }.to_json, headers: {} } }
   let(:response) { good_response }
   let(:good_response) { { status: 204, body: "", headers: {} } }
@@ -30,7 +31,7 @@ RSpec.describe Worker::TestRunStart do
       end
 
       it "sends a slack message" do
-        expect_any_instance_of(SendSlackMessage).to receive(:generic)
+        expect(ssm).to receive(:generic)
         perform
       end
 
@@ -60,7 +61,7 @@ RSpec.describe Worker::TestRunStart do
       end
 
       it "polls github for data" do
-        expect_any_instance_of(SendSlackMessage).to receive(:generic).with(expected_hash)
+        expect(ssm).to receive(:generic).with(expected_hash)
         perform
       end
     end

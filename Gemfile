@@ -26,6 +26,7 @@ end
 
 group :development, :test do
   gem "byebug"
+  gem "factory_bot_rails"
   gem "foreman"
   gem "highline"
   gem "pry-byebug"
