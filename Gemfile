@@ -2,7 +2,7 @@ source "https://rubygems.org"
 ruby "3.1.1"
 
 gem "activerecord", "> 6.1.4", "< 8"
-gem "async", "~> 1.30.1"
+gem "async", "~> 2.0.1"
 gem "async-websocket"
 gem "dotenv"
 gem "dotiw"
