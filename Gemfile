@@ -43,6 +43,6 @@ group :test do
   gem "simplecov", require: false
   gem "simplecov-rcov"
   gem "timecop"
-  gem "vcr", github: "vcr/vcr"
+  gem "vcr"
   gem "webmock"
 end
