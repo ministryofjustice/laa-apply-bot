@@ -130,13 +130,14 @@ describe SlackApplybot::Commands::Helm, :vcr do
           allow(User).to receive(:find_or_create_by).and_return(user)
           allow(ROTP::TOTP).to receive(:new).and_return(rotp)
           allow(rotp).to receive(:verify).with("123456").and_return(valid_token?)
-          allow(::Helm::Delete).to receive(:call).with("ap1234").and_return(true)
+          allow(::Helm::Delete).to receive(:call).with(context, "ap1234").and_return(true)
         end
 
         let(:user) { FactoryBot.create :user, encrypted_2fa_secret: encrypted_secret }
         let(:rotp) { instance_double(ROTP::TOTP) }
         let(:encrypted_secret) { Encryption::Service.encrypt("secret") }
         let(:command) { "delete ap1234 123456" }
+        let(:context) { "apply" }
 
         context "and it is correct" do
           let(:command_response) { "ap1234 deleted" }
@@ -144,6 +145,15 @@ describe SlackApplybot::Commands::Helm, :vcr do
 
           it "returns the expected message" do
             expect(message: user_input, channel:).to respond_with_slack_message(command_response)
+          end
+
+          context "and a different context is provided" do
+            let(:command) { "delete lfa ap1234 123456" }
+            let(:context) { "lfa" }
+
+            it "returns the expected message" do
+              expect(message: user_input, channel:).to respond_with_slack_message(command_response)
+            end
           end
         end
 

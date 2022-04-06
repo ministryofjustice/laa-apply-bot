@@ -28,12 +28,14 @@ module SlackApplybot
 
         def process_delete(match)
           parts = match["expression"].split - %w[delete]
+          context = (VALID_CONTEXTS & parts).first || "apply"
+          parts -= [context]
           if parts.empty?
             "Unable to delete - insufficient data, please call as `helm delete name-of-release 000000`"
           elsif parts.count.eql?(1)
             "OTP password not provided, please call as `helm delete name-of-release 000000`"
           elsif validate_otp_part(parts[1])
-            ::Helm::Delete.call(parts[0]) ? "#{parts[0]} deleted" : "Unable to delete"
+            ::Helm::Delete.call(context, parts[0]) ? "#{parts[0]} deleted" : "Unable to delete"
           else
             "OTP password did not match, please check your authenticator app"
           end
