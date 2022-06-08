@@ -28,9 +28,9 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     aes_key_wrap (1.1.0)
     ast (2.4.2)
-    async (1.30.2)
+    async (2.0.2)
       console (~> 1.10)
-      nio4r (~> 2.3)
+      io-event (~> 1.0.0)
       timers (~> 4.1)
     async-io (1.33.0)
       async
@@ -121,6 +121,7 @@ GEM
     httpclient (2.8.3)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
+    io-event (1.0.9)
     json-jwt (1.13.0)
       activesupport (>= 4.2)
       aes_key_wrap
@@ -344,7 +345,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord (> 6.1.4, < 8)
-  async (~> 1.30.2)
+  async
   async-websocket
   byebug
   database_cleaner
