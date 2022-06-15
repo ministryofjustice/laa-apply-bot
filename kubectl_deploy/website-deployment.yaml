@@ -20,6 +20,10 @@ spec:
           value: laa-apply-for-legal-aid
         - name: CFE_GITHUB_REPO
           value: check-financial-eligibility
+        - name: LFA_GITHUB_REPO
+          value: legal-framework-api
+        - name: HMRC_GITHUB_REPO
+          value: laa-hmrc-interface-service-api
         - name: GITHUB_OWNER
           value: ministryofjustice
         - name: GITHUB_REPO
