@@ -18,7 +18,7 @@ module ApplyServiceInstance
   end
 
   class Base
-    APPLICATIONS = %w[apply cfe].freeze
+    APPLICATIONS = %w[apply cfe lfa hmrc].freeze
     NON_LIVE_ENVS = %w[staging].freeze
     LIVE_ENV_SYNONYMS = %w[production prod live].freeze
     SERVICE_URL = "apply-for-legal-aid.service.justice.gov.uk".freeze
