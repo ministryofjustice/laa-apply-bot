@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/ping.json
+    uri: https://laa-hmrc-interface-staging.cloud-platform.service.justice.gov.uk/ping.json
     body:
       encoding: US-ASCII
       string: ''
@@ -10,28 +10,24 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - rest-client/2.1.0 (darwin18.7.0 x86_64) ruby/2.6.5p114
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.1.2p20
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
-      - check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk
+      - laa-hmrc-interface-staging.cloud-platform.service.justice.gov.uk
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx/1.17.8
       Date:
-      - Thu, 16 Apr 2020 07:10:37 GMT
+      - Wed, 15 Jun 2022 08:38:33 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      Vary:
-      - Accept-Encoding
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
@@ -45,18 +41,17 @@ http_interactions:
       Referrer-Policy:
       - strict-origin-when-cross-origin
       Etag:
-      - W/"7a1df29a869756f596440ad6b138aadc"
+      - W/"18a9385952337fb18cf14750f1fed71b"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - ade3f50f7140bed285ffa8fbd7ad1f27
+      - 6d8e587903692b1b7b808103e3ca0eaa
       X-Runtime:
-      - '0.001542'
+      - '0.002710'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
-      encoding: ASCII-8BIT
-      string: '{"build_date":"2020-04-15T15:31:45+0000","build_tag":"app-bf400232676802bfcd7e53ff7ff013087ee6d1d1","app_branch":"master"}'
-    http_version: null
-  recorded_at: Thu, 16 Apr 2020 07:10:37 GMT
-recorded_with: VCR 5.1.0
+      encoding: UTF-8
+      string: '{"build_date":"2022-06-15T06:21:41.000+00:00","build_tag":"app-9ea4a2ab7edb6ee71d12d16726fc2db7b31875e4","app_branch":"main"}'
+  recorded_at: Wed, 15 Jun 2022 08:38:33 GMT
+recorded_with: VCR 6.1.0

@@ -1,6 +1,7 @@
 module Helm
   class Tidy
     def self.call(context = "apply")
+      @application = "#{context.humanize}Application".constantize.new
       @context = "--kube-context #{context}-context"
       @output = ""
       @count = 0

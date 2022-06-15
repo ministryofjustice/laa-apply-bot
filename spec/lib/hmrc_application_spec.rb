@@ -1,7 +1,7 @@
 require "spec_helper"
 require "date_display"
 
-describe CfeApplication do
+describe HmrcApplication do
   subject(:base) { described_class.new }
 
   it { is_expected.to be_a described_class }
@@ -11,12 +11,12 @@ describe CfeApplication do
   describe ".name" do
     subject(:name) { base.name }
 
-    it { is_expected.to eq "CFE" }
+    it { is_expected.to eq "HMRC" }
   end
 
   describe ".github_api_url" do
     subject(:github_api_url) { base.github_api_url }
 
-    it { is_expected.to eq "https://api.github.com/repos/moj/cfe-project-api" }
+    it { is_expected.to eq "https://api.github.com/repos/moj/hmrc-project-api" }
   end
 end

@@ -1,10 +1,10 @@
 require "spec_helper"
 
-describe CfeInstance do
+describe LfaInstance do
   subject(:application_instance) { described_class.new(level) }
 
-  let(:live_url) { "https://check-financial-eligibility.cloud-platform.service.justice.gov.uk" }
-  let(:staging_url) { "https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk" }
+  let(:live_url) { "https://legal-framework-api.cloud-platform.service.justice.gov.uk" }
+  let(:staging_url) { "https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk" }
   let(:level) { "live" }
 
   it { is_expected.to be_a described_class }
@@ -44,9 +44,9 @@ describe CfeInstance do
       let(:level) { "staging" }
       let(:expected_json) do
         {
-          "build_date" => "2020-05-26T09:46:42+0100",
-          "build_tag" => "app-a1bd774c68094caa2a7f4b3d505e826a0aa68dc7",
-          "app_branch" => "master",
+          "build_date" => "2022-06-14T06:24:58+0000",
+          "build_tag" => "app-42c22014522e6ae61dc9a16cfea7211266872b8d",
+          "app_branch" => "main",
         }
       end
 

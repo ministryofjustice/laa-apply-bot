@@ -1,10 +1,10 @@
 require "spec_helper"
 
-describe CfeInstance do
+describe HmrcInstance do
   subject(:application_instance) { described_class.new(level) }
 
-  let(:live_url) { "https://check-financial-eligibility.cloud-platform.service.justice.gov.uk" }
-  let(:staging_url) { "https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk" }
+  let(:live_url) { "https://laa-hmrc-interface.cloud-platform.service.justice.gov.uk" }
+  let(:staging_url) { "https://laa-hmrc-interface-staging.cloud-platform.service.justice.gov.uk" }
   let(:level) { "live" }
 
   it { is_expected.to be_a described_class }
@@ -44,9 +44,9 @@ describe CfeInstance do
       let(:level) { "staging" }
       let(:expected_json) do
         {
-          "build_date" => "2020-05-26T09:46:42+0100",
-          "build_tag" => "app-a1bd774c68094caa2a7f4b3d505e826a0aa68dc7",
-          "app_branch" => "master",
+          "build_date" => "2022-06-15T06:21:41.000+00:00",
+          "build_tag" => "app-9ea4a2ab7edb6ee71d12d16726fc2db7b31875e4",
+          "app_branch" => "main",
         }
       end
 
