@@ -1,6 +1,7 @@
 module Helm
   class List
     def self.call(context = "apply")
+      @application = "#{context.humanize}Application".constantize.new
       context = "--kube-context #{context}-context"
       raw_output = helm_list_as_json(context)
       releases = parse_releases(raw_output)

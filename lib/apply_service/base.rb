@@ -25,5 +25,13 @@ module ApplyService
     def github_api_url
       "https://api.github.com/repos/#{ENV.fetch('GITHUB_OWNER')}/#{ENV.fetch(@github_repo)}"
     end
+
+    def open_branches
+      Github::Branches.call(self)
+    end
+
+    def open_pull_requests
+      Github::PullRequests.call(self)
+    end
   end
 end
