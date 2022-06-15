@@ -1,11 +1,10 @@
 require "spec_helper"
 
-LIVE_URL = "https://check-financial-eligibility.apps.live-1.cloud-platform.service.justice.gov.uk".freeze
-STAGING_URL = "https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk".freeze
-
 describe CfeInstance do
   subject(:application_instance) { described_class.new(level) }
 
+  let(:live_url) { "https://check-financial-eligibility.cloud-platform.service.justice.gov.uk" }
+  let(:staging_url) { "https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk" }
   let(:level) { "live" }
 
   it { is_expected.to be_a described_class }
@@ -14,13 +13,13 @@ describe CfeInstance do
     subject(:url) { application_instance.url }
 
     context "when level is production-like" do
-      it { is_expected.to eql "https://check-financial-eligibility.apps.live-1.cloud-platform.service.justice.gov.uk" }
+      it { is_expected.to eql live_url }
     end
 
     context "when level staging" do
       let(:level) { "staging" }
 
-      it { is_expected.to eql STAGING_URL }
+      it { is_expected.to eql staging_url }
     end
   end
 
@@ -28,13 +27,13 @@ describe CfeInstance do
     subject(:ping_url) { application_instance.ping_url }
 
     context "when level is production-like" do
-      it { is_expected.to eql "#{LIVE_URL}/ping.json" }
+      it { is_expected.to eql "#{live_url}/ping.json" }
     end
 
     context "when level staging" do
       let(:level) { "staging" }
 
-      it { is_expected.to eql "#{STAGING_URL}/ping.json" }
+      it { is_expected.to eql "#{staging_url}/ping.json" }
     end
   end
 

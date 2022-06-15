@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/ping.json
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/ping.json
     body:
       encoding: US-ASCII
       string: ''
@@ -14,7 +14,7 @@ http_interactions:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
-      - check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+      - check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk
   response:
     status:
       code: 200

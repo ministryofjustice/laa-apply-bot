@@ -61,7 +61,7 @@ http_interactions:
   recorded_at: Fri, 03 Apr 2020 23:00:00 GMT
 - request:
     method: get
-    uri: https://check-financial-eligibility.apps.live-1.cloud-platform.service.justice.gov.uk/ping.json
+    uri: https://check-financial-eligibility.cloud-platform.service.justice.gov.uk/ping.json
     body:
       encoding: US-ASCII
       string: ''
@@ -73,7 +73,7 @@ http_interactions:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
-      - check-financial-eligibility.apps.live-1.cloud-platform.service.justice.gov.uk
+      - check-financial-eligibility.cloud-platform.service.justice.gov.uk
   response:
     status:
       code: 200
