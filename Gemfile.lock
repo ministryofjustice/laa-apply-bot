@@ -311,7 +311,7 @@ GEM
       attr_required (>= 0.0.5)
       httpclient (>= 2.4)
     thor (1.2.1)
-    tilt (2.0.10)
+    tilt (2.0.11)
     timecop (0.9.5)
     timers (4.3.3)
     tzinfo (2.0.5)
