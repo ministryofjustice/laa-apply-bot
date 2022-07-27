@@ -60,7 +60,7 @@ GEM
     docile (1.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-    dotenv (2.7.6)
+    dotenv (2.8.0)
     dotiw (5.3.3)
       activesupport
       i18n
