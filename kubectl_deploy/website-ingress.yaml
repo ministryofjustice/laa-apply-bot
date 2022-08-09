@@ -6,6 +6,7 @@ metadata:
     external-dns.alpha.kubernetes.io/aws-weight: "100"
     external-dns.alpha.kubernetes.io/set-identifier: laa-apply-slack-bot-ingress-laa-apply-bot-production-green
 spec:
+  ingressClassName: default
   tls:
   - hosts:
     - laa-apply-slack-bot.cloud-platform.service.justice.gov.uk
@@ -14,6 +15,9 @@ spec:
     http:
       paths:
       - path: /
+        pathType: ImplementationSpecific
         backend:
-          serviceName: website
-          servicePort: 4567
+          service:
+            name: website
+            port:
+              number: 4567
