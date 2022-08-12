@@ -316,7 +316,7 @@ GEM
     timers (4.3.3)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
-    tzinfo-data (1.2022.1)
+    tzinfo-data (1.2022.2)
       tzinfo (>= 1.0.0)
     unf (0.1.4)
       unf_ext
