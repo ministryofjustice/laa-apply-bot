@@ -57,6 +57,7 @@ GEM
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
     diff-lcs (1.5.0)
+    digest (3.1.0)
     docile (1.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -122,7 +123,7 @@ GEM
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     json (2.6.2)
-    json-jwt (1.15.1)
+    json-jwt (1.15.2)
       activesupport (>= 4.2)
       aes_key_wrap
       bindata
@@ -155,6 +156,12 @@ GEM
     mustermann (2.0.2)
       ruby2_keywords (~> 0.0.1)
     nenv (0.3.0)
+    net-protocol (0.1.3)
+      timeout
+    net-smtp (0.3.1)
+      digest
+      net-protocol
+      timeout
     netrc (0.11.0)
     nio4r (2.5.8)
     nokogiri (1.13.8)
@@ -163,10 +170,11 @@ GEM
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    openid_connect (1.3.0)
+    openid_connect (1.3.1)
       activemodel
       attr_required (>= 1.0.0)
       json-jwt (>= 1.5.0)
+      net-smtp
       rack-oauth2 (>= 1.6.1)
       swd (>= 1.0.0)
       tzinfo
@@ -314,6 +322,7 @@ GEM
     thor (1.2.1)
     tilt (2.0.11)
     timecop (0.9.5)
+    timeout (0.3.0)
     timers (4.3.3)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
